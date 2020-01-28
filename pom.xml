@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.nbaproject</groupId>
+  <artifactId>NBAStatistics</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>NBAStatistics_ui</module>
+  	<module>NBAStatistics_entities</module>
+  	<module>NBAStatistics_repository</module>
+  	<module>NBAStatistics_web</module>
+  	<module>NBAStatistics_service</module>
+  	<module>NBAStatistics_utils</module>
+  </modules>
+  
+  <dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.2.2.RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>
