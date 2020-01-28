@@ -30,6 +30,9 @@ public class MenuView extends UI{
 	@Autowired
     SpringViewProvider viewProvider;
 	
+	@Autowired
+	private MenuLayoutFactory menuLayoutFactory;
+	
 	private Panel changeTab = new Panel();
 	
 	@Override
@@ -58,11 +61,7 @@ public class MenuView extends UI{
 		uiLayout.setComponentAlignment(changeTab, Alignment.TOP_CENTER);
 		
 		
-		MenuBar menuBar = new MenuBar();
-		Stream.of("Home", "Dashboard", "Teams", "Players", "Appearance",
-		        "Modules", "Users", "Configuration", "Reports", "Help")
-		        .forEach(menuBar::addItem);
-		menuPanel.setContent(menuBar);
+		menuPanel.setContent(menuLayoutFactory.createComponent());
 		
 		rootLayout.addComponent(menuPanel);
 		rootLayout.addComponent(contentPanel);
