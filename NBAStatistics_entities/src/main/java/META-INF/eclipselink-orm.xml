@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.5" xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/orm http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_5.xsd">
+    <named-query name="Team.findAll">
+        <query>select t from Team t</query>
+    </named-query>
+	<entity class="com.nbaproject.entities.Team" access="VIRTUAL">
+		<table name="teams"/>
+		<attributes>
+			<id name="teamid" attribute-type="int">
+			</id>
+			<basic name="active" attribute-type="byte">
+			</basic>
+			<basic name="city" attribute-type="String">
+			</basic>
+			<basic name="conference" attribute-type="String">
+			</basic>
+			<basic name="division" attribute-type="String">
+			</basic>
+			<basic name="teamkey" attribute-type="String">
+			</basic>
+			<basic name="teamname" attribute-type="String">
+			</basic>
+			<basic name="wikipedialogourl" attribute-type="String">
+			</basic>
+		</attributes>
+	</entity>
+</entity-mappings>
