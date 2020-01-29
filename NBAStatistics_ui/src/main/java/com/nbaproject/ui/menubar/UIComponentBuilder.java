@@ -1,4 +1,4 @@
-package com.nbaproject.ui;
+package com.nbaproject.ui.menubar;
 
 import com.vaadin.ui.Component;
 

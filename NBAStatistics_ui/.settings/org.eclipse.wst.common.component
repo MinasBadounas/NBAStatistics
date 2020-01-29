@@ -2,12 +2,5 @@
     <wb-module deploy-name="NBAStatistics_ui">
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <dependent-module archiveName="NBAStatistics.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/NBAStatistics/NBAStatistics">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <property name="context-root" value="NBAStatistics_ui"/>
-        <property name="java-output-path" value="/NBAStatistics_ui/target/classes"/>
     </wb-module>
 </project-modules>
