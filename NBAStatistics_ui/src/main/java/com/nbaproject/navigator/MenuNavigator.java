@@ -5,6 +5,7 @@ import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.SingleComponentContainer;
 import com.vaadin.ui.UI;
 
+
 public class MenuNavigator extends Navigator {
 
 	public MenuNavigator(UI ui, SingleComponentContainer container) {

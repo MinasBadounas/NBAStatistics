@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.nbaproject.navigator.MenuNavigator;
 import com.nbaproject.ui.menubar.MenuLayoutFactory;
+import com.nbaproject.ui.players.PlayersLayoutFactory;
 import com.nbaproject.utils.JsonNBATeams;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -31,7 +32,7 @@ import com.vaadin.ui.VerticalLayout;
 public class MenuView extends UI {
 
 	@Autowired
-	SpringViewProvider viewProvider;
+	private SpringViewProvider viewProvider;
 
 	@Autowired
 	private MenuLayoutFactory menuLayoutFactory;
@@ -67,6 +68,8 @@ public class MenuView extends UI {
 
 		menuPanel.setContent(menuLayoutFactory.createComponent());
 
+		contentPanel.setContent(uiLayout);
+		
 		rootLayout.addComponent(menuPanel);
 		rootLayout.addComponent(contentPanel);
 		rootLayout.setComponentAlignment(menuPanel, Alignment.TOP_CENTER);
@@ -113,6 +116,7 @@ public class MenuView extends UI {
 		MenuNavigator menuNavigator = new MenuNavigator(this, changeTab);
 		applicationContext.getAutowireCapableBeanFactory().autowireBean(menuNavigator);
 		menuNavigator.addProvider(viewProvider);
+		menuNavigator.navigateTo(PlayersLayoutFactory.NAME);
 	}
 
 }

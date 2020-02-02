@@ -3,6 +3,7 @@
 	<name>NBAStatistics_web</name>
 	<comment></comment>
 	<projects>
+		<project>NBAStatistics_repository</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

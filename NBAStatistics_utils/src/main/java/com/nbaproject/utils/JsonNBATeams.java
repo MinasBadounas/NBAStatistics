@@ -6,14 +6,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nbaproject.entities.Team;
+
 public class JsonNBATeams {
 
-	public static void JsonNBATeamsRequest() throws IOException {
+	public static ArrayList<Team> JsonNBATeamsRequest() throws IOException {
 
+		ArrayList<Team> teamList = new ArrayList<Team>();
 		URL url = null;
 		try {
 
@@ -40,12 +44,30 @@ public class JsonNBATeams {
 			}
 			in.close();
 			
-			JSONArray myResponse = new JSONArray(response.toString());
-			System.out.println(myResponse.toString());
+			JSONArray JArray = new JSONArray(response.toString());
+
+			
+			for (int i = 0; i < JArray.length(); i++) {
+				Team newTeam = new Team();
+				
+				JSONObject JObject = JArray.getJSONObject(i);
+				System.out.println(JObject.getString("Key"));
+				newTeam.setTeamid(JObject.getInt("TeamID"));
+				newTeam.setTeamkey(JObject.getString("Key"));
+				newTeam.setCity(JObject.getString("City"));
+				newTeam.setConference(JObject.getString("Conference"));
+				newTeam.setDivision(JObject.getString("Division"));
+				newTeam.setTeamname(JObject.getString("Name"));
+				newTeam.setWikipedialogourl(JObject.getString("WikipediaLogoUrl"));
+				
+				teamList.add(newTeam);
+			}
 			
 		}
 
 		httpURLConnection.disconnect();
+		System.out.println(teamList.isEmpty());
+		return teamList;
 
 	}
 

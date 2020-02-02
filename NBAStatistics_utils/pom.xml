@@ -15,6 +15,11 @@
 			<artifactId>json</artifactId>
 			<version>20190722</version>
 		</dependency>
+		<dependency>
+			<groupId>com.nbaproject</groupId>
+			<artifactId>NBAStatistics_entities</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
