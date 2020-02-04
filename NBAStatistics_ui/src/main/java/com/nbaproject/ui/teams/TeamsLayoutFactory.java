@@ -2,20 +2,32 @@ package com.nbaproject.ui.teams;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.nbaproject.entities.Team;
+import com.nbaproject.service.team.AddTeamService;
 import com.nbaproject.ui.common.MenuView;
 import com.nbaproject.utils.JsonNBATeams;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 @SpringView(name = TeamsLayoutFactory.NAME, ui = MenuView.class)
 public class TeamsLayoutFactory extends VerticalLayout implements View {
 
 	public static final String NAME = "teams";
-
+	private Button saveButton;
+	
+	@Autowired
+	private AddTeamService addTeamService;
+	
 	public void enter(ViewChangeEvent event) {
 
 		ArrayList<Team> teamList = new ArrayList<Team>();
@@ -38,9 +50,35 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 		grid.addColumn(Team::getWikipedialogourl).setCaption("WikipediaLogoUrl");
 
 		grid.setSizeFull();
+		
+		//**********ADD ALL TEAMS IN DATABASE *********//
+//		saveButton = new Button("SAVE");
+//		saveButton.addClickListener(new Button.ClickListener() {
+//		    public void buttonClick(ClickEvent event) {
+//		    	ArrayList<Team> teamList = new ArrayList<Team>();
+//
+//				try {
+//					teamList = JsonNBATeams.JsonNBATeamsRequest();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//				for(Team team:teamList) {
+//					addTeamService.saveTeam(team);
+//				}
+//		    }
+//		});
+//
+//		saveButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+//		addComponent(saveButton);
+		
 
 		addComponent(grid);
 
+
 	}
+	
+
 
 }
