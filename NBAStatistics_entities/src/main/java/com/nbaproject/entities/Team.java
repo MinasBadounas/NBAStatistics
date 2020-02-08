@@ -2,6 +2,7 @@ package com.nbaproject.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -31,6 +32,10 @@ public class Team implements Serializable {
 	private String teamname;
 
 	private String wikipedialogourl;
+
+	//bi-directional many-to-one association to Player
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="teamid")
+	private List<Player> players;
 
 	public Team() {
 	}
@@ -97,6 +102,28 @@ public class Team implements Serializable {
 
 	public void setWikipedialogourl(String wikipedialogourl) {
 		this.wikipedialogourl = wikipedialogourl;
+	}
+
+	public List<Player> getPlayers() {
+		return this.players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+
+	public Player addPlayer(Player player) {
+		getPlayers().add(player);
+		player.setTeam(this);
+
+		return player;
+	}
+
+	public Player removePlayer(Player player) {
+		getPlayers().remove(player);
+		player.setTeam(null);
+
+		return player;
 	}
 
 }

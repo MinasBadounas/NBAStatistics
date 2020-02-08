@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nbaproject.entities.Team;
-import com.nbaproject.service.team.AddTeamService;
+import com.nbaproject.repository.team.TeamRepository;
+import com.nbaproject.service.team.TeamService;
 import com.nbaproject.ui.common.MenuView;
 import com.nbaproject.utils.JsonNBATeams;
+import com.nbaproject.utils.StaticContextInitializer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
@@ -24,10 +26,10 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 
 	public static final String NAME = "teams";
 	private Button saveButton;
-	
+
 	@Autowired
-	private AddTeamService addTeamService;
-	
+	private TeamRepository teamRepository;
+
 	public void enter(ViewChangeEvent event) {
 
 		ArrayList<Team> teamList = new ArrayList<Team>();
@@ -50,20 +52,14 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 		grid.addColumn(Team::getWikipedialogourl).setCaption("WikipediaLogoUrl");
 
 		grid.setSizeFull();
-		
-		//**********ADD ALL TEAMS IN DATABASE *********//
+
+		System.out.println(teamRepository.findTeamById(1));
+		StaticContextInitializer.findByIdNQ(1);
+
+		// **********ADD ALL TEAMS IN DATABASE *********//
 //		saveButton = new Button("SAVE");
 //		saveButton.addClickListener(new Button.ClickListener() {
-//		    public void buttonClick(ClickEvent event) {
-//		    	ArrayList<Team> teamList = new ArrayList<Team>();
-//
-//				try {
-//					teamList = JsonNBATeams.JsonNBATeamsRequest();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
+//		    public void buttonClick(ClickEvent event) {			
 //				for(Team team:teamList) {
 //					addTeamService.saveTeam(team);
 //				}
@@ -72,13 +68,9 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 //
 //		saveButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
 //		addComponent(saveButton);
-		
 
 		addComponent(grid);
 
-
 	}
-	
-
 
 }

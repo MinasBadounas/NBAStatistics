@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import com.nbaproject.navigator.MenuNavigator;
 import com.nbaproject.ui.menubar.MenuLayoutFactory;
 import com.nbaproject.ui.players.PlayersLayoutFactory;
+import com.nbaproject.ui.teams.TeamsLayoutFactory;
 import com.nbaproject.utils.JsonNBATeams;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -116,7 +117,7 @@ public class MenuView extends UI {
 		MenuNavigator menuNavigator = new MenuNavigator(this, changeTab);
 		applicationContext.getAutowireCapableBeanFactory().autowireBean(menuNavigator);
 		menuNavigator.addProvider(viewProvider);
-		menuNavigator.navigateTo(PlayersLayoutFactory.NAME);
+		menuNavigator.navigateTo(TeamsLayoutFactory.NAME);
 	}
 
 }
