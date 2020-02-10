@@ -13,12 +13,18 @@ import com.nbaproject.utils.JsonNBATeams;
 import com.nbaproject.utils.StaticContextInitializer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.ExternalResource;
+import com.vaadin.server.Resource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Grid.Column;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.renderers.ImageRenderer;
 import com.vaadin.ui.themes.ValoTheme;
 
 @SpringView(name = TeamsLayoutFactory.NAME, ui = MenuView.class)
@@ -50,11 +56,12 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 		grid.addColumn(Team::getConference).setCaption("Conference");
 		grid.addColumn(Team::getDivision).setCaption("Division");
 		grid.addColumn(Team::getWikipedialogourl).setCaption("WikipediaLogoUrl");
-
+		Column<Team, ExternalResource> imageColumn = grid.addColumn(
+			    Team -> new ExternalResource(Team.getWikipedialogourl()),
+			    new ImageRenderer<>()).setCaption("Logo");
+		
+		grid.setColumnReorderingAllowed(true);
 		grid.setSizeFull();
-
-		System.out.println(teamRepository.findTeamById(1));
-		StaticContextInitializer.findByIdNQ(1);
 
 		// **********ADD ALL TEAMS IN DATABASE *********//
 //		saveButton = new Button("SAVE");
