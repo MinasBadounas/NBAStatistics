@@ -4,5 +4,7 @@
 		<mapping-file>META-INF/eclipselink-orm.xml</mapping-file>
 		<class>com.nbaproject.entities.Player</class>
 		<class>com.nbaproject.entities.Team</class>
+		<class>com.nbaproject.entities.Boxscore</class>
+		<class>com.nbaproject.entities.Quarter</class>
 	</persistence-unit>
 </persistence>

@@ -37,7 +37,7 @@ public class JsonNBAPlayers {
 //		httpURLConnection.setRequestProperty("Content-Type", "application/json");
 
 		if (httpURLConnection.getResponseCode() != 200) {
-			System.out.println("The JsonNBATeamsRequest failed");
+			System.out.println("The JsonNBAPlayersRequest failed");
 		} else {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));

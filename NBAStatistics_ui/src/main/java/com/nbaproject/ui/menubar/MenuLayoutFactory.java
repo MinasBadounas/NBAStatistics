@@ -92,22 +92,23 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 		    		System.out.println(path);
 		        }
 		    });
-//			MenuItem help = menuBar.addItem("Help", new Command() {
-//		        private static final long serialVersionUID = 1L;
-//
-//		        @Override
-//		        public void menuSelected(MenuItem selectedItem) {
-//		    		String selectedItemPath = selectedItem.getText();
-//
-//		    		if (selectedItemPath == null)
-//		    			return;
-//
-//		    		String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-//		    		MenuNavigator.navigate(path);
-//
-//		    		System.out.println(path);
-//		        }
-//		    });
+			
+			MenuItem boxscore = menuBar.addItem("Boxscore", new Command() {
+		        private static final long serialVersionUID = 1L;
+
+		        @Override
+		        public void menuSelected(MenuItem selectedItem) {
+		    		String selectedItemPath = selectedItem.getText();
+
+		    		if (selectedItemPath == null)
+		    			return;
+
+		    		String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
+		    		MenuNavigator.navigate(path);
+
+		    		System.out.println(path);
+		        }
+		    });
 
 			addComponent(menuBar);
 			setComponentAlignment(menuBar, Alignment.TOP_CENTER);
