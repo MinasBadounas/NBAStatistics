@@ -56,6 +56,15 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 		grid.addColumn(Team::getConference).setCaption("Conference");
 		grid.addColumn(Team::getDivision).setCaption("Division");
 		grid.addColumn(Team::getWikipedialogourl).setCaption("WikipediaLogoUrl");
+		
+		grid.addComponentColumn(Team -> {
+			Image img = new Image();
+			img.setSource( new ExternalResource(Team.getWikipedialogourl()));
+			img.setHeight("60px");
+			img.setWidth("60px");
+			
+		});
+		
 		Column<Team, ExternalResource> imageColumn = grid.addColumn(
 			    Team -> new ExternalResource(Team.getWikipedialogourl()),
 			    new ImageRenderer<>()).setCaption("Logo");

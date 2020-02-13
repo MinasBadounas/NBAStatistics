@@ -21,19 +21,19 @@ import com.nbaproject.entities.Boxscore;
 
 public class JsonNBABoxscore {
 
-	public static ArrayList<Boxscore> JsonNBABoxscoreRequest() throws IOException {
+	public static ArrayList<Boxscore> JsonNBABoxscoreRequest(LocalDate localDate ) throws IOException {
 
 		ArrayList<Boxscore> boxscoreList = new ArrayList<Boxscore>();
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-
-		
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
 		
 		URL url = null;
 		try {
 
 			url = new URL(
-					"https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/"+"2020-FEB-10"+"?key=9d0dcf6acaa04131a5d9d747ec8d7825");
+					"https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/"+localDate+"?key=9d0dcf6acaa04131a5d9d747ec8d7825");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,7 +98,6 @@ public class JsonNBABoxscore {
 				newBoxscore.setHometeamscore(JObject.getInt("HomeTeamScore"));
 				newBoxscore.setPointspread(JObject.getInt("PointSpread"));
 				newBoxscore.setOverunder(JObject.getInt("OverUnder"));
-
 
 			}
 
