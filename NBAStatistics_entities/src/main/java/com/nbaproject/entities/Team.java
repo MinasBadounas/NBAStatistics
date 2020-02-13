@@ -19,8 +19,6 @@ public class Team implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int teamid;
 
-	private byte active;
-
 	private String city;
 
 	private String conference;
@@ -33,8 +31,16 @@ public class Team implements Serializable {
 
 	private String wikipedialogourl;
 
+	//bi-directional many-to-one association to Boxscore
+	@OneToMany(mappedBy="team1")
+	private List<Boxscore> boxscores1;
+
+	//bi-directional many-to-one association to Boxscore
+	@OneToMany(mappedBy="team2")
+	private List<Boxscore> boxscores2;
+
 	//bi-directional many-to-one association to Player
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="teamid")
+	@OneToMany(mappedBy="team")
 	private List<Player> players;
 
 	public Team() {
@@ -46,14 +52,6 @@ public class Team implements Serializable {
 
 	public void setTeamid(int teamid) {
 		this.teamid = teamid;
-	}
-
-	public byte getActive() {
-		return this.active;
-	}
-
-	public void setActive(byte active) {
-		this.active = active;
 	}
 
 	public String getCity() {
@@ -102,6 +100,50 @@ public class Team implements Serializable {
 
 	public void setWikipedialogourl(String wikipedialogourl) {
 		this.wikipedialogourl = wikipedialogourl;
+	}
+
+	public List<Boxscore> getBoxscores1() {
+		return this.boxscores1;
+	}
+
+	public void setBoxscores1(List<Boxscore> boxscores1) {
+		this.boxscores1 = boxscores1;
+	}
+
+	public Boxscore addBoxscores1(Boxscore boxscores1) {
+		getBoxscores1().add(boxscores1);
+		boxscores1.setTeam1(this);
+
+		return boxscores1;
+	}
+
+	public Boxscore removeBoxscores1(Boxscore boxscores1) {
+		getBoxscores1().remove(boxscores1);
+		boxscores1.setTeam1(null);
+
+		return boxscores1;
+	}
+
+	public List<Boxscore> getBoxscores2() {
+		return this.boxscores2;
+	}
+
+	public void setBoxscores2(List<Boxscore> boxscores2) {
+		this.boxscores2 = boxscores2;
+	}
+
+	public Boxscore addBoxscores2(Boxscore boxscores2) {
+		getBoxscores2().add(boxscores2);
+		boxscores2.setTeam2(this);
+
+		return boxscores2;
+	}
+
+	public Boxscore removeBoxscores2(Boxscore boxscores2) {
+		getBoxscores2().remove(boxscores2);
+		boxscores2.setTeam2(null);
+
+		return boxscores2;
 	}
 
 	public List<Player> getPlayers() {

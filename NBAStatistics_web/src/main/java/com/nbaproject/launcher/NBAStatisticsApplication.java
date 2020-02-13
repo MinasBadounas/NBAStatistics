@@ -13,8 +13,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan({"com.nbaproject"})
-//@EnableJpaRepositories({"com.nbaproject"})
-//@EntityScan({"com.nbaproject"})
+@EnableJpaRepositories({"com.nbaproject"})
+@EntityScan({"com.nbaproject"})
 public class NBAStatisticsApplication extends SpringBootServletInitializer{
 	
 	@Override

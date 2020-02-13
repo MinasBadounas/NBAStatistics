@@ -21,19 +21,12 @@ public class Boxscore implements Serializable {
 
 	private String awayteam;
 
-	private int awayteamid;
-
 	private int awayteamscore;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datetime;
 
-	@Temporal(TemporalType.DATE)
-	private Date day;
-
 	private String hometeam;
-
-	private int hometeamid;
 
 	private int hometeamscore;
 
@@ -43,8 +36,18 @@ public class Boxscore implements Serializable {
 
 	private int season;
 
+	//bi-directional many-to-one association to Team
+	@ManyToOne
+	@JoinColumn(name="awayteamid")
+	private Team team1;
+
+	//bi-directional many-to-one association to Team
+	@ManyToOne
+	@JoinColumn(name="hometeamid")
+	private Team team2;
+
 	//bi-directional many-to-one association to Quarter
-	@OneToMany(mappedBy="boxscore", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="boxscore")
 	private List<Quarter> quarters;
 
 	public Boxscore() {
@@ -66,14 +69,6 @@ public class Boxscore implements Serializable {
 		this.awayteam = awayteam;
 	}
 
-	public int getAwayteamid() {
-		return this.awayteamid;
-	}
-
-	public void setAwayteamid(int awayteamid) {
-		this.awayteamid = awayteamid;
-	}
-
 	public int getAwayteamscore() {
 		return this.awayteamscore;
 	}
@@ -90,28 +85,12 @@ public class Boxscore implements Serializable {
 		this.datetime = datetime;
 	}
 
-	public Date getDay() {
-		return this.day;
-	}
-
-	public void setDay(Date day) {
-		this.day = day;
-	}
-
 	public String getHometeam() {
 		return this.hometeam;
 	}
 
 	public void setHometeam(String hometeam) {
 		this.hometeam = hometeam;
-	}
-
-	public int getHometeamid() {
-		return this.hometeamid;
-	}
-
-	public void setHometeamid(int hometeamid) {
-		this.hometeamid = hometeamid;
 	}
 
 	public int getHometeamscore() {
@@ -144,6 +123,22 @@ public class Boxscore implements Serializable {
 
 	public void setSeason(int season) {
 		this.season = season;
+	}
+
+	public Team getTeam1() {
+		return this.team1;
+	}
+
+	public void setTeam1(Team team1) {
+		this.team1 = team1;
+	}
+
+	public Team getTeam2() {
+		return this.team2;
+	}
+
+	public void setTeam2(Team team2) {
+		this.team2 = team2;
 	}
 
 	public List<Quarter> getQuarters() {

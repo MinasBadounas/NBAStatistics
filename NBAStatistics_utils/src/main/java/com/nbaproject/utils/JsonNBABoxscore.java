@@ -9,9 +9,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +24,6 @@ public class JsonNBABoxscore {
 
 		ArrayList<Boxscore> boxscoreList = new ArrayList<Boxscore>();
 
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 		
@@ -33,7 +31,7 @@ public class JsonNBABoxscore {
 		try {
 
 			url = new URL(
-					"https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/"+localDate+"?key=9d0dcf6acaa04131a5d9d747ec8d7825");
+					"https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/"+localDate+"?key=9d0dcf6acaa04131a5d9d747ec8d7825");		
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,25 +61,11 @@ public class JsonNBABoxscore {
 
 			
 				JSONObject JObject = JArray.getJSONObject(i);
-				System.out.println(JObject.getInt("GameID"));
-				System.out.println(JObject.getInt("Season"));
-				System.out.println(JObject.getString("Day"));
-				System.out.println(JObject.getString("DateTime"));
-				System.out.println(JObject.getString("AwayTeam"));
-				System.out.println(JObject.getString("HomeTeam"));
-				System.out.println(JObject.getInt("AwayTeamID"));
-				System.out.println(JObject.getInt("HomeTeamID"));
-				System.out.println(JObject.getInt("AwayTeamScore"));
-				System.out.println(JObject.getInt("HomeTeamScore"));
-				System.out.println(JObject.getInt("PointSpread"));
-				System.out.println(JObject.getInt("OverUnder"));
-				
+			
 				newBoxscore.setGameid(JObject.getInt("GameID"));
 				newBoxscore.setSeason(JObject.getInt("Season"));
-				try {
-					
-//					newBoxscore.setDay(date.from(localDate.parse(JObject.getString("Day"), inputFormatter)));
-					newBoxscore.setDatetime(sdf.parse(JObject.getString("DateTime")));
+				try {			
+					newBoxscore.setDatetime(sdf.parse(JObject.getString("DateTime").replace("T", " ")));
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -92,12 +76,14 @@ public class JsonNBABoxscore {
 
 				newBoxscore.setAwayteam(JObject.getString("AwayTeam"));
 				newBoxscore.setHometeam(JObject.getString("HomeTeam"));
-				newBoxscore.setAwayteamid(JObject.getInt("AwayTeamID"));
-				newBoxscore.setHometeamid(JObject.getInt("HomeTeamID"));
+				newBoxscore.setTeam1(StaticContextInitializer.findByIdNQ(JObject.getInt("AwayTeamID")));
+				newBoxscore.setTeam2(StaticContextInitializer.findByIdNQ(JObject.getInt("HomeTeamID")));
 				newBoxscore.setAwayteamscore(JObject.getInt("AwayTeamScore"));
 				newBoxscore.setHometeamscore(JObject.getInt("HomeTeamScore"));
 				newBoxscore.setPointspread(JObject.getInt("PointSpread"));
 				newBoxscore.setOverunder(JObject.getInt("OverUnder"));
+				
+				boxscoreList.add(newBoxscore);
 
 			}
 

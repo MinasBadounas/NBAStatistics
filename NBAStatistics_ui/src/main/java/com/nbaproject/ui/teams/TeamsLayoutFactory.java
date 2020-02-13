@@ -50,27 +50,23 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 		Grid<Team> grid = new Grid<Team>();
 		grid.setItems(teamList);
 		grid.addColumn(Team::getTeamid).setCaption("TeamID");
+		grid.addComponentColumn(Team -> {
+			Image img = new Image();
+			img.setSource( new ExternalResource(Team.getWikipedialogourl()));
+			img.setHeight("30px");
+			img.setWidth("30px");
+			return img;
+		}).setCaption("Photo");
 		grid.addColumn(Team::getTeamkey).setCaption("Key");
 		grid.addColumn(Team::getTeamname).setCaption("Name");
 		grid.addColumn(Team::getCity).setCaption("City");
 		grid.addColumn(Team::getConference).setCaption("Conference");
 		grid.addColumn(Team::getDivision).setCaption("Division");
-		grid.addColumn(Team::getWikipedialogourl).setCaption("WikipediaLogoUrl");
-		
-		grid.addComponentColumn(Team -> {
-			Image img = new Image();
-			img.setSource( new ExternalResource(Team.getWikipedialogourl()));
-			img.setHeight("60px");
-			img.setWidth("60px");
-			
-		});
-		
-		Column<Team, ExternalResource> imageColumn = grid.addColumn(
-			    Team -> new ExternalResource(Team.getWikipedialogourl()),
-			    new ImageRenderer<>()).setCaption("Logo");
+//		grid.addColumn(Team::getWikipedialogourl).setCaption("WikipediaLogoUrl");
 		
 		grid.setColumnReorderingAllowed(true);
 		grid.setSizeFull();
+	
 
 		// **********ADD ALL TEAMS IN DATABASE *********//
 //		saveButton = new Button("SAVE");

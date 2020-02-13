@@ -12,10 +12,12 @@ import com.nbaproject.ui.common.MenuView;
 import com.nbaproject.utils.JsonNBAPlayers;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -44,12 +46,23 @@ public class PlayersLayoutFactory extends VerticalLayout implements View {
 		Grid<Player> grid = new Grid<Player>();
 		grid.setItems(playerList);
 		grid.addColumn(Player::getPlayerid).setCaption("PlayerID");
+		grid.addComponentColumn(Player -> {
+			Image img = new Image();
+			img.setSource( new ExternalResource(Player.getPhotoUrl()));
+			img.setHeight("30px");
+			img.setWidth("30px");
+			return img;
+		}).setCaption("Photo");
 		grid.addColumn(Player::getFirstname).setCaption("First Name");
 		grid.addColumn(Player::getLastname).setCaption("Last Name");
 		grid.addColumn(Player::getPosition).setCaption("Position");
-		grid.addColumn(Player::getPositionCategory).setCaption("Position Category");
-		grid.addColumn(Player::getTeam).setCaption("Team");
-		grid.addColumn(Player::getPhotoUrl).setCaption("Photo URL");
+		grid.addColumn(Player::getPositionCategory).setCaption("Position Category");	
+		grid.addColumn(Player->{
+			return Player.getTeam().getTeamname();
+		}).setCaption("Team");
+//		grid.addColumn(Player::getTeam).setCaption("Team");
+//		grid.addColumn(Player::getPhotoUrl).setCaption("Photo URL");
+
 
 		grid.setSizeFull();
 		

@@ -12,21 +12,10 @@ import javax.persistence.*;
 @Table(name="players")
 @NamedQuery(name="Player.findAll", query="SELECT p FROM Player p")
 public class Player implements Serializable {
-	public Player(int playerid, String firstname, String lastname, String photoUrl, String position,
-			String positionCategory, Team team) {
-		super();
-		this.playerid = playerid;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.photoUrl = photoUrl;
-		this.position = position;
-		this.positionCategory = positionCategory;
-		this.teamid = team;
-	}
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int playerid;
 
 	private String firstname;
@@ -42,14 +31,12 @@ public class Player implements Serializable {
 	private String positionCategory;
 
 	//bi-directional many-to-one association to Team
-	@ManyToOne(optional = false)
-	@JoinColumn(name="teamid", referencedColumnName = "teamid")
-	private Team teamid;
+	@ManyToOne
+	@JoinColumn(name="teamid")
+	private Team team;
 
 	public Player() {
 	}
-	
-	
 
 	public int getPlayerid() {
 		return this.playerid;
@@ -99,13 +86,12 @@ public class Player implements Serializable {
 		this.positionCategory = positionCategory;
 	}
 
-
 	public Team getTeam() {
-		return this.teamid;
+		return this.team;
 	}
 
 	public void setTeam(Team team) {
-		this.teamid = team;
+		this.team = team;
 	}
 
 }

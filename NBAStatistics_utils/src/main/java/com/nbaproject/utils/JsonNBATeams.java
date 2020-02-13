@@ -51,7 +51,7 @@ public class JsonNBATeams {
 				Team newTeam = new Team();
 				
 				JSONObject JObject = JArray.getJSONObject(i);
-				System.out.println(JObject.getString("Key"));
+
 				newTeam.setTeamid(JObject.getInt("TeamID"));
 				newTeam.setTeamkey(JObject.getString("Key"));
 				newTeam.setCity(JObject.getString("City"));

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nbaproject.entities.Boxscore;
 import com.nbaproject.repository.boxscore.BoxscoreRepository;
-import com.nbaproject.repository.quarterscore.QuarterscoreRepository;
 import com.nbaproject.ui.common.MenuView;
 import com.nbaproject.utils.JsonNBABoxscore;
 import com.vaadin.navigator.View;
@@ -26,10 +25,12 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 	@Autowired
 	private BoxscoreRepository boxscoreRepository;
 	
-	@Autowired
-	private QuarterscoreRepository quarterscoreRepository;
+//	@Autowired
+//	private QuarterscoreRepository quarterscoreRepository;
 	
 	public void enter(ViewChangeEvent event) {
+		
+		Grid<Boxscore> grid = new Grid<Boxscore>();
 		
 		DateField date = new DateField();
 		date.setDateFormat("yyyy-MMM-dd");
@@ -38,6 +39,8 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 		addComponent(date);
 		
 		date.addValueChangeListener(datefield->{
+			
+			grid.removeAllColumns();
 
 			ArrayList<Boxscore> boxscoreList= new ArrayList<Boxscore>();
 			try {
@@ -46,25 +49,25 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			Grid<Boxscore> grid = new Grid<Boxscore>();
+
 			grid.setItems(boxscoreList);
 			grid.addColumn(Boxscore::getGameid).setCaption("Gameid");
 			grid.addColumn(Boxscore::getSeason).setCaption("Season");
+			grid.addColumn(Boxscore::getDatetime).setCaption("Datetime");
 			grid.addColumn(Boxscore::getAwayteam).setCaption("Awayteam");
 			grid.addColumn(Boxscore::getHometeam).setCaption("Hometeam");
-			grid.addColumn(Boxscore::getAwayteamid).setCaption("Awayteamid");
-			grid.addColumn(Boxscore::getHometeamid).setCaption("Hometeamid");
+//			grid.addColumn(Boxscore::getAwayteamid).setCaption("Awayteamid");
+//			grid.addColumn(Boxscore::getHometeamid).setCaption("Hometeamid");
 			grid.addColumn(Boxscore::getAwayteamscore).setCaption("Awayteamscore");
 			grid.addColumn(Boxscore::getHometeamscore).setCaption("Hometeamscore");
 			grid.addColumn(Boxscore::getPointspread).setCaption("Pointspread");
 			grid.addColumn(Boxscore::getOverunder).setCaption("Overunder");
-			grid.addColumn(Boxscore::getDatetime).setCaption("Datetime");
 			
 			grid.setSizeFull();
-			addComponent(grid);
 
 		});
+
+		addComponent(grid);
 	}
 	
 	
