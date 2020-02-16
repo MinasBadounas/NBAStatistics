@@ -19,7 +19,6 @@ import com.nbaproject.service.team.TeamService;
 public class JsonNBAPlayers {
 
 	public static ArrayList<Player> JsonNBAPlayersRequest() throws IOException {
-		
 
 		ArrayList<Player> playerList = new ArrayList<Player>();
 		URL url = null;
@@ -27,7 +26,7 @@ public class JsonNBAPlayers {
 
 			url = new URL("https://api.sportsdata.io/v3/nba/scores/json/Players?key=9d0dcf6acaa04131a5d9d747ec8d7825");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
@@ -54,14 +53,6 @@ public class JsonNBAPlayers {
 				Player newPlayer = new Player();
 
 				JSONObject JObject = JArray.getJSONObject(i);
-				System.out.println(JObject.getString("FirstName"));
-				System.out.println(JObject.getInt("PlayerID"));
-				System.out.println(JObject.getString("LastName"));
-				System.out.println(JObject.getString("Position"));
-				System.out.println(JObject.getString("PositionCategory"));
-				System.out.println(StaticContextInitializer.findByIdNQ(JObject.getInt("TeamID")));
-				System.out.println(JObject.getString("PhotoUrl"));
-				
 
 				newPlayer.setPlayerid(JObject.getInt("PlayerID"));
 				newPlayer.setFirstname(JObject.getString("FirstName"));

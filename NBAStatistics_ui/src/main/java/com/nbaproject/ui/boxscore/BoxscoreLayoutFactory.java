@@ -2,6 +2,7 @@ package com.nbaproject.ui.boxscore;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,6 @@ import com.vaadin.ui.VerticalLayout;
 public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 	
 	public static final String NAME = "boxscore";
-	
-	@Autowired
-	private BoxscoreRepository boxscoreRepository;
-	
-//	@Autowired
-//	private QuarterscoreRepository quarterscoreRepository;
 	
 	public void enter(ViewChangeEvent event) {
 		
@@ -56,8 +51,6 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 			grid.addColumn(Boxscore::getDatetime).setCaption("Datetime");
 			grid.addColumn(Boxscore::getAwayteam).setCaption("Awayteam");
 			grid.addColumn(Boxscore::getHometeam).setCaption("Hometeam");
-//			grid.addColumn(Boxscore::getAwayteamid).setCaption("Awayteamid");
-//			grid.addColumn(Boxscore::getHometeamid).setCaption("Hometeamid");
 			grid.addColumn(Boxscore::getAwayteamscore).setCaption("Awayteamscore");
 			grid.addColumn(Boxscore::getHometeamscore).setCaption("Hometeamscore");
 			grid.addColumn(Boxscore::getPointspread).setCaption("Pointspread");
@@ -66,6 +59,9 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 			grid.setSizeFull();
 
 		});
+		
+		date.setValue(LocalDate.now().minusDays(1));
+		
 
 		addComponent(grid);
 	}

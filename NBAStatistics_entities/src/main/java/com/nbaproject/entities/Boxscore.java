@@ -16,7 +16,6 @@ public class Boxscore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int gameid;
 
 	private String awayteam;
@@ -29,6 +28,8 @@ public class Boxscore implements Serializable {
 	private String hometeam;
 
 	private int hometeamscore;
+
+	private byte islosed;
 
 	private double overunder;
 
@@ -99,6 +100,14 @@ public class Boxscore implements Serializable {
 
 	public void setHometeamscore(int hometeamscore) {
 		this.hometeamscore = hometeamscore;
+	}
+
+	public byte getIslosed() {
+		return this.islosed;
+	}
+
+	public void setIslosed(byte islosed) {
+		this.islosed = islosed;
 	}
 
 	public double getOverunder() {

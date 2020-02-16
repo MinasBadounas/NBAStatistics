@@ -82,6 +82,7 @@ public class JsonNBABoxscore {
 				newBoxscore.setHometeamscore(JObject.getInt("HomeTeamScore"));
 				newBoxscore.setPointspread(JObject.getInt("PointSpread"));
 				newBoxscore.setOverunder(JObject.getInt("OverUnder"));
+				newBoxscore.setIslosed(Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed")));
 				
 				boxscoreList.add(newBoxscore);
 

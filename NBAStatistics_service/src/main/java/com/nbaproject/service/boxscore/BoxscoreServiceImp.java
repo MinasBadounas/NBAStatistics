@@ -9,16 +9,29 @@ import com.nbaproject.repository.boxscore.BoxscoreRepository;
 
 @Service
 public class BoxscoreServiceImp implements BoxscoreService {
-	
+
 	@Autowired
 	private BoxscoreRepository boxscoreRepository;
-	
+
 	@Override
 	public void saveBoxscore(Boxscore boxscore) {
-		
+
 		boxscoreRepository.save(boxscore);
-		
 	}
 
+	@Override
+	public int findMaxGameId() {
+
+		int maxId;
+		
+		if(boxscoreRepository.findMaxGameId()==null) {
+			maxId=0;
+		}
+		else {
+			maxId=boxscoreRepository.findMaxGameId();
+		}
+		
+		return maxId;
+	}
 
 }
