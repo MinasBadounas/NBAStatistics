@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.nbaproject.entities.Boxscore;
+import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
 
 public class JsonNBABoxscore {
 

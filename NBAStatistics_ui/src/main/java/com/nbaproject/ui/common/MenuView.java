@@ -28,7 +28,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @SpringUI(path = "/ui")
-@Title("This the title")
+@Title("NBAStatistics")
 @Theme("valo")
 public class MenuView extends UI {
 

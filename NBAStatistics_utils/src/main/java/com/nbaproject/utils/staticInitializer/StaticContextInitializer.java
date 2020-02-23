@@ -1,4 +1,4 @@
-package com.nbaproject.utils;
+package com.nbaproject.utils.staticInitializer;
 
 import javax.annotation.PostConstruct;
 

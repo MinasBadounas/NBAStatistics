@@ -1,5 +1,7 @@
 package com.nbaproject.service.boxscore;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,14 @@ public class BoxscoreServiceImp implements BoxscoreService {
 		}
 		
 		return maxId;
+	}
+
+	@Override
+	public ArrayList<Integer> findAllGameIdBoxscore() {
+
+		ArrayList<Integer> gameIdBoxscoreList = boxscoreRepository.findAllGameId();
+		
+		return gameIdBoxscoreList;
 	}
 
 }

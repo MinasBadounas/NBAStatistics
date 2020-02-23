@@ -1,0 +1,10 @@
+com\nbaproject\service\quarterscore\QuarterscoreService.class
+com\nbaproject\service\team\TeamServiceImp.class
+com\nbaproject\service\boxscore\BoxscoreServiceImp.class
+com\nbaproject\service\playerstatspergame\PlayerstatspergameService.class
+com\nbaproject\service\team\TeamService.class
+com\nbaproject\service\boxscore\BoxscoreService.class
+com\nbaproject\service\quarterscore\QuarterscoreServiceImp.class
+com\nbaproject\service\player\PlayerServiceImp.class
+com\nbaproject\service\player\PlayerService.class
+com\nbaproject\service\playerstatspergame\PlayerstatspergameServiceImp.class

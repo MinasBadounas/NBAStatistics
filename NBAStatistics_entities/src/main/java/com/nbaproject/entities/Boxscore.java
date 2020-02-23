@@ -47,6 +47,10 @@ public class Boxscore implements Serializable {
 	@JoinColumn(name="hometeamid")
 	private Team team2;
 
+	//bi-directional many-to-one association to Playerstatspergame
+	@OneToMany(mappedBy="boxscore")
+	private List<Playerstatspergame> playerstatspergames;
+
 	//bi-directional many-to-one association to Quarter
 	@OneToMany(mappedBy="boxscore")
 	private List<Quarter> quarters;
@@ -148,6 +152,28 @@ public class Boxscore implements Serializable {
 
 	public void setTeam2(Team team2) {
 		this.team2 = team2;
+	}
+
+	public List<Playerstatspergame> getPlayerstatspergames() {
+		return this.playerstatspergames;
+	}
+
+	public void setPlayerstatspergames(List<Playerstatspergame> playerstatspergames) {
+		this.playerstatspergames = playerstatspergames;
+	}
+
+	public Playerstatspergame addPlayerstatspergame(Playerstatspergame playerstatspergame) {
+		getPlayerstatspergames().add(playerstatspergame);
+		playerstatspergame.setBoxscore(this);
+
+		return playerstatspergame;
+	}
+
+	public Playerstatspergame removePlayerstatspergame(Playerstatspergame playerstatspergame) {
+		getPlayerstatspergames().remove(playerstatspergame);
+		playerstatspergame.setBoxscore(null);
+
+		return playerstatspergame;
 	}
 
 	public List<Quarter> getQuarters() {

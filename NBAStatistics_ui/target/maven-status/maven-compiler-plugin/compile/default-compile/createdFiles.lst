@@ -1,0 +1,12 @@
+com\nbaproject\ui\boxscore\BoxscoreLayoutFactory.class
+com\nbaproject\ui\menubar\MenuLayoutFactory.class
+com\nbaproject\ui\menubar\UIComponentBuilder.class
+com\nbaproject\ui\common\MenuView.class
+com\nbaproject\ui\menubar\MenuLayoutFactory$MenuLayout$1.class
+com\nbaproject\navigator\MenuNavigator.class
+com\nbaproject\ui\menubar\MenuLayoutFactory$1.class
+com\nbaproject\ui\menubar\MenuLayoutFactory$MenuLayout.class
+com\nbaproject\ui\teams\TeamsLayoutFactory.class
+com\nbaproject\ui\menubar\MenuLayoutFactory$MenuLayout$3.class
+com\nbaproject\ui\players\PlayersLayoutFactory.class
+com\nbaproject\ui\menubar\MenuLayoutFactory$MenuLayout$2.class

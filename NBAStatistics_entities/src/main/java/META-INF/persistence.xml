@@ -6,5 +6,7 @@
 		<class>com.nbaproject.entities.Team</class>
 		<class>com.nbaproject.entities.Boxscore</class>
 		<class>com.nbaproject.entities.Quarter</class>
+		<class>com.nbaproject.entities.Playerstatspergame</class>
+		<class>com.nbaproject.entities.PlayerstatspergamePK</class>
 	</persistence-unit>
 </persistence>

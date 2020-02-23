@@ -22,7 +22,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import com.nbaproject.entities.Boxscore;
 import com.nbaproject.service.boxscore.BoxscoreService;
 import com.nbaproject.utils.Converters;
-import com.nbaproject.utils.StaticContextInitializer;
+import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
 
 @Configuration
 @EnableScheduling
@@ -33,11 +33,11 @@ public class UpdateGames {
 	private BoxscoreService boxscoreService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 0 22 * * ?")
-	public void UpadateGamesSchedule() throws IOException {
+	@Scheduled(cron = "0 50 12 * * ?")
+	public void UpdateGamesSchedule() throws IOException {
 
+		System.out.println("Run 'UpdateGamesSchedule()'");
 		int maximumId = boxscoreService.findMaxGameId();
-		System.out.println(maximumId);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -75,9 +75,6 @@ public class UpdateGames {
 
 				JSONObject JObject = JArray.getJSONObject(i);
 				
-				System.out.println(JObject.getInt("GameID") );
-				System.out.println(Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed")));
-
 				if (JObject.getInt("GameID") > maximumId && Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed"))==1) {
 
 					newBoxscore.setGameid(JObject.getInt("GameID"));
@@ -101,7 +98,7 @@ public class UpdateGames {
 					newBoxscore.setPointspread(JObject.getInt("PointSpread"));
 					newBoxscore.setOverunder(JObject.getInt("OverUnder"));
 					newBoxscore.setIslosed(Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed")));
-					System.out.println(JObject.getInt("GameID"));
+					System.out.println("Save to boxscore the Game with GameID: "+JObject.getInt("GameID"));
 
 					boxscoreService.saveBoxscore(newBoxscore);
 				}

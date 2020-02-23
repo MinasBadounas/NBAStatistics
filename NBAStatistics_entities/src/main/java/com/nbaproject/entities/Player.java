@@ -2,6 +2,7 @@ package com.nbaproject.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -15,7 +16,6 @@ public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int playerid;
 
 	private String firstname;
@@ -34,6 +34,10 @@ public class Player implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="teamid")
 	private Team team;
+
+	//bi-directional many-to-one association to Playerstatspergame
+	@OneToMany(mappedBy="player")
+	private List<Playerstatspergame> playerstatspergames;
 
 	public Player() {
 	}
@@ -92,6 +96,28 @@ public class Player implements Serializable {
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+
+	public List<Playerstatspergame> getPlayerstatspergames() {
+		return this.playerstatspergames;
+	}
+
+	public void setPlayerstatspergames(List<Playerstatspergame> playerstatspergames) {
+		this.playerstatspergames = playerstatspergames;
+	}
+
+	public Playerstatspergame addPlayerstatspergame(Playerstatspergame playerstatspergame) {
+		getPlayerstatspergames().add(playerstatspergame);
+		playerstatspergame.setPlayer(this);
+
+		return playerstatspergame;
+	}
+
+	public Playerstatspergame removePlayerstatspergame(Playerstatspergame playerstatspergame) {
+		getPlayerstatspergames().remove(playerstatspergame);
+		playerstatspergame.setPlayer(null);
+
+		return playerstatspergame;
 	}
 
 }

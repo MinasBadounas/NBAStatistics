@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.nbaproject.entities.Player;
 import com.nbaproject.entities.Team;
 import com.nbaproject.service.team.TeamService;
+import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
 
 public class JsonNBAPlayers {
 
