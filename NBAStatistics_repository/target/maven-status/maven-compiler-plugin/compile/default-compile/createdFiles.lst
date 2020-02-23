@@ -1,5 +1,0 @@
-com\nbaproject\repository\boxscore\BoxscoreRepository.class
-com\nbaproject\repository\player\PlayerRepository.class
-com\nbaproject\repository\quarterscore\QuarterscoreRepository.class
-com\nbaproject\repository\playerstatspergame\PlayerStatsPerGameRepository.class
-com\nbaproject\repository\team\TeamRepository.class
