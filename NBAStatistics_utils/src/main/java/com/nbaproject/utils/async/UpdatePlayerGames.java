@@ -24,6 +24,7 @@ import com.nbaproject.service.boxscore.BoxscoreService;
 import com.nbaproject.service.playerstatspergame.PlayerstatspergameService;
 import com.nbaproject.utils.Converters;
 import com.nbaproject.utils.checker.CheckPlayer;
+import com.nbaproject.utils.converter.ConvertPositionToInt;
 import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
 
 @Configuration
@@ -75,15 +76,16 @@ public class UpdatePlayerGames {
 					}
 					in.close();
 
-					JSONObject JArray = new JSONObject(response.toString());
-					JSONArray JArray1=JArray.getJSONArray("PlayerGames");
+					JSONObject Jobj = new JSONObject(response.toString());
+					JSONArray JArray = Jobj.getJSONArray("PlayerGames");
 
 					for (int i = 0; i < JArray.length(); i++) {
 
-						JSONObject JObject = JArray1.getJSONObject(i);
+						JSONObject JObject = JArray.getJSONObject(i);
 						Playerstatspergame newPlayerstatspergame = new Playerstatspergame();
 						CheckPlayer.CheckPlayerInDB(JObject.getInt("PlayerID"));
-						PlayerstatspergamePK newPlayerstatspergamePK = new PlayerstatspergamePK(JObject.getInt("GameID"),JObject.getInt("PlayerID"));
+						PlayerstatspergamePK newPlayerstatspergamePK = new PlayerstatspergamePK(
+								JObject.getInt("GameID"), JObject.getInt("PlayerID"));
 
 						newPlayerstatspergame.setId(newPlayerstatspergamePK);
 						newPlayerstatspergame.setTeamid(JObject.getInt("TeamID"));
@@ -91,21 +93,22 @@ public class UpdatePlayerGames {
 						newPlayerstatspergame.setSeasontype(JObject.getInt("SeasonType"));
 						newPlayerstatspergame.setSeason(JObject.getInt("Season"));
 						newPlayerstatspergame.setInjurestatus(JObject.getString("InjuryStatus"));
-						newPlayerstatspergame.setFanduelposition(JObject.getString("FanDuelPosition"));
-						newPlayerstatspergame.setDraftkingsposition(JObject.getString("DraftKingsPosition"));
+						newPlayerstatspergame.setFanduelposition(
+								ConvertPositionToInt.PositionToInt(JObject.getString("FanDuelPosition")));
+						newPlayerstatspergame.setDraftkingsposition(
+								ConvertPositionToInt.PositionToInt(JObject.getString("DraftKingsPosition")));
 						newPlayerstatspergame.setStarted(JObject.getInt("Started"));
-						
 
-						if(JObject.getString("OpponentRank")=="null") {
+						if (JObject.getString("OpponentRank") == "null") {
 							System.out.println("Opponent Rankkkkkk");
 							newPlayerstatspergame.setOpponentrank(0);
-						}else {
+						} else {
 							newPlayerstatspergame.setOpponentrank(JObject.getInt("OpponentRank"));
 						}
-						
-						if(JObject.getString("OpponentPositionRank")=="null") {
+
+						if (JObject.getString("OpponentPositionRank") == "null") {
 							newPlayerstatspergame.setOpponentpositionrank(0);
-						}else {
+						} else {
 							newPlayerstatspergame.setOpponentpositionrank(JObject.getInt("OpponentPositionRank"));
 						}
 
@@ -115,7 +118,8 @@ public class UpdatePlayerGames {
 						newPlayerstatspergame.setFieldgoalsmade(JObject.getDouble("FieldGoalsMade"));
 						newPlayerstatspergame.setFieldgoalsattempted(JObject.getDouble("FieldGoalsAttempted"));
 						newPlayerstatspergame.setFieldgoalspercentage(JObject.getDouble("FieldGoalsPercentage"));
-						newPlayerstatspergame.setEffectivefieldgoalspercentage(JObject.getDouble("EffectiveFieldGoalsPercentage"));
+						newPlayerstatspergame
+								.setEffectivefieldgoalspercentage(JObject.getDouble("EffectiveFieldGoalsPercentage"));
 						newPlayerstatspergame.setTwopointersmade(JObject.getDouble("TwoPointersMade"));
 						newPlayerstatspergame.setTwopointersattempted(JObject.getDouble("TwoPointersAttempted"));
 						newPlayerstatspergame.setTwopointerspercentage(JObject.getDouble("TwoPointersPercentage"));
@@ -128,8 +132,10 @@ public class UpdatePlayerGames {
 						newPlayerstatspergame.setOffensiverebounds(JObject.getDouble("OffensiveRebounds"));
 						newPlayerstatspergame.setDefensiverebounds(JObject.getDouble("DefensiveRebounds"));
 						newPlayerstatspergame.setRebounds(JObject.getDouble("Rebounds"));
-						newPlayerstatspergame.setOffensivereboundspercentage(JObject.getDouble("OffensiveReboundsPercentage"));
-						newPlayerstatspergame.setDefensivereboundspercentage(JObject.getDouble("DefensiveReboundsPercentage"));
+						newPlayerstatspergame
+								.setOffensivereboundspercentage(JObject.getDouble("OffensiveReboundsPercentage"));
+						newPlayerstatspergame
+								.setDefensivereboundspercentage(JObject.getDouble("DefensiveReboundsPercentage"));
 						newPlayerstatspergame.setTotalreboundspercentage(JObject.getDouble("TotalReboundsPercentage"));
 						newPlayerstatspergame.setAssists(JObject.getDouble("Assists"));
 						newPlayerstatspergame.setSteals(JObject.getDouble("Steals"));
@@ -150,18 +156,19 @@ public class UpdatePlayerGames {
 						newPlayerstatspergame.setTripledoubles(JObject.getDouble("TripleDoubles"));
 						newPlayerstatspergame.setLineupconfirmed(JObject.getString("LineupConfirmed"));
 						newPlayerstatspergame.setLineupstatus(JObject.getString("LineupStatus"));
-						
-						
-						System.out.println("Save to Playerstatspergame the Game with GameID: " + JObject.getInt("GameID"));
+
+						System.out.println("Save to Playerstatspergame the Game with GameID: "
+								+ JObject.getInt("GameID") + " and PlayerId: " + JObject.getInt("PlayerID"));
 
 						playerstatspergameService.savePlayerstatspergame(newPlayerstatspergame);
 
 					}
-
+					
 				}
 
 				httpURLConnection.disconnect();
 			}
+			DefenseMatchup(gameId);
 		}
 	}
 }

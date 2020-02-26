@@ -34,14 +34,22 @@ public class PlayerstatspergameServiceImp implements PlayerstatspergameService {
 	public int maxGameIdInPlayerStatsPerGame() {
 
 		int maxGameId;
-		
-		if(playerStatsPerGameRepository.maxGameId()==null) {
+
+		if (playerStatsPerGameRepository.maxGameId() == null) {
 			maxGameId = 0;
-		}
-		else {
-			maxGameId=playerStatsPerGameRepository.maxGameId();
+		} else {
+			maxGameId = playerStatsPerGameRepository.maxGameId();
 		}
 
 		return maxGameId;
+	}
+
+	@Override
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameid) {
+
+		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
+				.findPlayerStatsPerGameByGameId(gameid);
+		
+		return playerStatsPerGameList;
 	}
 }

@@ -30,11 +30,11 @@ public class Playerstatspergame implements Serializable {
 
 	private double doubledoubles;
 
-	private String draftkingsposition;
+	private int draftkingsposition;
 
 	private double effectivefieldgoalspercentage;
 
-	private String fanduelposition;
+	private int fanduelposition;
 
 	private double fieldgoalsattempted;
 
@@ -197,11 +197,11 @@ public class Playerstatspergame implements Serializable {
 		this.doubledoubles = doubledoubles;
 	}
 
-	public String getDraftkingsposition() {
+	public int getDraftkingsposition() {
 		return this.draftkingsposition;
 	}
 
-	public void setDraftkingsposition(String draftkingsposition) {
+	public void setDraftkingsposition(int draftkingsposition) {
 		this.draftkingsposition = draftkingsposition;
 	}
 
@@ -213,11 +213,11 @@ public class Playerstatspergame implements Serializable {
 		this.effectivefieldgoalspercentage = effectivefieldgoalspercentage;
 	}
 
-	public String getFanduelposition() {
+	public int getFanduelposition() {
 		return this.fanduelposition;
 	}
 
-	public void setFanduelposition(String fanduelposition) {
+	public void setFanduelposition(int fanduelposition) {
 		this.fanduelposition = fanduelposition;
 	}
 

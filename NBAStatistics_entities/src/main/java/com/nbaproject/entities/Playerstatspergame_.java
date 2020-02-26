@@ -4,7 +4,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2020-02-22T15:32:13.098+0200")
+@Generated(value="Dali", date="2020-02-26T22:48:34.486+0200")
 @StaticMetamodel(Playerstatspergame.class)
 public class Playerstatspergame_ {
 	public static volatile SingularAttribute<Playerstatspergame, PlayerstatspergamePK> id;
@@ -15,9 +15,9 @@ public class Playerstatspergame_ {
 	public static volatile SingularAttribute<Playerstatspergame, Double> defensiverebounds;
 	public static volatile SingularAttribute<Playerstatspergame, Double> defensivereboundspercentage;
 	public static volatile SingularAttribute<Playerstatspergame, Double> doubledoubles;
-	public static volatile SingularAttribute<Playerstatspergame, String> draftkingsposition;
+	public static volatile SingularAttribute<Playerstatspergame, Integer> draftkingsposition;
 	public static volatile SingularAttribute<Playerstatspergame, Double> effectivefieldgoalspercentage;
-	public static volatile SingularAttribute<Playerstatspergame, String> fanduelposition;
+	public static volatile SingularAttribute<Playerstatspergame, Integer> fanduelposition;
 	public static volatile SingularAttribute<Playerstatspergame, Double> fieldgoalsattempted;
 	public static volatile SingularAttribute<Playerstatspergame, Double> fieldgoalsmade;
 	public static volatile SingularAttribute<Playerstatspergame, Double> fieldgoalspercentage;

@@ -11,5 +11,7 @@ public interface PlayerstatspergameService {
 	public ArrayList<Integer> findAllGameIdInPlayerStatsPerGame();
 	
 	public int maxGameIdInPlayerStatsPerGame();
+	
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameId);
 
 }
