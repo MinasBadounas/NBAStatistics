@@ -25,6 +25,7 @@ import com.nbaproject.service.playerstatspergame.PlayerstatspergameService;
 import com.nbaproject.utils.Converters;
 import com.nbaproject.utils.checker.CheckPlayer;
 import com.nbaproject.utils.converter.ConvertPositionToInt;
+import com.nbaproject.utils.defenceMatchup.DefenceMatchUp;
 import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
 
 @Configuration
@@ -39,18 +40,18 @@ public class UpdatePlayerGames {
 	private PlayerstatspergameService playerstatspergameService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 52 23 * * ?")
+	@Scheduled(cron = "0 4 23 * * ?")
 	public void UpdatePlayerGamesStas() throws IOException {
 
-		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
-		ArrayList<Integer> gameIdList = boxscoreService.findAllGameIdBoxscore();
+//		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
+//		ArrayList<Integer> gameIdList = boxscoreService.findAllGameIdBoxscore();
 		System.out.println("Run 'UpadatePlayerGamesStas()'");
 
-		for (Integer gameId : gameIdList) {
-			System.out.println(gameId);
-
-			if (gameId > maxGameId) {
-
+//		for (Integer gameId : gameIdList) {
+//			System.out.println(gameId);
+//
+//			if (gameId > maxGameId) {
+int gameId=13905;
 				URL url = null;
 				try {
 
@@ -167,8 +168,8 @@ public class UpdatePlayerGames {
 				}
 
 				httpURLConnection.disconnect();
-			}
-			DefenseMatchup(gameId);
-		}
+//			}
+			DefenceMatchUp.calculateDefenceMatchUp(gameId);
+//		}
 	}
 }

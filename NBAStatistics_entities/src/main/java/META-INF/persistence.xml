@@ -8,5 +8,7 @@
 		<class>com.nbaproject.entities.Quarter</class>
 		<class>com.nbaproject.entities.Playerstatspergame</class>
 		<class>com.nbaproject.entities.PlayerstatspergamePK</class>
+		<class>com.nbaproject.entities.Defencematchup</class>
+		<class>com.nbaproject.entities.DefencematchupPK</class>
 	</persistence-unit>
 </persistence>
