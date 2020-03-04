@@ -10,5 +10,8 @@
 		<class>com.nbaproject.entities.PlayerstatspergamePK</class>
 		<class>com.nbaproject.entities.Defencematchup</class>
 		<class>com.nbaproject.entities.DefencematchupPK</class>
+		<class>com.nbaproject.entities.Appconfig</class>
+		<class>com.nbaproject.entities.Opponentplayerstatspergame</class>
+		<class>com.nbaproject.entities.OpponentplayerstatspergamePK</class>
 	</persistence-unit>
 </persistence>

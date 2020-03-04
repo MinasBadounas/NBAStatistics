@@ -3,12 +3,14 @@ package com.nbaproject.utils.staticInitializer;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.nbaproject.entities.Player;
 import com.nbaproject.service.player.PlayerService;
 
 @Component
+@Order(3)
 public class PlayerServiceStaticInitializer {
 
 	@Autowired

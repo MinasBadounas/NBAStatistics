@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nbaproject.entities.Team;
+import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
 
 public class JsonNBATeams {
 
@@ -21,7 +22,7 @@ public class JsonNBATeams {
 		URL url = null;
 		try {
 
-			url = new URL("https://api.sportsdata.io/v3/nba/scores/json/AllTeams?key=9d0dcf6acaa04131a5d9d747ec8d7825");
+			url = new URL("https://api.sportsdata.io/v3/nba/scores/json/AllTeams?key="+AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

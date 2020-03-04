@@ -10,7 +10,7 @@ import com.nbaproject.repository.team.TeamRepository;
 import com.nbaproject.service.team.TeamService;
 import com.nbaproject.ui.common.MenuView;
 import com.nbaproject.utils.JsonNBATeams;
-import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
+import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;

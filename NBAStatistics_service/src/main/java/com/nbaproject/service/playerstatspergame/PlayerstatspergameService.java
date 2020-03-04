@@ -12,6 +12,6 @@ public interface PlayerstatspergameService {
 	
 	public int maxGameIdInPlayerStatsPerGame();
 	
-	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameId);
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameId, int min_minutes);
 
 }

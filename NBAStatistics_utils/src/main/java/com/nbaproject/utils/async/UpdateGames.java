@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -21,8 +22,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.nbaproject.entities.Boxscore;
 import com.nbaproject.service.boxscore.BoxscoreService;
-import com.nbaproject.utils.Converters;
-import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
+import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
+import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
+import com.nbaproject.utils.tools.Converters;
 
 @Configuration
 @EnableScheduling
@@ -31,7 +33,7 @@ public class UpdateGames {
 
 	@Autowired
 	private BoxscoreService boxscoreService;
-
+	
 	@Async("threadPoolTaskExecutor")
 	@Scheduled(cron = "0 50 12 * * ?")
 	public void UpdateGamesSchedule() throws IOException {
@@ -45,7 +47,7 @@ public class UpdateGames {
 		try {
 
 			url = new URL("https://api.sportsdata.io/v3/nba/scores/json/Games/" + "2020"
-					+ "?key=9d0dcf6acaa04131a5d9d747ec8d7825");
+					+ "?key="+AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,8 +93,8 @@ public class UpdateGames {
 
 					newBoxscore.setAwayteam(JObject.getString("AwayTeam"));
 					newBoxscore.setHometeam(JObject.getString("HomeTeam"));
-					newBoxscore.setTeam1(StaticContextInitializer.findByIdNQ(JObject.getInt("AwayTeamID")));
-					newBoxscore.setTeam2(StaticContextInitializer.findByIdNQ(JObject.getInt("HomeTeamID")));
+					newBoxscore.setTeam1(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("AwayTeamID")));
+					newBoxscore.setTeam2(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("HomeTeamID")));
 					newBoxscore.setAwayteamscore(JObject.getInt("AwayTeamScore"));
 					newBoxscore.setHometeamscore(JObject.getInt("HomeTeamScore"));
 					newBoxscore.setPointspread(JObject.getInt("PointSpread"));

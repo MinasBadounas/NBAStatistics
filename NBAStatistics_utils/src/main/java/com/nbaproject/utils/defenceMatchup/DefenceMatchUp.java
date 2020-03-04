@@ -24,10 +24,18 @@ public class DefenceMatchUp {
 								playerStatsPerGameList.get(y).getFanduelposition()) >= Math.min(
 										playerStatsPerGameList.get(i).getDraftkingsposition(),
 										playerStatsPerGameList.get(i).getFanduelposition())
-								|| Math.max(playerStatsPerGameList.get(y).getDraftkingsposition(),
+								&& Math.min(playerStatsPerGameList.get(y).getDraftkingsposition(),
 										playerStatsPerGameList.get(y).getFanduelposition()) <= Math.max(
 												playerStatsPerGameList.get(i).getDraftkingsposition(),
 												playerStatsPerGameList.get(i).getFanduelposition()))
+								|| (Math.max(playerStatsPerGameList.get(y).getDraftkingsposition(),
+										playerStatsPerGameList.get(y).getFanduelposition()) <= Math.max(
+												playerStatsPerGameList.get(i).getDraftkingsposition(),
+												playerStatsPerGameList.get(i).getFanduelposition())
+										&& Math.max(playerStatsPerGameList.get(y).getDraftkingsposition(),
+												playerStatsPerGameList.get(y).getFanduelposition()) >= Math.min(
+														playerStatsPerGameList.get(i).getDraftkingsposition(),
+														playerStatsPerGameList.get(i).getFanduelposition()))
 								|| (Math.min(playerStatsPerGameList.get(y).getDraftkingsposition(),
 										playerStatsPerGameList.get(y).getFanduelposition()) < Math.min(
 												playerStatsPerGameList.get(i).getDraftkingsposition(),

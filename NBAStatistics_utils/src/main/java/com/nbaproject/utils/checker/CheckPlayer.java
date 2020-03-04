@@ -14,8 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nbaproject.entities.Player;
 import com.nbaproject.service.player.PlayerService;
+import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
 import com.nbaproject.utils.staticInitializer.PlayerServiceStaticInitializer;
-import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
+import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
 
 public class CheckPlayer {
 
@@ -28,7 +29,7 @@ public class CheckPlayer {
 			try {
 
 				url = new URL("https://api.sportsdata.io/v3/nba/scores/json/Player/" + playerid
-						+ "?key=9d0dcf6acaa04131a5d9d747ec8d7825");
+						+ "?key="+AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key"));
 			} catch (MalformedURLException e) {
 
 				e.printStackTrace();
@@ -61,7 +62,7 @@ public class CheckPlayer {
 				newPlayer.setPosition(JObject.getString("Position"));
 				newPlayer.setPositionCategory(JObject.getString("PositionCategory"));
 				//set Team == null(id:33) by default
-				newPlayer.setTeam(StaticContextInitializer.findByIdNQ(33));
+				newPlayer.setTeam(TeamServiceStaticInitializer.findByIdNQ(33));
 				newPlayer.setPhotoUrl(JObject.getString("PhotoUrl"));
 
 

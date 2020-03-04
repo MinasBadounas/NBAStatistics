@@ -15,24 +15,30 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.nbaproject.entities.Boxscore;
-import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
+import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
+import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
+import com.nbaproject.utils.tools.Converters;
 
 public class JsonNBABoxscore {
 
+	
 	public static ArrayList<Boxscore> JsonNBABoxscoreRequest(LocalDate localDate ) throws IOException {
 
+	
 		ArrayList<Boxscore> boxscoreList = new ArrayList<Boxscore>();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-		
+
 		URL url = null;
 		try {
 
 			url = new URL(
-					"https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/"+localDate+"?key=9d0dcf6acaa04131a5d9d747ec8d7825");		
+					"https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/"+localDate+"?key="+AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key"));		
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,8 +83,8 @@ public class JsonNBABoxscore {
 
 				newBoxscore.setAwayteam(JObject.getString("AwayTeam"));
 				newBoxscore.setHometeam(JObject.getString("HomeTeam"));
-				newBoxscore.setTeam1(StaticContextInitializer.findByIdNQ(JObject.getInt("AwayTeamID")));
-				newBoxscore.setTeam2(StaticContextInitializer.findByIdNQ(JObject.getInt("HomeTeamID")));
+				newBoxscore.setTeam1(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("AwayTeamID")));
+				newBoxscore.setTeam2(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("HomeTeamID")));
 				newBoxscore.setAwayteamscore(JObject.getInt("AwayTeamScore"));
 				newBoxscore.setHometeamscore(JObject.getInt("HomeTeamScore"));
 				newBoxscore.setPointspread(JObject.getInt("PointSpread"));

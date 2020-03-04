@@ -17,7 +17,7 @@ public interface PlayerStatsPerGameRepository extends JpaRepository<Playerstatsp
 	 @Query(value = "select Max(gameid) from playerstatspergame ;", nativeQuery = true)
 	    Integer maxGameId();
 	 
-	 @Query(value = "select * from playerstatspergame where gameid= ?1 and minutes>25 ;", nativeQuery = true)
-	    ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameid);
+	 @Query(value = "select * from playerstatspergame where gameid= ?1 and minutes> ?2 ;", nativeQuery = true)
+	    ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameid, int minutes);
 
 }

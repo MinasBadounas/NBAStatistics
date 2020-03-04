@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -22,11 +23,13 @@ import com.nbaproject.entities.Playerstatspergame;
 import com.nbaproject.entities.PlayerstatspergamePK;
 import com.nbaproject.service.boxscore.BoxscoreService;
 import com.nbaproject.service.playerstatspergame.PlayerstatspergameService;
-import com.nbaproject.utils.Converters;
 import com.nbaproject.utils.checker.CheckPlayer;
 import com.nbaproject.utils.converter.ConvertPositionToInt;
 import com.nbaproject.utils.defenceMatchup.DefenceMatchUp;
-import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
+import com.nbaproject.utils.opponentplayerstatspergame.OpponentPlayerStatsPerGame;
+import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
+import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
+import com.nbaproject.utils.tools.Converters;
 
 @Configuration
 @EnableScheduling
@@ -40,23 +43,24 @@ public class UpdatePlayerGames {
 	private PlayerstatspergameService playerstatspergameService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 4 23 * * ?")
+	@Scheduled(cron = "0 38 23 * * ?")
 	public void UpdatePlayerGamesStas() throws IOException {
-
+		
 //		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
 //		ArrayList<Integer> gameIdList = boxscoreService.findAllGameIdBoxscore();
 		System.out.println("Run 'UpadatePlayerGamesStas()'");
-
+		long timeNow = System.currentTimeMillis();
 //		for (Integer gameId : gameIdList) {
 //			System.out.println(gameId);
 //
 //			if (gameId > maxGameId) {
-int gameId=13905;
+				int gameId=13905;
+				
 				URL url = null;
 				try {
 
 					url = new URL("https://api.sportsdata.io/v3/nba/stats/json/BoxScore/" + gameId
-							+ "?key=9d0dcf6acaa04131a5d9d747ec8d7825");
+							+ "?key="+AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key"));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -170,6 +174,9 @@ int gameId=13905;
 				httpURLConnection.disconnect();
 //			}
 			DefenceMatchUp.calculateDefenceMatchUp(gameId);
+			OpponentPlayerStatsPerGame.calulateOpponentPlayerStatsPerGame(gameId);
+			long timeEnd = System.currentTimeMillis();
+			System.out.println("total time : " +(timeEnd-timeNow));
 //		}
 	}
 }

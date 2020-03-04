@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.nbaproject.entities.Player;
 import com.nbaproject.entities.Team;
 import com.nbaproject.service.team.TeamService;
-import com.nbaproject.utils.staticInitializer.StaticContextInitializer;
+import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
+import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
 
 public class JsonNBAPlayers {
 
@@ -25,7 +26,7 @@ public class JsonNBAPlayers {
 		URL url = null;
 		try {
 
-			url = new URL("https://api.sportsdata.io/v3/nba/scores/json/Players?key=9d0dcf6acaa04131a5d9d747ec8d7825");
+			url = new URL("https://api.sportsdata.io/v3/nba/scores/json/Players?key="+AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key"));
 		} catch (MalformedURLException e) {
 
 			e.printStackTrace();
@@ -60,7 +61,7 @@ public class JsonNBAPlayers {
 				newPlayer.setLastname(JObject.getString("LastName"));
 				newPlayer.setPosition(JObject.getString("Position"));
 				newPlayer.setPositionCategory(JObject.getString("PositionCategory"));
-				newPlayer.setTeam(StaticContextInitializer.findByIdNQ(JObject.getInt("TeamID")));
+				newPlayer.setTeam(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("TeamID")));
 				newPlayer.setPhotoUrl(JObject.getString("PhotoUrl"));
 
 				playerList.add(newPlayer);
