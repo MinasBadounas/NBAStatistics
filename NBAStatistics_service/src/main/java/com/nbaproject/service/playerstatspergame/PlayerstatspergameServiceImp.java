@@ -8,13 +8,11 @@ import org.springframework.stereotype.Service;
 import com.nbaproject.entities.Playerstatspergame;
 import com.nbaproject.repository.playerstatspergame.PlayerStatsPerGameRepository;
 
-
 @Service
 public class PlayerstatspergameServiceImp implements PlayerstatspergameService {
 
 	@Autowired
 	private PlayerStatsPerGameRepository playerStatsPerGameRepository;
-	
 
 	@Override
 	public void savePlayerstatspergame(Playerstatspergame playerstatspergame) {
@@ -51,6 +49,15 @@ public class PlayerstatspergameServiceImp implements PlayerstatspergameService {
 
 		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
 				.findPlayerStatsPerGameByGameId(gameid, min_minutes);
+
+		return playerStatsPerGameList;
+	}
+
+	@Override
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameWhichNotInDefenceMatchUpByGameId(int gameId, int minutes) {
+
+		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
+				.findAllPlayerStatsPerGameWhereNotInDefencemMatchUpAndOverMinutesByGameId(gameId,minutes);
 
 		return playerStatsPerGameList;
 	}

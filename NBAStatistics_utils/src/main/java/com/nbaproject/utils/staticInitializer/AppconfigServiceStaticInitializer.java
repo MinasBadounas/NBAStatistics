@@ -3,6 +3,7 @@ package com.nbaproject.utils.staticInitializer;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -37,5 +38,6 @@ public class AppconfigServiceStaticInitializer {
 		return appconfigServiceStaticInitializer.appconfigService.findKeyValue(keytitle);
 
 	}
+
 
 }

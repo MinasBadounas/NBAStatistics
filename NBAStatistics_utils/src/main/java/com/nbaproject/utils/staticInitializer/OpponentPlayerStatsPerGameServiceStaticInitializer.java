@@ -41,7 +41,7 @@ public class OpponentPlayerStatsPerGameServiceStaticInitializer {
 	
 	public static void addNullOpponentPlayerStatsPerGame(int gameid, int playerid) {
 
-		opponentPlayerStatsPerGameServiceStaticInitializer.opponentplayerstatspergameService.saveNullOpponentPlayerStatsPerGame(gameid, playerid);;
+		opponentPlayerStatsPerGameServiceStaticInitializer.opponentplayerstatspergameService.saveNullOpponentPlayerStatsPerGame(gameid, playerid);
 
 	}
 

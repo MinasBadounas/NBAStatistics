@@ -21,6 +21,11 @@ import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
 public class CheckPlayer {
 
 	public static void CheckPlayerInDB(int playerid) throws IOException {
+		
+		/**---------Method Description---------**/
+		// - Check the player if exists in Database: 
+	    // 		* If not then create an entry with TeamID(null) 
+		// 		* Else nothing
 
 		int playerId = PlayerServiceStaticInitializer.findPlayerById(playerid);
 
@@ -37,8 +42,6 @@ public class CheckPlayer {
 
 			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 			httpURLConnection.setRequestMethod("GET");
-
-//		httpURLConnection.setRequestProperty("Content-Type", "application/json");
 
 			if (httpURLConnection.getResponseCode() != 200) {
 				System.out.println("The JsonNBAPlayersRequest failed");
@@ -61,7 +64,7 @@ public class CheckPlayer {
 				newPlayer.setLastname(JObject.getString("LastName"));
 				newPlayer.setPosition(JObject.getString("Position"));
 				newPlayer.setPositionCategory(JObject.getString("PositionCategory"));
-				//set Team == null(id:33) by default
+				//set TeamID ==33 (null) by default
 				newPlayer.setTeam(TeamServiceStaticInitializer.findByIdNQ(33));
 				newPlayer.setPhotoUrl(JObject.getString("PhotoUrl"));
 

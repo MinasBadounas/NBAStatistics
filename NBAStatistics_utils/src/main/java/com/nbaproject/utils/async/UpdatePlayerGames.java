@@ -43,7 +43,7 @@ public class UpdatePlayerGames {
 	private PlayerstatspergameService playerstatspergameService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 38 23 * * ?")
+	@Scheduled(cron = "0 43 00 * * ?")
 	public void UpdatePlayerGamesStas() throws IOException {
 		
 //		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
@@ -54,8 +54,8 @@ public class UpdatePlayerGames {
 //			System.out.println(gameId);
 //
 //			if (gameId > maxGameId) {
-				int gameId=13905;
-				
+//				int gameId=13905;
+				for(int gameId=13904;gameId<13906;gameId++) {
 				URL url = null;
 				try {
 
@@ -173,10 +173,23 @@ public class UpdatePlayerGames {
 
 				httpURLConnection.disconnect();
 //			}
+				
+			/**---------Method Description---------**/
+			// - Compare Every player(a list with players which had played for than 25 minutes) for the specific gameid.
+			// - The comparison is been accordingly with the position of each player				
 			DefenceMatchUp.calculateDefenceMatchUp(gameId);
+			
+			/**---------Method Description---------**/
+			// - Create an entry in table "OpponentPlayerStatsPerGame" for every player for the specific gameId
+		    // - If the player have played less than 25 minutes create an null entry to the table
+			// - If the player have played more than 25 minutes create an entry which calculate the average of 
+			//   his opponents with the same position
 			OpponentPlayerStatsPerGame.calulateOpponentPlayerStatsPerGame(gameId);
+			
+			/**---------Calculate the process time for each game---------**/
 			long timeEnd = System.currentTimeMillis();
-			System.out.println("total time : " +(timeEnd-timeNow));
-//		}
+			System.out.println("Total time process time of match with gameId "+gameId+ " : " +(timeEnd-timeNow)/1000+" sec");
+			
+		}
 	}
 }

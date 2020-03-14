@@ -18,7 +18,8 @@ public class PlayerstatspergameServiceStaticInitializer {
 	@Autowired
 	private PlayerstatspergameService playerstatspergameService;
 	
-	public static int minutes = 25;
+	@Autowired
+	private static AppconfigServiceStaticInitializer appconfigServiceStaticInitializer;
 
 	private static PlayerstatspergameServiceStaticInitializer playerstatspergameServiceStaticInitializer;
 
@@ -38,8 +39,26 @@ public class PlayerstatspergameServiceStaticInitializer {
 
 	public static ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameid) {
 
+		int minutes = Integer.parseInt(appconfigServiceStaticInitializer.getKeyValuefromAppconfig("minimum.playerMinutes"));
+		
 		ArrayList<Playerstatspergame> playerstatspergameList = playerstatspergameServiceStaticInitializer.playerstatspergameService
 				.findPlayerStatsPerGameByGameId(gameid,minutes);
+
+		return playerstatspergameList;
+	}
+	
+	public static ArrayList<Playerstatspergame> findAllPlayerStatsPerGameByGameId(int gameid) {
+
+		ArrayList<Playerstatspergame> playerstatspergameList = playerstatspergameServiceStaticInitializer.playerstatspergameService
+				.findPlayerStatsPerGameByGameId(gameid,0);
+
+		return playerstatspergameList;
+	}
+	
+	public static ArrayList<Playerstatspergame> findAllPlayerStatsPerGameWhichNotInDefencemMatchUpAndOverMinutesByGameId(int gameid, int minutes) {
+	
+		ArrayList<Playerstatspergame> playerstatspergameList = playerstatspergameServiceStaticInitializer.playerstatspergameService
+				.findPlayerStatsPerGameWhichNotInDefenceMatchUpByGameId(gameid, minutes);
 
 		return playerstatspergameList;
 	}

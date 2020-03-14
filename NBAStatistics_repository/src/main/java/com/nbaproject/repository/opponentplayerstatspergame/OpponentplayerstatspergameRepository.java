@@ -21,7 +21,7 @@ public interface OpponentplayerstatspergameRepository extends JpaRepository<Oppo
 			+ "AVG_offensiverebounds ,AVG_defensiverebounds ,AVG_rebounds ,AVG_offensivereboundspercentage ,AVG_defensivereboundspercentage ,"
 			+ "AVG_totalreboundspercentage ,AVG_assists ,AVG_steals ,AVG_blockedshots ,AVG_turnovers ,AVG_personalfouls ,AVG_points ,"
 			+ "AVG_trueshootingattempts ,AVG_trueshootingpercentage ,AVG_playerefficiencyrating ,AVG_assistspercentage ,AVG_stealspercentage ,"
-			+ "AVG_blockspercentage ,AVG_turnoverspercentage ,AVG_usageratepercentage ,AVG_plusminus)"
+			+ "AVG_blockspercentage ,AVG_turnoverspercentage ,AVG_usageratepercentage ,AVG_plusminus) "
 			+ "select dfu.gameid, dfu.playerid_1,pspg.teamid, pspg.opponentid,pspg.seasontype, pspg.season,pspg.opponentrank,"
 			+ "MIN(pspg.opponentpositionrank) MINopponentpositionrank,max(pspg.opponentpositionrank) MAXopponentpositionrank,pspg.games,"
 			+ "cast(AVG(pspg.minutes) as decimal(12,2)),cast(AVG(pspg.fieldgoalsmade) as decimal(12,2)),"
@@ -53,13 +53,12 @@ public interface OpponentplayerstatspergameRepository extends JpaRepository<Oppo
 			+ "AVG_offensiverebounds ,AVG_defensiverebounds ,AVG_rebounds ,AVG_offensivereboundspercentage ,AVG_defensivereboundspercentage ,"
 			+ "AVG_totalreboundspercentage ,AVG_assists ,AVG_steals ,AVG_blockedshots ,AVG_turnovers ,AVG_personalfouls ,AVG_points ,"
 			+ "AVG_trueshootingattempts ,AVG_trueshootingpercentage ,AVG_playerefficiencyrating ,AVG_assistspercentage ,AVG_stealspercentage ,"
-			+ "AVG_blockspercentage ,AVG_turnoverspercentage ,AVG_usageratepercentage ,AVG_plusminus)"
-			+ "select dfu.gameid, dfu.playerid_1,pspg.teamid, pspg.opponentid,pspg.seasontype, pspg.season,pspg.opponentrank,"
-			+ "MIN(pspg.opponentpositionrank) MINopponentpositionrank,max(pspg.opponentpositionrank) MAXopponentpositionrank,pspg.games,"
-			+ "null ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"
+			+ "AVG_blockspercentage ,AVG_turnoverspercentage ,AVG_usageratepercentage ,AVG_plusminus) "
+			+ "select pspg.gameid, pspg.playerid, pspg.teamid, pspg.opponentid,pspg.seasontype, pspg.season,pspg.opponentrank, "
+			+ "MIN(pspg.opponentpositionrank) MINopponentpositionrank,max(pspg.opponentpositionrank) MAXopponentpositionrank,pspg.games, "
+			+ "null ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null, "
 			+ "null,null,null,null,null, null,null,null,null, null,null "
-			+ "from nbastatistics.defencematchup dfu "
-			+ "left join nbastatistics.playerstatspergame  pspg  on dfu.playerid_2=pspg.playerid"
-			+ "where dfu.gameid= ?1 and dfu.playerid_1= ?2 ;", nativeQuery = true)
+			+ "from nbastatistics.playerstatspergame  pspg "
+			+ "where pspg.gameid= ?1 and pspg.playerid= ?2 ;", nativeQuery = true)
 	void InsertNullOpponentplayerstatspergame(int gameid, int playerid);
 }
