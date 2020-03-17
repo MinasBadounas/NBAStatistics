@@ -36,6 +36,8 @@ public class Boxscore implements Serializable {
 	private double pointspread;
 
 	private int season;
+	
+	private String status;
 
 	//bi-directional many-to-one association to Team
 	@ManyToOne
@@ -136,6 +138,14 @@ public class Boxscore implements Serializable {
 
 	public void setSeason(int season) {
 		this.season = season;
+	}
+	
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Team getTeam1() {

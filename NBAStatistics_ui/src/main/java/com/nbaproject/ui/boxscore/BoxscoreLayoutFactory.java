@@ -48,6 +48,7 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 			grid.setItems(boxscoreList);
 			grid.addColumn(Boxscore::getGameid).setCaption("Gameid");
 			grid.addColumn(Boxscore::getSeason).setCaption("Season");
+			grid.addColumn(Boxscore::getStatus).setCaption("Status");
 			grid.addColumn(Boxscore::getDatetime).setCaption("Datetime");
 			grid.addColumn(Boxscore::getAwayteam).setCaption("Awayteam");
 			grid.addColumn(Boxscore::getHometeam).setCaption("Hometeam");

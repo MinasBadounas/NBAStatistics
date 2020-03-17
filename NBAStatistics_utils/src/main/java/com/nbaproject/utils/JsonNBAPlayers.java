@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import com.nbaproject.entities.Player;
 import com.nbaproject.entities.Team;
@@ -23,54 +25,32 @@ public class JsonNBAPlayers {
 	public static ArrayList<Player> JsonNBAPlayersRequest() throws IOException {
 
 		ArrayList<Player> playerList = new ArrayList<Player>();
-		URL url = null;
-		try {
 
-			url = new URL("https://api.sportsdata.io/v3/nba/scores/json/Players?key="+AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key"));
-		} catch (MalformedURLException e) {
+		String url = "https://api.sportsdata.io/v3/nba/scores/json/Players?key="
+				+ AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key");
 
-			e.printStackTrace();
+		RestTemplate restTemplate = new RestTemplate();
+
+		ResponseEntity<Object[]> response = restTemplate.getForEntity(url, Object[].class);
+
+		JSONArray JArray = new JSONArray(response.getBody());
+
+		for (int i = 0; i < JArray.length(); i++) {
+			Player newPlayer = new Player();
+
+			JSONObject JObject = JArray.getJSONObject(i);
+
+			newPlayer.setPlayerid(JObject.getInt("PlayerID"));
+			newPlayer.setFirstname(JObject.getString("FirstName"));
+			newPlayer.setLastname(JObject.getString("LastName"));
+			newPlayer.setPosition(JObject.getString("Position"));
+			newPlayer.setPositionCategory(JObject.getString("PositionCategory"));
+			newPlayer.setTeam(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("TeamID")));
+			newPlayer.setPhotoUrl(JObject.getString("PhotoUrl"));
+
+			playerList.add(newPlayer);
 		}
 
-		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-		httpURLConnection.setRequestMethod("GET");
-
-//		httpURLConnection.setRequestProperty("Content-Type", "application/json");
-
-		if (httpURLConnection.getResponseCode() != 200) {
-			System.out.println("The JsonNBAPlayersRequest failed");
-		} else {
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-			JSONArray JArray = new JSONArray(response.toString());
-
-			for (int i = 0; i < JArray.length(); i++) {
-				Player newPlayer = new Player();
-
-				JSONObject JObject = JArray.getJSONObject(i);
-
-				newPlayer.setPlayerid(JObject.getInt("PlayerID"));
-				newPlayer.setFirstname(JObject.getString("FirstName"));
-				newPlayer.setLastname(JObject.getString("LastName"));
-				newPlayer.setPosition(JObject.getString("Position"));
-				newPlayer.setPositionCategory(JObject.getString("PositionCategory"));
-				newPlayer.setTeam(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("TeamID")));
-				newPlayer.setPhotoUrl(JObject.getString("PhotoUrl"));
-
-				playerList.add(newPlayer);
-			}
-
-		}
-
-		httpURLConnection.disconnect();
-		System.out.println(playerList.isEmpty());
 		return playerList;
 
 	}

@@ -6,7 +6,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2020-02-22T15:42:11.367+0200")
+@Generated(value="Dali", date="2020-03-16T20:32:33.259+0200")
 @StaticMetamodel(Boxscore.class)
 public class Boxscore_ {
 	public static volatile SingularAttribute<Boxscore, Integer> gameid;
@@ -23,4 +23,5 @@ public class Boxscore_ {
 	public static volatile SingularAttribute<Boxscore, Team> team2;
 	public static volatile ListAttribute<Boxscore, Playerstatspergame> playerstatspergames;
 	public static volatile ListAttribute<Boxscore, Quarter> quarters;
+	public static volatile SingularAttribute<Boxscore, String> status;
 }
