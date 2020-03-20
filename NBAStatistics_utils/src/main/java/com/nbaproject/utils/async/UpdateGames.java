@@ -37,6 +37,7 @@ public class UpdateGames {
 	@Autowired
 	private BoxscoreService boxscoreService;
 
+	
 	@Async("threadPoolTaskExecutor")
 	@Scheduled(cron = "0 26 22 * * ?")
 	public void UpdateGamesSchedule() throws IOException {

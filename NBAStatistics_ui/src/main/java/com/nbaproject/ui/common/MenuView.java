@@ -82,34 +82,6 @@ public class MenuView extends UI {
 
 		setContent(rootLayout);
 
-//		final VerticalLayout verticalLayout= new VerticalLayout();
-//		
-//		try {
-//			JsonNBATeams.JsonNBATeamsRequest();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//
-//		
-//		verticalLayout.addComponent(new Label("Welcome to springboot with Vaadin...."));
-//		
-//		Button button = new Button("Click me!!");
-//		
-//		verticalLayout.addComponent(button);
-//		button.addClickListener(new Button.ClickListener(){
-//			
-//			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
-//				verticalLayout.addComponent(new Label("Button has been clicked"));
-//				
-//			}
-//
-//		
-//		});
-//		
-//		setContent(verticalLayout);
-
 	}
 
 	private void initNavigator() {
@@ -119,5 +91,6 @@ public class MenuView extends UI {
 		menuNavigator.addProvider(viewProvider);
 		menuNavigator.navigateTo(TeamsLayoutFactory.NAME);
 	}
+	
 
 }

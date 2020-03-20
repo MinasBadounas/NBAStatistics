@@ -61,4 +61,13 @@ public class PlayerstatspergameServiceImp implements PlayerstatspergameService {
 
 		return playerStatsPerGameList;
 	}
+
+	@Override
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameIdAndTeamId(int gameId, int teamid) {
+
+		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
+				.findPlayerStatsPerGameByGameIdAndTeamId(gameId, teamid);
+
+		return playerStatsPerGameList;
+	}
 }

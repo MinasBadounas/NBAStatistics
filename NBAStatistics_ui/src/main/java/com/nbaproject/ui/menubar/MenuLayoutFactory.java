@@ -21,94 +21,82 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 		private MenuBar menuBar;
 
 		public MenuLayout init() {
-			
-			menuBar = new MenuBar();	
+
+			menuBar = new MenuBar();
 			return this;
 		}
 
 		public MenuLayout layout() {
 
-//			MenuItem home = menuBar.addItem("Home", new Command() {
-//		        private static final long serialVersionUID = 1L;
-//
-//		        @Override
-//		        public void menuSelected(MenuItem selectedItem) {
-//		    		String selectedItemPath = selectedItem.getText();
-//
-//		    		if (selectedItemPath == null)
-//		    			return;
-//
-//		    		String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-//		    		MenuNavigator.navigate(path);
-//
-//		    		System.out.println(path);
-//		        }
-//		    });
-//			MenuItem dashboard = menuBar.addItem("Dashboard", new Command() {
-//		        private static final long serialVersionUID = 1L;
-//
-//		        @Override
-//		        public void menuSelected(MenuItem selectedItem) {
-//		    		String selectedItemPath = selectedItem.getText();
-//
-//		    		if (selectedItemPath == null)
-//		    			return;
-//
-//		    		String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-//		    		MenuNavigator.navigate(path);
-//
-//		    		System.out.println(path);
-//		        }
-//		    });
 			MenuItem teams = menuBar.addItem("Teams", new Command() {
-		        private static final long serialVersionUID = 1L;
+				private static final long serialVersionUID = 1L;
 
-		        @Override
-		        public void menuSelected(MenuItem selectedItem) {
-		    		String selectedItemPath = selectedItem.getText();
+				@Override
+				public void menuSelected(MenuItem selectedItem) {
+					String selectedItemPath = selectedItem.getText();
 
-		    		if (selectedItemPath == null)
-		    			return;
+					if (selectedItemPath == null)
+						return;
 
-		    		String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-		    		MenuNavigator.navigate(path);
+					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
+					MenuNavigator.navigate(path);
 
-		    		System.out.println(path);
-		        }
-		    });
+					System.out.println(path);
+				}
+			});
+
 			MenuItem players = menuBar.addItem("Players", new Command() {
-		        private static final long serialVersionUID = 1L;
+				private static final long serialVersionUID = 1L;
 
-		        @Override
-		        public void menuSelected(MenuItem selectedItem) {
-		    		String selectedItemPath = selectedItem.getText();
+				@Override
+				public void menuSelected(MenuItem selectedItem) {
+					String selectedItemPath = selectedItem.getText();
 
-		    		if (selectedItemPath == null)
-		    			return;
+					if (selectedItemPath == null)
+						return;
 
-		    		String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-		    		MenuNavigator.navigate(path);
+					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
+					MenuNavigator.navigate(path);
 
-		    		System.out.println(path);
-		        }
-		    });
-			
+					System.out.println(path);
+				}
+			});
+
 			MenuItem boxscore = menuBar.addItem("Boxscore", new Command() {
-		        private static final long serialVersionUID = 1L;
+				private static final long serialVersionUID = 1L;
 
-		        @Override
-		        public void menuSelected(MenuItem selectedItem) {
-		    		String selectedItemPath = selectedItem.getText();
+				@Override
+				public void menuSelected(MenuItem selectedItem) {
+					String selectedItemPath = selectedItem.getText();
 
-		    		if (selectedItemPath == null)
-		    			return;
+					if (selectedItemPath == null)
+						return;
 
-		    		String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-		    		MenuNavigator.navigate(path);
+					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
+					MenuNavigator.navigate(path);
 
-		    		System.out.println(path);
-		        }
-		    });
+					System.out.println(path);
+				}
+			});
+
+			MenuItem stats = menuBar.addItem("Stats", new Command() {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void menuSelected(MenuItem selectedItem) {
+					String selectedItemPath = selectedItem.getText();
+
+					if (selectedItemPath == null)
+						return;
+
+					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
+					MenuNavigator.navigate(path);
+
+					System.out.println(path);
+				}
+			});
+
+			stats.setVisible(false);
 
 			addComponent(menuBar);
 			setComponentAlignment(menuBar, Alignment.TOP_CENTER);
@@ -121,6 +109,5 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 
 		return new MenuLayout().init().layout();
 	}
-
 
 }

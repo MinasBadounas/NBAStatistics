@@ -47,6 +47,8 @@ public class PlayerstatspergameServiceStaticInitializer {
 		return playerstatspergameList;
 	}
 	
+	
+	
 	public static ArrayList<Playerstatspergame> findAllPlayerStatsPerGameByGameId(int gameid) {
 
 		ArrayList<Playerstatspergame> playerstatspergameList = playerstatspergameServiceStaticInitializer.playerstatspergameService
@@ -59,6 +61,14 @@ public class PlayerstatspergameServiceStaticInitializer {
 	
 		ArrayList<Playerstatspergame> playerstatspergameList = playerstatspergameServiceStaticInitializer.playerstatspergameService
 				.findPlayerStatsPerGameWhichNotInDefenceMatchUpByGameId(gameid, minutes);
+
+		return playerstatspergameList;
+	}
+	
+	public static ArrayList<Playerstatspergame> findAllPlayerStatsPerGameByGameIdAndTeam(int gameid, int teamid) {
+
+		ArrayList<Playerstatspergame> playerstatspergameList = playerstatspergameServiceStaticInitializer.playerstatspergameService
+				.findPlayerStatsPerGameByGameIdAndTeamId(gameid,teamid);
 
 		return playerstatspergameList;
 	}

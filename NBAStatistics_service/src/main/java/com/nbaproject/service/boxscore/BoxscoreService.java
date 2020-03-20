@@ -11,5 +11,7 @@ public interface BoxscoreService {
 	public int findMaxGameId() ;
 	
 	public ArrayList<Integer> findAllGameIdBoxscore() ;
+	
+	public Boxscore findBoxscorebyGameId(int gameid) ;
 
 }
