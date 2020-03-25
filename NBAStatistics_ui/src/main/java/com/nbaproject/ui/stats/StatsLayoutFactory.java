@@ -85,6 +85,7 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 			grid.addColumn(Playerstatspergame::getFreethrowsattempted).setCaption("freethrowsattempted");
 
 			grid.setSizeFull();
+			grid.setFrozenColumnCount(3);
 			addComponent(grid);
 		});
 
@@ -127,6 +128,7 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 			grid.addColumn(Playerstatspergame::getFreethrowsattempted).setCaption("freethrowsattempted");
 
 			grid.setSizeFull();
+			grid.setFrozenColumnCount(3);
 			addComponent(grid);
 		});
 

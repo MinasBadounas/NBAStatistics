@@ -1,6 +1,7 @@
 package com.nbaproject.service.player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,16 @@ public class PlayerServiceImp implements PlayerService {
 		} else {
 			playerID = playerRepository.findPlayerById(playerid);
 		}
-		
+
 		return playerID;
+	}
+
+	@Override
+	public ArrayList<Player> findPlayersByName(String playername) {
+
+		ArrayList<Player> playersList = playerRepository.findPlayersByName(playername);
+		
+		return playersList;
 	}
 
 }
