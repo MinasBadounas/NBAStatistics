@@ -1,4 +1,4 @@
-package com.nbaproject.navigator;
+package com.nbaproject.ui.navigator;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.ComponentContainer;
@@ -6,18 +6,18 @@ import com.vaadin.ui.SingleComponentContainer;
 import com.vaadin.ui.UI;
 
 
-public class MenuNavigator extends Navigator {
+public class MainNavigator extends Navigator {
 
-	public MenuNavigator(UI ui, SingleComponentContainer container) {
+	public MainNavigator(UI ui, SingleComponentContainer container) {
 		super(ui, container);
 	}
 
-	private static MenuNavigator getNavigator() {
+	private static MainNavigator getNavigator() {
 
 		UI ui = UI.getCurrent();
 		Navigator navigator = ui.getNavigator();
 
-		return (MenuNavigator) navigator;
+		return (MainNavigator) navigator;
 
 	}
 
@@ -25,7 +25,7 @@ public class MenuNavigator extends Navigator {
 
 		try {
 
-			MenuNavigator.getNavigator().navigateTo(path);
+			MainNavigator.getNavigator().navigateTo(path);
 
 		} catch (Exception e) {
 			e.printStackTrace();

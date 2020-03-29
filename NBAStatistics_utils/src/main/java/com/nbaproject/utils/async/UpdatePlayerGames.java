@@ -1,18 +1,10 @@
 package com.nbaproject.utils.async;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Array;
-import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -21,18 +13,17 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
-import com.nbaproject.entities.Boxscore;
+
 import com.nbaproject.entities.Playerstatspergame;
 import com.nbaproject.entities.PlayerstatspergamePK;
-import com.nbaproject.service.boxscore.BoxscoreService;
 import com.nbaproject.service.playerstatspergame.PlayerstatspergameService;
 import com.nbaproject.utils.checker.CheckPlayer;
 import com.nbaproject.utils.converter.ConvertPositionToInt;
 import com.nbaproject.utils.defenceMatchup.DefenceMatchUp;
 import com.nbaproject.utils.opponentplayerstatspergame.OpponentPlayerStatsPerGame;
 import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
-import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
-import com.nbaproject.utils.tools.Converters;
+import com.nbaproject.utils.teamstatsbypositionpergame.Teamstatsbypositionpergame;
+
 
 @Configuration
 @EnableScheduling
@@ -40,13 +31,10 @@ import com.nbaproject.utils.tools.Converters;
 public class UpdatePlayerGames {
 
 	@Autowired
-	private BoxscoreService boxscoreService;
-
-	@Autowired
 	private PlayerstatspergameService playerstatspergameService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 39 09 * * ?")
+	@Scheduled(cron = "0 48 0 * * ?")
 	public void UpdatePlayerGamesStas() throws IOException {
 
 //		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
@@ -171,6 +159,8 @@ public class UpdatePlayerGames {
 			// calculate the average of
 			// his opponents with the same position
 			OpponentPlayerStatsPerGame.calulateOpponentPlayerStatsPerGame(gameId);
+
+			Teamstatsbypositionpergame.calculateTeamstatsbypositionpergame(gameId);
 
 			/** ---------Calculate the process time for each game--------- **/
 			long timeEnd = System.currentTimeMillis();

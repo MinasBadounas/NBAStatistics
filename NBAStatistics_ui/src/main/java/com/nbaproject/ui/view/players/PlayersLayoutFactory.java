@@ -1,4 +1,4 @@
-package com.nbaproject.ui.players;
+package com.nbaproject.ui.view.players;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.nbaproject.entities.Player;
 import com.nbaproject.entities.Team;
 import com.nbaproject.service.player.PlayerService;
-import com.nbaproject.ui.common.MenuView;
+import com.nbaproject.ui.view.mainview.MainView;
 import com.nbaproject.utils.JsonNBAPlayers;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
@@ -27,7 +27,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-@SpringView(name=PlayersLayoutFactory.NAME, ui=MenuView.class)
+@SpringView(name=PlayersLayoutFactory.NAME, ui=MainView.class)
 public class PlayersLayoutFactory extends VerticalLayout implements View {
 
 	public static final String NAME="players";

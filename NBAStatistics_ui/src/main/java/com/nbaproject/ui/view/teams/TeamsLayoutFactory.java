@@ -1,4 +1,4 @@
-package com.nbaproject.ui.teams;
+package com.nbaproject.ui.view.teams;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.nbaproject.entities.Team;
 import com.nbaproject.repository.team.TeamRepository;
 import com.nbaproject.service.team.TeamService;
-import com.nbaproject.ui.common.MenuView;
+import com.nbaproject.ui.view.mainview.MainView;
 import com.nbaproject.utils.JsonNBATeams;
 import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
 import com.vaadin.navigator.View;
@@ -16,6 +16,7 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -27,7 +28,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.renderers.ImageRenderer;
 import com.vaadin.ui.themes.ValoTheme;
 
-@SpringView(name = TeamsLayoutFactory.NAME, ui = MenuView.class)
+@SpringView(name = TeamsLayoutFactory.NAME, ui = MainView.class)
 public class TeamsLayoutFactory extends VerticalLayout implements View {
 
 	public static final String NAME = "teams";

@@ -1,4 +1,4 @@
-package com.nbaproject.ui.stats;
+package com.nbaproject.ui.view.stats;
 
 import java.util.ArrayList;
 
@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nbaproject.entities.Playerstatspergame;
 import com.nbaproject.service.boxscore.BoxscoreService;
-import com.nbaproject.ui.common.MenuView;
+import com.nbaproject.ui.view.mainview.MainView;
 import com.nbaproject.utils.staticInitializer.PlayerstatspergameServiceStaticInitializer;
 import com.nbaproject.utils.tools.EditPath;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
@@ -18,7 +19,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-@SpringView(name = StatsLayoutFactory.NAME, ui = MenuView.class)
+@SpringView(name = StatsLayoutFactory.NAME, ui = MainView.class)
 public class StatsLayoutFactory extends VerticalLayout implements View {
 
 	public static final String NAME = "stats";
@@ -29,7 +30,7 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 
 		Grid<Playerstatspergame> grid = new Grid<Playerstatspergame>();
-		int gameid = EditPath.EditPathToGetGameID(UI.getCurrent().getPage().getUriFragment());
+		int gameid = Integer.parseInt(event.getParameters());
 
 		HorizontalLayout horizontal = new HorizontalLayout();
 

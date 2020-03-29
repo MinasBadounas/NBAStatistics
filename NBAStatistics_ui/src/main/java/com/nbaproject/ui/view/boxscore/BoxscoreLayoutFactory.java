@@ -1,4 +1,4 @@
-package com.nbaproject.ui.boxscore;
+package com.nbaproject.ui.view.boxscore;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -11,14 +11,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nbaproject.entities.Boxscore;
-import com.nbaproject.navigator.MenuNavigator;
 import com.nbaproject.repository.boxscore.BoxscoreRepository;
-import com.nbaproject.ui.common.MenuView;
-import com.nbaproject.ui.teams.TeamsLayoutFactory;
+import com.nbaproject.ui.navigator.MainNavigator;
+import com.nbaproject.ui.view.mainview.MainView;
+import com.nbaproject.ui.view.teams.TeamsLayoutFactory;
 import com.nbaproject.utils.JsonNBABoxscore;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.VaadinService;
 import com.vaadin.shared.Position;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Alignment;
@@ -32,7 +33,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.grid.SingleSelectionModel;
 import com.vaadin.ui.themes.ValoTheme;
 
-@SpringView(name = BoxscoreLayoutFactory.NAME, ui = MenuView.class)
+@SpringView(name = BoxscoreLayoutFactory.NAME, ui = MainView.class)
 public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 
 	public static final String NAME = "boxscore";
@@ -106,19 +107,19 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 				LocalDate gameDate = (selected.get().getDatetime()).toInstant().atZone(ZoneId.systemDefault())
 						.toLocalDate();
 				if (localDateNow.isAfter(gameDate)) {
-					UI.getCurrent().getNavigator().navigateTo("stats/gameid=" + selected.get().getGameid());
+					UI.getCurrent().getNavigator().navigateTo("stats/" + selected.get().getGameid());
 				} else {
 					Notification notification = new Notification("You should select game");
 					notification.setDelayMsec(3000);
 					notification.setPosition(Position.MIDDLE_CENTER);
-					notification.show("", "The game isn't completed", Notification.Type.ERROR_MESSAGE);
+					notification.show("Information: ", "The game isn't completed", Notification.Type.HUMANIZED_MESSAGE);
 				}
 
 			} else {
 				Notification notification = new Notification("You should select game");
 				notification.setDelayMsec(3000);
 				notification.setPosition(Position.MIDDLE_CENTER);
-				notification.show("", "You should select game", Notification.Type.ERROR_MESSAGE);
+				notification.show("Information: ", "You should select game", Notification.Type.HUMANIZED_MESSAGE);
 
 			}
 

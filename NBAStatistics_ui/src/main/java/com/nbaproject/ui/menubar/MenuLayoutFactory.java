@@ -2,7 +2,7 @@ package com.nbaproject.ui.menubar;
 
 import java.util.stream.Stream;
 
-import com.nbaproject.navigator.MenuNavigator;
+import com.nbaproject.ui.navigator.MainNavigator;
 import com.vaadin.data.HasValue.ValueChangeListener;
 import com.vaadin.event.MouseEvents.ClickEvent;
 import com.vaadin.ui.Alignment;
@@ -39,7 +39,7 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 						return;
 
 					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-					MenuNavigator.navigate(path);
+					MainNavigator.navigate(path);
 
 					System.out.println(path);
 				}
@@ -56,7 +56,7 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 						return;
 
 					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-					MenuNavigator.navigate(path);
+					MainNavigator.navigate(path);
 
 					System.out.println(path);
 				}
@@ -73,7 +73,7 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 						return;
 
 					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-					MenuNavigator.navigate(path);
+					MainNavigator.navigate(path);
 
 					System.out.println(path);
 				}
@@ -90,7 +90,7 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 						return;
 
 					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
-					MenuNavigator.navigate(path);
+					MainNavigator.navigate(path);
 
 					System.out.println(path);
 				}

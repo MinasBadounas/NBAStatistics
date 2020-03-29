@@ -21,5 +21,8 @@ public interface BoxscoreRepository  extends JpaRepository<Boxscore,Integer>{
 	 @Query(value = "select * from boxscore where gameid= ?1 ;", nativeQuery = true)
 	    Boxscore findBoxscorebyGameId(int gameid);
 	 
+	 @Query(value = "select awayteamid, hometeamid from boxscore where gameid= ?1 ;", nativeQuery = true)
+	    ArrayList<Integer> findTeamsIdbyGameId(int gameid);
+	 
 
 }

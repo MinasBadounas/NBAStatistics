@@ -13,5 +13,7 @@
 		<class>com.nbaproject.entities.Appconfig</class>
 		<class>com.nbaproject.entities.Opponentplayerstatspergame</class>
 		<class>com.nbaproject.entities.OpponentplayerstatspergamePK</class>
+		<class>com.nbaproject.entities.Teamstatsbypositionpergame</class>
+		<class>com.nbaproject.entities.TeamstatsbypositionpergamePK</class>
 	</persistence-unit>
 </persistence>

@@ -1,36 +1,27 @@
-package com.nbaproject.ui.common;
-
-import java.io.IOException;
-import java.util.stream.Stream;
+package com.nbaproject.ui.view.mainview;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import com.nbaproject.navigator.MenuNavigator;
 import com.nbaproject.ui.menubar.MenuLayoutFactory;
-import com.nbaproject.ui.players.PlayersLayoutFactory;
-import com.nbaproject.ui.teams.TeamsLayoutFactory;
-import com.nbaproject.utils.JsonNBATeams;
+import com.nbaproject.ui.navigator.MainNavigator;
+import com.nbaproject.ui.view.teams.TeamsLayoutFactory;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
-import com.vaadin.event.MouseEvents.ClickEvent;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @SpringUI(path = "/ui")
 @Title("NBAStatistics")
-@Theme("valo")
-public class MenuView extends UI {
+@Theme("nbastatistics_uitheme")
+public class MainView extends UI {
 
 	@Autowired
 	private SpringViewProvider viewProvider;
@@ -81,15 +72,16 @@ public class MenuView extends UI {
 		initNavigator();
 
 		setContent(rootLayout);
-
+		
 	}
 
 	private void initNavigator() {
 
-		MenuNavigator menuNavigator = new MenuNavigator(this, changeTab);
+		MainNavigator menuNavigator = new MainNavigator(this, changeTab);
 		applicationContext.getAutowireCapableBeanFactory().autowireBean(menuNavigator);
 		menuNavigator.addProvider(viewProvider);
 		menuNavigator.navigateTo(TeamsLayoutFactory.NAME);
+		
 	}
 	
 
