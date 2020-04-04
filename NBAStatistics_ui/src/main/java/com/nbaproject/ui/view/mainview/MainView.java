@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import com.nbaproject.ui.menubar.MenuLayoutFactory;
 import com.nbaproject.ui.navigator.MainNavigator;
 import com.nbaproject.ui.view.teams.TeamsLayoutFactory;
+import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
@@ -21,6 +22,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringUI(path = "/ui")
 @Title("NBAStatistics")
 @Theme("nbastatistics_uitheme")
+@JavaScript({"vaadin://javascripts/Chart.js"})
 public class MainView extends UI {
 
 	@Autowired
@@ -41,7 +43,7 @@ public class MainView extends UI {
 
 		VerticalLayout rootLayout = new VerticalLayout();
 		rootLayout.setSizeFull();
-		rootLayout.setMargin(true);
+		rootLayout.setMargin(false);
 
 		Panel menuPanel = new Panel();
 		menuPanel.setWidth("80%");
@@ -53,7 +55,7 @@ public class MainView extends UI {
 
 		HorizontalLayout uiLayout = new HorizontalLayout();
 		uiLayout.setSizeFull();
-		uiLayout.setMargin(true);
+		uiLayout.setMargin(false);
 
 		uiLayout.addComponent(changeTab);
 		uiLayout.setComponentAlignment(changeTab, Alignment.TOP_CENTER);

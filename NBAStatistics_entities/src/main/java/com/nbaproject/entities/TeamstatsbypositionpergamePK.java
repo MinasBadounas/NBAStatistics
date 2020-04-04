@@ -21,6 +21,7 @@ public class TeamstatsbypositionpergamePK implements Serializable {
 	@Column(insertable=false, updatable=false)
 	private int opponentteamid;
 
+	@Column(insertable=false, updatable=false)
 	private int categoryposition;
 
 	public TeamstatsbypositionpergamePK() {

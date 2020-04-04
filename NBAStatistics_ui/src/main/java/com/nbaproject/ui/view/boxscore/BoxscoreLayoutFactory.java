@@ -53,7 +53,7 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 		forwardArrow.setIcon(VaadinIcons.ARROW_FORWARD);
 		backwardArrow.setIcon(VaadinIcons.ARROW_BACKWARD);
 		showStatsButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
-		
+
 		horizontal.addComponent(backwardArrow);
 		horizontal.addComponent(date);
 		horizontal.addComponent(forwardArrow);
@@ -107,7 +107,8 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 				LocalDate gameDate = (selected.get().getDatetime()).toInstant().atZone(ZoneId.systemDefault())
 						.toLocalDate();
 				if (localDateNow.isAfter(gameDate)) {
-					UI.getCurrent().getNavigator().navigateTo("stats/" + selected.get().getGameid());
+					UI.getCurrent().getNavigator().navigateTo("stats/" + "gameid="+selected.get().getGameid() 
+							+ "&awayteam="+selected.get().getTeam1().getTeamid() +"&hometeam="+ selected.get().getTeam2().getTeamid());
 				} else {
 					Notification notification = new Notification("You should select game");
 					notification.setDelayMsec(3000);

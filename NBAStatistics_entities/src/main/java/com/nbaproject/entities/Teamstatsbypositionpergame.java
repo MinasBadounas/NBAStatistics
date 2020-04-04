@@ -99,7 +99,7 @@ public class Teamstatsbypositionpergame implements Serializable {
 
 	//bi-directional many-to-one association to Team
 	@ManyToOne
-	@JoinColumn(name="opponentteamid",insertable=false, updatable=false)
+	@JoinColumn(name="opponentteamid", insertable=false, updatable=false)
 	private Team team1;
 
 	//bi-directional many-to-one association to Team

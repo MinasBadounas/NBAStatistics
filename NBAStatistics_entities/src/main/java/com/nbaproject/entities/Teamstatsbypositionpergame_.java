@@ -4,7 +4,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2020-03-30T00:20:42.271+0300")
+@Generated(value="Dali", date="2020-04-01T00:24:39.762+0300")
 @StaticMetamodel(Teamstatsbypositionpergame.class)
 public class Teamstatsbypositionpergame_ {
 	public static volatile SingularAttribute<Teamstatsbypositionpergame, TeamstatsbypositionpergamePK> id;

@@ -34,7 +34,7 @@ public class UpdatePlayerGames {
 	private PlayerstatspergameService playerstatspergameService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 48 0 * * ?")
+	@Scheduled(cron = "0 15 21 * * ?")
 	public void UpdatePlayerGamesStas() throws IOException {
 
 //		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
