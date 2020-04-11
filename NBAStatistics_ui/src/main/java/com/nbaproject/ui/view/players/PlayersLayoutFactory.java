@@ -1,11 +1,15 @@
 package com.nbaproject.ui.view.players;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.nbaproject.entities.Boxscore;
 import com.nbaproject.entities.Player;
 import com.nbaproject.entities.Team;
 import com.nbaproject.service.player.PlayerService;
@@ -15,15 +19,19 @@ import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
+import com.vaadin.shared.Position;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.components.grid.SingleSelectionModel;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -51,20 +59,23 @@ public class PlayersLayoutFactory extends VerticalLayout implements View {
 		clearFilterTextBtn.setDescription("Clear the current filter");
 		clearFilterTextBtn.addClickListener(e->filterText.clear());
 		
-		filtering.addComponents(filterText,clearFilterTextBtn);
+		Button showStatsButton = new Button("Show Stats");
+		showStatsButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
+		
+		filtering.addComponents(filterText,clearFilterTextBtn,showStatsButton);
 		filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-		
+				
 		addComponent(filtering);
-		
 
-
-		try {
-			playerList = JsonNBAPlayers.JsonNBAPlayersRequest();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*** JSON REQUEST ***/
+//		try {
+//			playerList = JsonNBAPlayers.JsonNBAPlayersRequest();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	
+		playerList= playerService.findAll();
 		
 		grid.setItems(playerList);
 //		grid.addColumn(Player::getPlayerid).setCaption("PlayerID");
@@ -89,6 +100,22 @@ public class PlayersLayoutFactory extends VerticalLayout implements View {
 		addComponent(grid);
 		updatelist();
 	
+		showStatsButton.addClickListener(player -> {
+
+			if (((SingleSelectionModel) grid.getSelectionModel()).getSelectedItems().size() > 0) {
+
+				Optional<Player> selectedPlayer = ((SingleSelectionModel) grid.getSelectionModel()).getSelectedItem();
+
+					UI.getCurrent().getNavigator()
+							.navigateTo("playerstats/" + "playerid=" + selectedPlayer.get().getPlayerid());
+			}
+			else {
+				Notification notification = new Notification("You should select player");
+				notification.setDelayMsec(3000);
+				notification.setPosition(Position.MIDDLE_CENTER);
+				notification.show("Information: ", "You should select player", Notification.Type.HUMANIZED_MESSAGE);
+			}
+		});
 	}
 
 	private void updatelist() {

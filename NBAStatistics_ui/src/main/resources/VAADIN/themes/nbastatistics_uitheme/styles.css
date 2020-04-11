@@ -15419,6 +15419,10 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.nbastatistics_uitheme .v-grid-cell.bold {
+	font-weight: bold;
+}
+
 .nbastatistics_uitheme .pageHeader {
 	text-align: center;
 	font-size: 36px;
@@ -15430,14 +15434,12 @@ div.v-layout.v-horizontal.v-widget {
 	padding-right: 10px;
 	width: 100px;
 	height: 100px;
-	text-align: right;
 }
 
 .nbastatistics_uitheme .AwayTeamImage {
 	padding-left: 10px;
 	width: 100px;
 	height: 100px;
-	text-align: left;
 }
 
 .nbastatistics_uitheme .TeamLabel {
@@ -15450,6 +15452,16 @@ div.v-layout.v-horizontal.v-widget {
 	background: lightgray;
 }
 
+.nbastatistics_uitheme .AwayTeamButton {
+	width: 25%;
+	text-align: center;
+}
+
+.nbastatistics_uitheme .HomeTeamButton {
+	width: 25%;
+	text-align: center;
+}
+
 .nbastatistics_uitheme .gridTopPlayers {
 	border-right: solid;
 	border-width: 2px;
@@ -15458,7 +15470,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .nbastatistics_uitheme .HeaderTopPlayer {
 	color: #1570b5;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: bold;
 	padding-left: 10px;
 	margin: 0 0 0 0;
@@ -15467,14 +15479,30 @@ div.v-layout.v-horizontal.v-widget {
 .nbastatistics_uitheme .RowTopPlayerName {
 	font-style: "Roboto";
 	color: black;
-	font-size: 16px;
+	font-size: 14px;
 	margin: 0 0 0 0;
 }
 
 .nbastatistics_uitheme .RowTopPlayerValue {
 	font-style: "Roboto";
 	color: black;
-	font-size: 16px;
+	font-size: 14px;
 	margin: 0 10px 0 0;
 	padding-left: 5px;
+}
+
+.nbastatistics_uitheme .PlayerStatsImage {
+	width: 100px;
+	height: 100px;
+}
+
+.nbastatistics_uitheme .PlayerStatsName {
+	text-align: center;
+	font-size: 36px;
+	font-weight: bold;
+	margin: 0 0 0 0;
+}
+
+.nbastatistics_uitheme .lineChart {
+	width: 75%;
 }

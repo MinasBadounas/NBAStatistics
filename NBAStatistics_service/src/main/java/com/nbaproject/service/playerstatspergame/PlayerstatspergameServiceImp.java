@@ -1,6 +1,7 @@
 package com.nbaproject.service.playerstatspergame;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,10 +55,11 @@ public class PlayerstatspergameServiceImp implements PlayerstatspergameService {
 	}
 
 	@Override
-	public ArrayList<Playerstatspergame> findPlayerStatsPerGameWhichNotInDefenceMatchUpByGameId(int gameId, int minutes) {
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameWhichNotInDefenceMatchUpByGameId(int gameId,
+			int minutes) {
 
 		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
-				.findAllPlayerStatsPerGameWhereNotInDefencemMatchUpAndOverMinutesByGameId(gameId,minutes);
+				.findAllPlayerStatsPerGameWhereNotInDefencemMatchUpAndOverMinutesByGameId(gameId, minutes);
 
 		return playerStatsPerGameList;
 	}
@@ -67,6 +69,41 @@ public class PlayerstatspergameServiceImp implements PlayerstatspergameService {
 
 		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
 				.findPlayerStatsPerGameByGameIdAndTeamId(gameId, teamid);
+
+		return playerStatsPerGameList;
+	}
+
+	@Override
+	public List<Playerstatspergame> findAll() {
+
+		List<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository.findAll();
+
+		return playerStatsPerGameList;
+	}
+
+	@Override
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameid) {
+
+		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
+				.findPlayerStatsPerGameByGameId(gameid);
+
+		return playerStatsPerGameList;
+	}
+
+	@Override
+	public Playerstatspergame findPlayerStatsPerGameByGameIdAndPlayerId(int gameid, int playerid) {
+
+		Playerstatspergame playerstatspergame = playerStatsPerGameRepository
+				.findPlayerStatsPerGameByGameIdAndPlayerId(gameid, playerid);
+
+		return playerstatspergame;
+	}
+
+	@Override
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByPlayerId(int playerid) {
+
+		ArrayList<Playerstatspergame> playerStatsPerGameList = playerStatsPerGameRepository
+				.findPlayerStatsPerGameByPlayerId(playerid);
 
 		return playerStatsPerGameList;
 	}

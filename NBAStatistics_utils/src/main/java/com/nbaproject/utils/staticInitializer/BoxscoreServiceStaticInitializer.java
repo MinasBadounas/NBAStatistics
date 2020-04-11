@@ -1,5 +1,8 @@
 package com.nbaproject.utils.staticInitializer;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +39,9 @@ public class BoxscoreServiceStaticInitializer {
 		return boxscoreStaticContextInitializer.boxscoreService.findBoxscorebyGameId(gameid);
 	}
 
+	public static ArrayList<Boxscore> findBoxscoresByDate(String date) {
+
+		return boxscoreStaticContextInitializer.boxscoreService.findBoxscoresbyDate(date);
+	}
 }
 

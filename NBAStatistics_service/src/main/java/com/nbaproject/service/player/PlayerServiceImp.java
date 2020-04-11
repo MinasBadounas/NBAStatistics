@@ -23,7 +23,7 @@ public class PlayerServiceImp implements PlayerService {
 	}
 
 	@Override
-	public Integer findPlayerByPlayerId(int playerid) {
+	public Integer findPlayerById(int playerid) {
 
 		int playerID;
 
@@ -40,6 +40,22 @@ public class PlayerServiceImp implements PlayerService {
 	public ArrayList<Player> findPlayersByName(String playername) {
 
 		ArrayList<Player> playersList = playerRepository.findPlayersByName(playername);
+
+		return playersList;
+	}
+
+	@Override
+	public Player findPlayerByPlayerId(int playerid) {
+
+		Player player = playerRepository.findPlayerByPlayerId(playerid);
+
+		return player;
+	}
+
+	@Override
+	public ArrayList<Player> findAll() {
+
+		ArrayList<Player> playersList = playerRepository.findAll();
 		
 		return playersList;
 	}

@@ -1,11 +1,6 @@
 package com.nbaproject.utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -14,8 +9,6 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,7 +17,9 @@ import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
 import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
 import com.nbaproject.utils.tools.Converters;
 
+
 public class JsonNBABoxscore {
+	
 
 	public static ArrayList<Boxscore> JsonNBABoxscoreRequest(LocalDate localDate) throws IOException {
 
@@ -58,7 +53,7 @@ public class JsonNBABoxscore {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
 			newBoxscore.setAwayteam(JObject.getString("AwayTeam"));
 			newBoxscore.setHometeam(JObject.getString("HomeTeam"));
 			newBoxscore.setTeam1(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("AwayTeamID")));
@@ -76,7 +71,7 @@ public class JsonNBABoxscore {
 				newBoxscore.setOverunder(0);
 			}
 
-			newBoxscore.setIslosed(Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed")));
+			newBoxscore.setIsclosed(Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed")));
 
 			boxscoreList.add(newBoxscore);
 

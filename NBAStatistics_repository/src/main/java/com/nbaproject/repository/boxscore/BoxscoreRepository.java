@@ -1,5 +1,6 @@
 package com.nbaproject.repository.boxscore;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +24,9 @@ public interface BoxscoreRepository  extends JpaRepository<Boxscore,Integer>{
 	 
 	 @Query(value = "select awayteamid, hometeamid from boxscore where gameid= ?1 ;", nativeQuery = true)
 	    ArrayList<Integer> findTeamsIdbyGameId(int gameid);
+	 
+	 @Query(value = "select * from boxscore where datetime like ?1% ;", nativeQuery = true)
+	 ArrayList<Boxscore> findBoxscoresbyDate(String date);
 	 
 
 }

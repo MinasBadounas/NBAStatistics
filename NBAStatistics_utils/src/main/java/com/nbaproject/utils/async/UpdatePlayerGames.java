@@ -1,6 +1,7 @@
 package com.nbaproject.utils.async;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,7 +14,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
-
 import com.nbaproject.entities.Playerstatspergame;
 import com.nbaproject.entities.PlayerstatspergamePK;
 import com.nbaproject.service.playerstatspergame.PlayerstatspergameService;
@@ -24,7 +24,6 @@ import com.nbaproject.utils.opponentplayerstatspergame.OpponentPlayerStatsPerGam
 import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
 import com.nbaproject.utils.teamstatsbypositionpergame.Teamstatsbypositionpergame;
 
-
 @Configuration
 @EnableScheduling
 @EnableAsync
@@ -34,7 +33,7 @@ public class UpdatePlayerGames {
 	private PlayerstatspergameService playerstatspergameService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 27 21 * * ?")
+	@Scheduled(cron = "0 22 21 * * ?")
 	public void UpdatePlayerGamesStas() throws IOException {
 
 //		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
@@ -46,7 +45,10 @@ public class UpdatePlayerGames {
 //
 //			if (gameId > maxGameId) {
 //				int gameId=13905;
-		for (int gameId = 13904; gameId < 13906; gameId++) {
+		ArrayList<Integer> gameIdList = new ArrayList<Integer>();	
+		
+		for(int gameId:gameIdList) {
+//		for (int gameId = 14000; gameId < 14000; gameId++) {
 
 			String url = "https://api.sportsdata.io/v3/nba/stats/json/BoxScore/" + gameId + "?key="
 					+ AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key");
@@ -80,7 +82,6 @@ public class UpdatePlayerGames {
 				newPlayerstatspergame.setStarted(JObject.getInt("Started"));
 
 				if (JObject.getString("OpponentRank") == "null") {
-					System.out.println("Opponent Rankkkkkk");
 					newPlayerstatspergame.setOpponentrank(0);
 				} else {
 					newPlayerstatspergame.setOpponentrank(JObject.getInt("OpponentRank"));

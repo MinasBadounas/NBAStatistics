@@ -36,10 +36,10 @@ public class PlayerServiceStaticInitializer {
 
 		int playerId;
 
-		if (playerStaticContextInitializer.playerService.findPlayerByPlayerId(playerid) == null) {
+		if (playerStaticContextInitializer.playerService.findPlayerById(playerid) == null) {
 			playerId = 0;
 		} else {
-			playerId = playerStaticContextInitializer.playerService.findPlayerByPlayerId(playerid);
+			playerId = playerStaticContextInitializer.playerService.findPlayerById(playerid);
 		}
 
 		return playerId;

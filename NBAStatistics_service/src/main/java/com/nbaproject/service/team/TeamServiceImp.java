@@ -1,5 +1,6 @@
 package com.nbaproject.service.team;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +12,29 @@ import com.nbaproject.repository.team.TeamRepository;
 @Service
 public class TeamServiceImp implements TeamService {
 
-	
 	@Autowired
 	private TeamRepository teamRepository;
-	
-	
+
 	@Override
 	public void saveTeam(Team team) {
-		
+
 		teamRepository.save(team);
-		
+
 	}
-	
 
 	@Override
 	public Team findTeamById(int teamid) {
-		
+
 		return teamRepository.findTeamById(teamid);
-		
+
+	}
+
+	@Override
+	public List<Team> findAll() {
+
+		List<Team> teamList = teamRepository.findAll();
+
+		return teamList;
 	}
 
 }

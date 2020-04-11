@@ -1,6 +1,7 @@
 package com.nbaproject.service.playerstatspergame;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.nbaproject.entities.Playerstatspergame;
 
@@ -17,5 +18,13 @@ public interface PlayerstatspergameService {
 	public ArrayList<Playerstatspergame> findPlayerStatsPerGameWhichNotInDefenceMatchUpByGameId(int gameId, int minutes);
 	
 	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameIdAndTeamId(int gameId, int teamid);
+	
+	public List<Playerstatspergame> findAll();
+	
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameId(int gameid);
+	
+	public Playerstatspergame findPlayerStatsPerGameByGameIdAndPlayerId(int gameid, int playerid);
+	
+	public ArrayList<Playerstatspergame> findPlayerStatsPerGameByPlayerId(int playerid);
 
 }

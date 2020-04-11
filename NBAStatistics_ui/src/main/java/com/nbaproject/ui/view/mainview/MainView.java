@@ -22,7 +22,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringUI(path = "/ui")
 @Title("NBAStatistics")
 @Theme("nbastatistics_uitheme")
-@JavaScript({"vaadin://javascripts/Chart.js"})
+@JavaScript({"vaadin://javascripts/Chart.js","vaadin://javascripts/Chart.min.js","vaadin://javascripts/utils.js"})
 public class MainView extends UI {
 
 	@Autowired

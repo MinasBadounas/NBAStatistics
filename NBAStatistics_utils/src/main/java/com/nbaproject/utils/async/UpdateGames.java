@@ -1,20 +1,13 @@
 package com.nbaproject.utils.async;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -24,9 +17,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
 import com.nbaproject.entities.Boxscore;
+import com.nbaproject.service.appconfig.AppconfigService;
 import com.nbaproject.service.boxscore.BoxscoreService;
-import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
-import com.nbaproject.utils.staticInitializer.TeamServiceStaticInitializer;
+import com.nbaproject.service.team.TeamService;
 import com.nbaproject.utils.tools.Converters;
 
 @Configuration
@@ -37,9 +30,14 @@ public class UpdateGames {
 	@Autowired
 	private BoxscoreService boxscoreService;
 
+	@Autowired
+	private AppconfigService appconfigService;
 	
+	@Autowired
+	private TeamService teamService;
+
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 26 22 * * ?")
+	@Scheduled(cron = "0 54 23 * * ?")
 	public void UpdateGamesSchedule() throws IOException {
 
 		System.out.println("Run 'UpdateGamesSchedule()'");
@@ -47,9 +45,8 @@ public class UpdateGames {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-		String url = "https://api.sportsdata.io/v3/nba/scores/json/Games/"
-				+ AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("season") + "?key="
-				+ AppconfigServiceStaticInitializer.getKeyValuefromAppconfig("sportsdataio.key");
+		String url = "https://api.sportsdata.io/v3/nba/scores/json/Games/" + appconfigService.findKeyValue("season")
+				+ "?key=" + appconfigService.findKeyValue("sportsdataio.key");
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -77,8 +74,8 @@ public class UpdateGames {
 
 			newBoxscore.setAwayteam(JObject.getString("AwayTeam"));
 			newBoxscore.setHometeam(JObject.getString("HomeTeam"));
-			newBoxscore.setTeam1(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("AwayTeamID")));
-			newBoxscore.setTeam2(TeamServiceStaticInitializer.findByIdNQ(JObject.getInt("HomeTeamID")));
+			newBoxscore.setTeam1(teamService.findTeamById(JObject.getInt("AwayTeamID")));
+			newBoxscore.setTeam2(teamService.findTeamById(JObject.getInt("HomeTeamID")));
 			if (JObject.getString("Status").contentEquals("Final")
 					|| JObject.getString("Status").contentEquals("F/OT")) {
 				newBoxscore.setAwayteamscore(JObject.getInt("AwayTeamScore"));
@@ -91,7 +88,7 @@ public class UpdateGames {
 				newBoxscore.setPointspread(0);
 				newBoxscore.setOverunder(0);
 			}
-			newBoxscore.setIslosed(Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed")));
+			newBoxscore.setIsclosed(Converters.ConvertBooleanToByte(JObject.getBoolean("IsClosed")));
 			System.out.println("Save to boxscore the Game with GameID: " + JObject.getInt("GameID"));
 
 			boxscoreService.saveBoxscore(newBoxscore);

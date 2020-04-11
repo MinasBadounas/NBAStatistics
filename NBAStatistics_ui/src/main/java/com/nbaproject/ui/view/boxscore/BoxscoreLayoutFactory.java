@@ -1,28 +1,19 @@
 package com.nbaproject.ui.view.boxscore;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.nbaproject.entities.Boxscore;
-import com.nbaproject.repository.boxscore.BoxscoreRepository;
-import com.nbaproject.ui.navigator.MainNavigator;
 import com.nbaproject.ui.view.mainview.MainView;
-import com.nbaproject.ui.view.teams.TeamsLayoutFactory;
-import com.nbaproject.utils.JsonNBABoxscore;
+import com.nbaproject.utils.staticInitializer.BoxscoreServiceStaticInitializer;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.VaadinService;
 import com.vaadin.shared.Position;
 import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
@@ -43,6 +34,7 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 		Grid<Boxscore> grid = new Grid<Boxscore>();
 		HorizontalLayout horizontal = new HorizontalLayout();
 
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		DateField date = new DateField();
 		date.setDateFormat("yyyy-MMM-dd");
 		date.setValue(LocalDate.now());
@@ -73,12 +65,14 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 			grid.removeAllColumns();
 
 			ArrayList<Boxscore> boxscoreList = new ArrayList<Boxscore>();
-			try {
-				boxscoreList = JsonNBABoxscore.JsonNBABoxscoreRequest(datefield.getValue());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				boxscoreList = JsonNBABoxscore.JsonNBABoxscoreRequest(datefield.getValue());
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+
+			boxscoreList = BoxscoreServiceStaticInitializer.findBoxscoresByDate(dtf.format(datefield.getValue()));
 
 			grid.setItems(boxscoreList);
 			grid.addColumn(Boxscore::getGameid).setCaption("Gameid");
@@ -107,8 +101,10 @@ public class BoxscoreLayoutFactory extends VerticalLayout implements View {
 				LocalDate gameDate = (selected.get().getDatetime()).toInstant().atZone(ZoneId.systemDefault())
 						.toLocalDate();
 				if (localDateNow.isAfter(gameDate)) {
-					UI.getCurrent().getNavigator().navigateTo("stats/" + "gameid="+selected.get().getGameid() 
-							+ "&awayteam="+selected.get().getTeam1().getTeamid() +"&hometeam="+ selected.get().getTeam2().getTeamid());
+					UI.getCurrent().getNavigator()
+							.navigateTo("stats/" + "gameid=" + selected.get().getGameid() + "&awayteam="
+									+ selected.get().getTeam1().getTeamid() + "&hometeam="
+									+ selected.get().getTeam2().getTeamid());
 				} else {
 					Notification notification = new Notification("You should select game");
 					notification.setDelayMsec(3000);

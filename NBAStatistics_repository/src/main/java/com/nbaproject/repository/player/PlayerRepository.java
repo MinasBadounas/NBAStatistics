@@ -9,14 +9,20 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.nbaproject.entities.Player;
+import com.nbaproject.entities.Playerstatspergame;
 import com.nbaproject.entities.Team;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<Player,Integer>  {
+public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
-	  @Query(value = "select playerid from players where playerid = ?1 ;", nativeQuery = true)
-	    Integer findPlayerById(int playerid);
-	  
-	  @Query(value = "select * from players where firstname like ?1% ;", nativeQuery = true)
-	  ArrayList<Player> findPlayersByName(String playername);
+	ArrayList<Player> findAll();
+
+	@Query(value = "select playerid from players where playerid = ?1 ;", nativeQuery = true)
+	Integer findPlayerById(int playerid);
+
+	@Query(value = "select * from players where playerid = ?1 ;", nativeQuery = true)
+	Player findPlayerByPlayerId(int playerid);
+
+	@Query(value = "select * from players where firstname like ?1% ;", nativeQuery = true)
+	ArrayList<Player> findPlayersByName(String playername);
 }

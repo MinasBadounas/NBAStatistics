@@ -16,7 +16,6 @@ import com.nbaproject.utils.chart.PointsPerPosition;
 import com.nbaproject.utils.chart.UsageRatingPerPosition;
 import com.nbaproject.utils.filter.TopPlayers;
 import com.nbaproject.utils.staticInitializer.PlayerstatspergameServiceStaticInitializer;
-import com.nbaproject.utils.tables.TopPlayersTable;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
@@ -26,7 +25,6 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.JavaScript;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -44,9 +42,6 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 	private TopPlayers topPlayers;
 
 	@Autowired
-	private TopPlayersTable topPlayersTable;
-
-	@Autowired
 	BoxscoreService boxscoreService;
 
 	@Autowired
@@ -55,6 +50,7 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 
 		Page.getCurrent().getStyles().add("nbastatistics_uitheme");
+		
 		int gameid = Integer.parseInt(event.getParameterMap().get("gameid"));
 		int awayTeam = Integer.parseInt(event.getParameterMap().get("awayteam"));
 		int homeTeam = Integer.parseInt(event.getParameterMap().get("hometeam"));
@@ -68,8 +64,9 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 		ArrayList<Playerstatspergame> awayTeamPlayerstatspergameList = PlayerstatspergameServiceStaticInitializer
 				.findAllPlayerStatsPerGameByGameIdAndTeam(gameid, awayTeam);
 
-		GridLayout gridStats = new GridLayout(12, 16);
+		GridLayout gridStats = new GridLayout(12, 18);
 		
+		/**** GRIDLAYOUT HEADER****/
 		Label homeTeamImage = new Label(
 				"<img class=\"HomeTeamImage\" src=\"" + boxscore.getTeam2().getWikipedialogourl() + "\">",
 				ContentMode.HTML);
@@ -79,22 +76,20 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 		Label title = new Label("<p class=\"pageHeader\">" + boxscore.getTeam2().getTeamname() + "   "
 				+ boxscore.getHometeamscore() + "    -     " + boxscore.getAwayteamscore() + "   "
 				+ boxscore.getTeam1().getTeamname() + "</p>", ContentMode.HTML);
+
+		/**** GRIDLAYOUT HOME TEAM LABEL****/
 		Label homeTeamLabel = new Label(" <p class=\"TeamLabel\">" + boxscore.getTeam2().getTeamname() + "</p>", ContentMode.HTML);
-		Label awayTeamLabel = new Label(" <p class=\"TeamLabel\">" + boxscore.getTeam1().getTeamname() + "</p>", ContentMode.HTML);
 		
-		Map<String, Integer> mapAwayTeamPointsPerPositionList = PointsPerPosition
-				.createMapList(teamstatsbypositionpergameList, awayTeam);
+		
+		/**** GRIDLAYOUT HOME -  CHARTS AND TOP 5 PLAYERS PER CATEGORY****/
+
 		Map<String, Integer> mapHomeTeamPointsPerPositionList = PointsPerPosition
 				.createMapList(teamstatsbypositionpergameList, homeTeam);
-		Map<String, Integer> mapAwayTeamUsageRatingPerPositionList = UsageRatingPerPosition
-				.createMapList(teamstatsbypositionpergameList, awayTeam);
 		Map<String, Integer> mapHomeTeamUsageRatingPerPositionList = UsageRatingPerPosition
 				.createMapList(teamstatsbypositionpergameList, homeTeam);
-
+		
 		Label htmlLabelHomePieChart = new Label(chart.PieChartHtml(homeTeam), ContentMode.HTML);
-		Label htmlLabelAwayPieChart = new Label(chart.PieChartHtml(awayTeam), ContentMode.HTML);
 		Label htmlLabelHomeBarChart = new Label(chart.BarChartHtml(homeTeam), ContentMode.HTML);
-		Label htmlLabelAwayBarChart = new Label(chart.BarChartHtml(awayTeam), ContentMode.HTML);
 		
 		ArrayList<Playerstatspergame> gridTopPlayersPointsHomeList = topPlayers
 				.topPlayersPerCategory(homeTeamPlayerstatspergameList, homeTeam, 5, "Points");
@@ -102,14 +97,7 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 				.topPlayersPerCategory(homeTeamPlayerstatspergameList, homeTeam, 5, "Rebounds");
 		ArrayList<Playerstatspergame> gridTopPlayersAssistsHomeList = topPlayers
 				.topPlayersPerCategory(homeTeamPlayerstatspergameList, homeTeam, 5, "Assists");
-		ArrayList<Playerstatspergame> gridTopPlayersPointsAwayList = topPlayers
-				.topPlayersPerCategory(awayTeamPlayerstatspergameList, awayTeam, 5, "Points");
-		ArrayList<Playerstatspergame> gridTopPlayersReboundsAwayList = topPlayers
-				.topPlayersPerCategory(awayTeamPlayerstatspergameList, awayTeam, 5, "Rebounds");
-		ArrayList<Playerstatspergame> gridTopPlayersAssistsAwayList = topPlayers
-				.topPlayersPerCategory(awayTeamPlayerstatspergameList, awayTeam, 5, "Assists");
-	
-	
+		
 		gridStats.addComponent(new Label("<p class=\"HeaderTopPlayer\">" + "Points" + "</p>", ContentMode.HTML),6,2,7,2);
 
 		for (int i = 0; i < gridTopPlayersPointsHomeList.size(); i++) {
@@ -155,6 +143,30 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 			gridStats.addComponent(labelPointsValue, 11,3+i);
 		}
 		
+		/***************************************/
+		
+		/**** GRIDLAYOUT HOME TEAM LABEL****/
+		Label awayTeamLabel = new Label(" <p class=\"TeamLabel\">" + boxscore.getTeam1().getTeamname() + "</p>", ContentMode.HTML);
+		
+		
+		/**** GRIDLAYOUT AWAY -  CHARTS AND TOP 5 PLAYERS PER CATEGORY****/
+		Map<String, Integer> mapAwayTeamPointsPerPositionList = PointsPerPosition
+				.createMapList(teamstatsbypositionpergameList, awayTeam);
+		Map<String, Integer> mapAwayTeamUsageRatingPerPositionList = UsageRatingPerPosition
+				.createMapList(teamstatsbypositionpergameList, awayTeam);
+		
+
+		Label htmlLabelAwayPieChart = new Label(chart.PieChartHtml(awayTeam), ContentMode.HTML);
+		Label htmlLabelAwayBarChart = new Label(chart.BarChartHtml(awayTeam), ContentMode.HTML);
+		
+
+		ArrayList<Playerstatspergame> gridTopPlayersPointsAwayList = topPlayers
+				.topPlayersPerCategory(awayTeamPlayerstatspergameList, awayTeam, 5, "Points");
+		ArrayList<Playerstatspergame> gridTopPlayersReboundsAwayList = topPlayers
+				.topPlayersPerCategory(awayTeamPlayerstatspergameList, awayTeam, 5, "Rebounds");
+		ArrayList<Playerstatspergame> gridTopPlayersAssistsAwayList = topPlayers
+				.topPlayersPerCategory(awayTeamPlayerstatspergameList, awayTeam, 5, "Assists");
+		
 		gridStats.addComponent(new Label("<p class=\"HeaderTopPlayer\">" + "Points" + "</p>", ContentMode.HTML),6,10,7,10);
 		
 		for (int i = 0; i < gridTopPlayersPointsAwayList.size(); i++) {
@@ -199,7 +211,9 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 					+ String.valueOf(gridTopPlayersAssistsAwayList.get(i).getAssists()) + "</p>", ContentMode.HTML);
 			gridStats.addComponent(labelPointsValue, 11,11+i);
 		}
+		/***************************************/
 		
+		/***** IMPORT COMPONENTS IN GRIDLAYOUT******/
 //		gridStats.setSizeFull();
 		gridStats.setHeight("90%");
 		gridStats.setWidth("90%");
@@ -226,8 +240,10 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 		gridStats.setComponentAlignment(htmlLabelHomeBarChart, Alignment.MIDDLE_CENTER);
 		gridStats.setComponentAlignment(htmlLabelAwayPieChart, Alignment.MIDDLE_CENTER);
 		gridStats.setComponentAlignment(htmlLabelAwayBarChart, Alignment.MIDDLE_CENTER);
-		addComponent(gridStats);
+//		addComponent(gridStats);
+		/***************************************/
 		
+		/***** JAVASCRIPT FOR CHARTS******/
 		JavaScript.getCurrent()
 				.execute(chart.PieChartScript(mapHomeTeamPointsPerPositionList, homeTeam, "Points Per Position"));
 		JavaScript.getCurrent()
@@ -237,104 +253,137 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 		JavaScript.getCurrent().execute(
 				chart.BarChartScript(mapAwayTeamUsageRatingPerPositionList, awayTeam, "Usage Rate Per Position"));
 
+		/***************************************/
+		
+		/***** BOXSCORE TABLE ******/
 		Grid<Playerstatspergame> grid = new Grid<Playerstatspergame>();
 
-		HorizontalLayout horizontal = new HorizontalLayout();
-
-		Button awayTeamButton = new Button("Away");
-		Button homeTeamButton = new Button("Home");
+		Button awayTeamButton = new Button(boxscore.getAwayteam());
+		Button homeTeamButton = new Button(boxscore.getHometeam());
 		homeTeamButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		awayTeamButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
-		horizontal.addComponent(awayTeamButton);
-		horizontal.addComponent(homeTeamButton);
-		horizontal.setDefaultComponentAlignment(Alignment.TOP_CENTER);
-		addComponent(horizontal);
+		homeTeamButton.addStyleName("HomeTeamButton");
+		awayTeamButton.addStyleName("AwayTeamButton");
+		gridStats.addComponent(awayTeamButton, 5, 16,5,16);
+		gridStats.addComponent(homeTeamButton, 6, 16,6,16);
+		gridStats.setComponentAlignment(homeTeamButton, Alignment.MIDDLE_LEFT);
+		gridStats.setComponentAlignment(awayTeamButton, Alignment.MIDDLE_RIGHT);
 
 		awayTeamButton.addClickListener(playerstatsList -> {
 
+			gridStats.removeComponent(grid);
 			grid.removeAllColumns();
-
 			grid.setItems(awayTeamPlayerstatspergameList);
 
 //			grid.addColumn(Playerstatspergame::getTeamid).setCaption("TeamID");
 			grid.addColumn(Playerstatspergame -> {
-				return Playerstatspergame.getPlayer().getFirstname();
-			}).setCaption("First Name");
+				return Playerstatspergame.getPlayer().getFirstname() + " " + Playerstatspergame.getPlayer().getLastname();
+			}).setCaption("Name").setStyleGenerator(Playerstatspergame->Playerstatspergame.getStarted()==1?"bold":null);
+//			grid.addColumn(Playerstatspergame -> {
+//				return Playerstatspergame.getPlayer().getLastname();
+//			}).setCaption("Last Name").setStyleGenerator(Playerstatspergame->Playerstatspergame.getStarted()==1?"bold":null);
+//			grid.addColumn(Playerstatspergame::getOpponentid).setCaption("opponentid");
+//			grid.addColumn(Playerstatspergame::getSeasontype).setCaption("seasontype");
+//			grid.addColumn(Playerstatspergame::getSeason).setCaption("season");
+//			grid.addColumn(Playerstatspergame::getFanduelposition).setCaption("fanduelposition");
+//			grid.addColumn(Playerstatspergame::getDraftkingsposition).setCaption("draftkingsposition");
+//			grid.addColumn(Playerstatspergame::getStarted).setCaption("started").isHidden();
+//			grid.addColumn(Playerstatspergame::getOpponentrank).setCaption("opponentrank");
+//			grid.addColumn(Playerstatspergame::getOpponentpositionrank).setCaption("opponentpositionrank");
+//			grid.addColumn(Playerstatspergame::getGames).setCaption("games");
 			grid.addColumn(Playerstatspergame -> {
-				return Playerstatspergame.getPlayer().getLastname();
-			}).setCaption("Last Name");
-			grid.addColumn(Playerstatspergame::getOpponentid).setCaption("opponentid");
-			grid.addColumn(Playerstatspergame::getSeasontype).setCaption("seasontype");
-			grid.addColumn(Playerstatspergame::getSeason).setCaption("season");
-			grid.addColumn(Playerstatspergame::getFanduelposition).setCaption("fanduelposition");
-			grid.addColumn(Playerstatspergame::getDraftkingsposition).setCaption("draftkingsposition");
-			grid.addColumn(Playerstatspergame::getStarted).setCaption("started");
-			grid.addColumn(Playerstatspergame::getOpponentrank).setCaption("opponentrank");
-			grid.addColumn(Playerstatspergame::getOpponentpositionrank).setCaption("opponentpositionrank");
-			grid.addColumn(Playerstatspergame::getGames).setCaption("games");
-			grid.addColumn(Playerstatspergame::getMinutes).setCaption("minutes");
-			grid.addColumn(Playerstatspergame::getSeconds).setCaption("seconds");
-			grid.addColumn(Playerstatspergame::getFieldgoalsmade).setCaption("fieldgoalsmade");
-			grid.addColumn(Playerstatspergame::getFieldgoalsattempted).setCaption("fieldgoalsattempted");
-			grid.addColumn(Playerstatspergame::getFieldgoalspercentage).setCaption("fieldgoalspercentage");
-			grid.addColumn(Playerstatspergame::getEffectivefieldgoalspercentage)
-					.setCaption("effectivefieldgoalspercentage");
-			grid.addColumn(Playerstatspergame::getTwopointersmade).setCaption("twopointersmade");
-			grid.addColumn(Playerstatspergame::getTwopointersattempted).setCaption("twopointersattempted");
-			grid.addColumn(Playerstatspergame::getTwopointerspercentage).setCaption("twopointerspercentage");
-			grid.addColumn(Playerstatspergame::getThreepointersmade).setCaption("threepointersmade");
-			grid.addColumn(Playerstatspergame::getThreepointersattempted).setCaption("threepointersattempted");
-			grid.addColumn(Playerstatspergame::getThreepointerspercentage).setCaption("threepointerspercentage");
-			grid.addColumn(Playerstatspergame::getFreethrowssmade).setCaption("freethrowssmade");
-			grid.addColumn(Playerstatspergame::getFreethrowsattempted).setCaption("freethrowsattempted");
-
+				return Playerstatspergame.getMinutes()+":"+Playerstatspergame.getSeconds();
+			}).setCaption("MP").setWidth(78);
+			grid.addColumn(Playerstatspergame::getPoints).setCaption("PTS").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFieldgoalsattempted).setCaption("FGA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFieldgoalspercentage).setCaption("FG%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTwopointersmade).setCaption("2P").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTwopointersattempted).setCaption("2PA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTwopointerspercentage).setCaption("2P%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getThreepointersmade).setCaption("3P").setWidth(78);
+			grid.addColumn(Playerstatspergame::getThreepointersattempted).setCaption("3PA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getThreepointerspercentage).setCaption("3P%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFreethrowssmade).setCaption("FT").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFreethrowsattempted).setCaption("FTA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFreethrowspercentage).setCaption("FT%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getOffensiverebounds).setCaption("ORB").setWidth(78);
+			grid.addColumn(Playerstatspergame::getDefensiverebounds).setCaption("DRB").setWidth(78);
+			grid.addColumn(Playerstatspergame::getRebounds).setCaption("TRB").setWidth(78);
+			grid.addColumn(Playerstatspergame::getAssists).setCaption("AST").setWidth(78);
+			grid.addColumn(Playerstatspergame::getSteals).setCaption("STL").setWidth(78);
+			grid.addColumn(Playerstatspergame::getBlockedshots).setCaption("BLK").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTurnovers).setCaption("TOV").setWidth(78);
+			grid.addColumn(Playerstatspergame::getPersonalfouls).setCaption("PF").setWidth(78);
+			grid.addColumn(Playerstatspergame::getPlayerefficiencyrating).setCaption("RATE").setWidth(78);
+			grid.addColumn(Playerstatspergame::getUsageratepercentage).setCaption("USG%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getUsageratepercentage).setCaption("+/-").setWidth(78);
+//			grid.addColumn(Playerstatspergame::getEffectivefieldgoalspercentage)
+//			.setCaption("effectivefieldgoalspercentage");
+			
 			grid.setSizeFull();
-			grid.setFrozenColumnCount(2);
-			addComponent(grid);
+			grid.setFrozenColumnCount(1);
+			gridStats.addComponent(grid, 0, 17,11,17);
 		});
 
 		homeTeamButton.addClickListener(playerstatsList -> {
 
+			gridStats.removeComponent(grid);
+			grid.removeAllColumns();
+			
 			grid.setItems(homeTeamPlayerstatspergameList);
 
 //			grid.addColumn(Playerstatspergame::getTeamid).setCaption("TeamID");
 			grid.addColumn(Playerstatspergame -> {
-				return Playerstatspergame.getPlayer().getFirstname();
-			}).setCaption("First Name");
+				return Playerstatspergame.getPlayer().getFirstname() + " " + Playerstatspergame.getPlayer().getLastname();
+			}).setCaption("Name").setStyleGenerator(Playerstatspergame->Playerstatspergame.getStarted()==1?"bold":null);
+//			grid.addColumn(Playerstatspergame -> {
+//				return Playerstatspergame.getPlayer().getLastname();
+//			}).setCaption("Last Name").setStyleGenerator(Playerstatspergame->Playerstatspergame.getStarted()==1?"bold":null);
+//			grid.addColumn(Playerstatspergame::getOpponentid).setCaption("opponentid");
+//			grid.addColumn(Playerstatspergame::getSeasontype).setCaption("seasontype");
+//			grid.addColumn(Playerstatspergame::getSeason).setCaption("season");
+//			grid.addColumn(Playerstatspergame::getFanduelposition).setCaption("fanduelposition");
+//			grid.addColumn(Playerstatspergame::getDraftkingsposition).setCaption("draftkingsposition");
+//			grid.addColumn(Playerstatspergame::getStarted).setCaption("started").isHidden();
+//			grid.addColumn(Playerstatspergame::getOpponentrank).setCaption("opponentrank");
+//			grid.addColumn(Playerstatspergame::getOpponentpositionrank).setCaption("opponentpositionrank");
+//			grid.addColumn(Playerstatspergame::getGames).setCaption("games");
 			grid.addColumn(Playerstatspergame -> {
-				return Playerstatspergame.getPlayer().getLastname();
-			}).setCaption("Last Name");
-			grid.addColumn(Playerstatspergame::getOpponentid).setCaption("opponentid");
-			grid.addColumn(Playerstatspergame::getSeasontype).setCaption("seasontype");
-			grid.addColumn(Playerstatspergame::getSeason).setCaption("season");
-			grid.addColumn(Playerstatspergame::getFanduelposition).setCaption("fanduelposition");
-			grid.addColumn(Playerstatspergame::getDraftkingsposition).setCaption("draftkingsposition");
-			grid.addColumn(Playerstatspergame::getStarted).setCaption("started");
-			grid.addColumn(Playerstatspergame::getOpponentrank).setCaption("opponentrank");
-			grid.addColumn(Playerstatspergame::getOpponentpositionrank).setCaption("opponentpositionrank");
-			grid.addColumn(Playerstatspergame::getGames).setCaption("games");
-			grid.addColumn(Playerstatspergame::getMinutes).setCaption("minutes");
-			grid.addColumn(Playerstatspergame::getSeconds).setCaption("seconds");
-			grid.addColumn(Playerstatspergame::getFieldgoalsmade).setCaption("fieldgoalsmade");
-			grid.addColumn(Playerstatspergame::getFieldgoalsattempted).setCaption("fieldgoalsattempted");
-			grid.addColumn(Playerstatspergame::getFieldgoalspercentage).setCaption("fieldgoalspercentage");
-			grid.addColumn(Playerstatspergame::getEffectivefieldgoalspercentage)
-					.setCaption("effectivefieldgoalspercentage");
-			grid.addColumn(Playerstatspergame::getTwopointersmade).setCaption("twopointersmade");
-			grid.addColumn(Playerstatspergame::getTwopointersattempted).setCaption("twopointersattempted");
-			grid.addColumn(Playerstatspergame::getTwopointerspercentage).setCaption("twopointerspercentage");
-			grid.addColumn(Playerstatspergame::getThreepointersmade).setCaption("threepointersmade");
-			grid.addColumn(Playerstatspergame::getThreepointersattempted).setCaption("threepointersattempted");
-			grid.addColumn(Playerstatspergame::getThreepointerspercentage).setCaption("threepointerspercentage");
-			grid.addColumn(Playerstatspergame::getFreethrowssmade).setCaption("freethrowssmade");
-			grid.addColumn(Playerstatspergame::getFreethrowsattempted).setCaption("freethrowsattempted");
-
+				return Playerstatspergame.getMinutes()+":"+Playerstatspergame.getSeconds();
+			}).setCaption("MP").setWidth(78);
+			grid.addColumn(Playerstatspergame::getPoints).setCaption("PTS").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFieldgoalsattempted).setCaption("FGA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFieldgoalspercentage).setCaption("FG%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTwopointersmade).setCaption("2P").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTwopointersattempted).setCaption("2PA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTwopointerspercentage).setCaption("2P%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getThreepointersmade).setCaption("3P").setWidth(78);
+			grid.addColumn(Playerstatspergame::getThreepointersattempted).setCaption("3PA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getThreepointerspercentage).setCaption("3P%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFreethrowssmade).setCaption("FT").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFreethrowsattempted).setCaption("FTA").setWidth(78);
+			grid.addColumn(Playerstatspergame::getFreethrowspercentage).setCaption("FT%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getOffensiverebounds).setCaption("ORB").setWidth(78);
+			grid.addColumn(Playerstatspergame::getDefensiverebounds).setCaption("DRB").setWidth(78);
+			grid.addColumn(Playerstatspergame::getRebounds).setCaption("TRB").setWidth(78);
+			grid.addColumn(Playerstatspergame::getAssists).setCaption("AST").setWidth(78);
+			grid.addColumn(Playerstatspergame::getSteals).setCaption("STL").setWidth(78);
+			grid.addColumn(Playerstatspergame::getBlockedshots).setCaption("BLK").setWidth(78);
+			grid.addColumn(Playerstatspergame::getTurnovers).setCaption("TOV").setWidth(78);
+			grid.addColumn(Playerstatspergame::getPersonalfouls).setCaption("PF").setWidth(78);
+			grid.addColumn(Playerstatspergame::getPlayerefficiencyrating).setCaption("RATE").setWidth(78);
+			grid.addColumn(Playerstatspergame::getUsageratepercentage).setCaption("USG%").setWidth(78);
+			grid.addColumn(Playerstatspergame::getUsageratepercentage).setCaption("+/-").setWidth(78);
+//			grid.addColumn(Playerstatspergame::getEffectivefieldgoalspercentage)
+//			.setCaption("effectivefieldgoalspercentage");
+			
 			grid.setSizeFull();
-			grid.setFrozenColumnCount(2);
-			addComponent(grid);
+			grid.setFrozenColumnCount(1);
+			gridStats.addComponent(grid, 0, 17,11,17);
 		});
 
 		awayTeamButton.click();
+		addComponent(gridStats);
 	}
 
 }

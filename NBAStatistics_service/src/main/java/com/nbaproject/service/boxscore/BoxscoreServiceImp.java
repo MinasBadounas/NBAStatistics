@@ -1,13 +1,12 @@
 package com.nbaproject.service.boxscore;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nbaproject.entities.Boxscore;
-import com.nbaproject.entities.Player;
 import com.nbaproject.repository.boxscore.BoxscoreRepository;
 
 @Service
@@ -50,6 +49,14 @@ public class BoxscoreServiceImp implements BoxscoreService {
 		Boxscore boxscore = boxscoreRepository.findBoxscorebyGameId(gameid);
 
 		return boxscore;
+	}
+
+	@Override
+	public ArrayList<Boxscore> findBoxscoresbyDate(String date) {
+		
+		ArrayList<Boxscore> boxScoreList=boxscoreRepository.findBoxscoresbyDate(date);
+		
+		return boxScoreList;
 	}
 
 }

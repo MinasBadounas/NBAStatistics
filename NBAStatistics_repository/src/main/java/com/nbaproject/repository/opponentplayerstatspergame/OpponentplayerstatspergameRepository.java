@@ -1,5 +1,7 @@
 package com.nbaproject.repository.opponentplayerstatspergame;
 
+import java.util.ArrayList;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -56,9 +58,12 @@ public interface OpponentplayerstatspergameRepository extends JpaRepository<Oppo
 			+ "AVG_blockspercentage ,AVG_turnoverspercentage ,AVG_usageratepercentage ,AVG_plusminus) "
 			+ "select pspg.gameid, pspg.playerid, pspg.teamid, pspg.opponentid,pspg.seasontype, pspg.season,pspg.opponentrank, "
 			+ "MIN(pspg.opponentpositionrank) MINopponentpositionrank,max(pspg.opponentpositionrank) MAXopponentpositionrank,pspg.games, "
-			+ "null ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null, "
-			+ "null,null,null,null,null, null,null,null,null, null,null "
+			+ "0 ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, "
+			+ "0,0,0,0,0, 0,0,0,0, 0,0 "
 			+ "from nbastatistics.playerstatspergame  pspg "
 			+ "where pspg.gameid= ?1 and pspg.playerid= ?2 ;", nativeQuery = true)
 	void InsertNullOpponentplayerstatspergame(int gameid, int playerid);
+    
+	@Query(value = "select * from opponentplayerstatspergame where playerid= ?1 ;", nativeQuery = true)
+	ArrayList<Opponentplayerstatspergame> findOpponentplayerstatspergameByPlayerId( int playerid);
 }

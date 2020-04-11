@@ -29,7 +29,7 @@ public class Boxscore implements Serializable {
 
 	private int hometeamscore;
 
-	private byte islosed;
+	private byte isclosed;
 
 	private double overunder;
 
@@ -108,12 +108,12 @@ public class Boxscore implements Serializable {
 		this.hometeamscore = hometeamscore;
 	}
 
-	public byte getIslosed() {
-		return this.islosed;
+	public byte getIsclosed() {
+		return this.isclosed;
 	}
 
-	public void setIslosed(byte islosed) {
-		this.islosed = islosed;
+	public void setIsclosed(byte isclosed) {
+		this.isclosed = isclosed;
 	}
 
 	public double getOverunder() {

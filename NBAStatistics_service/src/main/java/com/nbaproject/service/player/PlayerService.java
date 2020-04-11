@@ -9,7 +9,11 @@ public interface PlayerService {
 
 	public void savePlayer(Player player) ;
 	
-	public Integer findPlayerByPlayerId(int playerid) ;
+	public Integer findPlayerById(int playerid) ;
+	
+	public Player findPlayerByPlayerId(int playerid) ;
 	
 	public ArrayList<Player> findPlayersByName(String playername);
+	
+	public ArrayList<Player> findAll();
 }
