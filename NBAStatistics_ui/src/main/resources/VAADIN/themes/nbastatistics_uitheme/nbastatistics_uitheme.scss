@@ -112,20 +112,82 @@
 
 }
 
-.PlayerStatsImage{
+.GridHeaderPlayerStats{
+	width: 100%;
+	height: 100%;
+	background-color: #032f4f;
+}
 
-	width: 100px;
-	height:100px;
+.PlayerStatsImage{
+	float:left;
+	margin: 10px 0 10px 10px;
+	text-align: center;
+	background-color: #032f4f;
+	width: 65px;
+	height:90px;
+	top: 0px;
 }
 
 .PlayerStatsName{
-
-	text-align:center;
+	font-family:'Roboto';
+	color:white;
+	background-color: #032f4f;
+	text-align: left;
 	font-size: 36px;
 	font-weight: bold;
 	margin: 0 0 0 0;
+	padding-left: 10px;
+	top: 0px;
+	overflow:auto;
+    display:block;
 }
 
+.PlayerStatsDescription{
+	color:white;
+	background-color: #032f4f;
+	text-align: left;
+	font-size: 26px;
+	font-weight: bold;
+	margin: 0 0 26px 0;
+	padding-left: 10px;
+	overflow:auto;
+    display:block;
+}
+
+.AverageSeasonStats{
+	font-family:'Roboto';
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed ;
+    width: 100% ;
+    border-collapse: collapse;
+    background-color: #032f4f;
+    color: white;
+}
+
+  .AverageSeasonStats td, .AverageSeasonStats th {
+    border: 1px solid white;
+  }
+  .AverageSeasonStats tr:first-child th {
+    border-top: 0;
+  }
+  .AverageSeasonStats tr:last-child td {
+    border-bottom: 0;
+  }
+  .AverageSeasonStats tr td:first-child,
+  .AverageSeasonStats tr th:first-child {
+    border-left: 0;
+  }
+  .AverageSeasonStats tr td:last-child,
+  .AverageSeasonStats tr th:last-child {
+    border-right: 0;
+  }
+  
+ .GridLineChartPlayerstats{
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
 .lineChart{
 	width: 75%;
 }

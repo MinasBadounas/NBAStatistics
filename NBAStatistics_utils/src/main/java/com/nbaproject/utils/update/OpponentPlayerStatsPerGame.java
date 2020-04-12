@@ -1,4 +1,4 @@
-package com.nbaproject.utils.opponentplayerstatspergame;
+package com.nbaproject.utils.update;
 
 import java.util.ArrayList;
 

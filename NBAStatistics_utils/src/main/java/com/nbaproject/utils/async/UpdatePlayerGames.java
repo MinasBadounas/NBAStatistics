@@ -20,9 +20,10 @@ import com.nbaproject.service.playerstatspergame.PlayerstatspergameService;
 import com.nbaproject.utils.checker.CheckPlayer;
 import com.nbaproject.utils.converter.ConvertPositionToInt;
 import com.nbaproject.utils.defenceMatchup.DefenceMatchUp;
-import com.nbaproject.utils.opponentplayerstatspergame.OpponentPlayerStatsPerGame;
 import com.nbaproject.utils.staticInitializer.AppconfigServiceStaticInitializer;
-import com.nbaproject.utils.teamstatsbypositionpergame.Teamstatsbypositionpergame;
+import com.nbaproject.utils.update.OpponentPlayerStatsPerGame;
+import com.nbaproject.utils.update.Teamstatsbypositionpergame;
+import com.nbaproject.utils.update.UpdatePlayerseasonstats;
 
 @Configuration
 @EnableScheduling
@@ -33,7 +34,7 @@ public class UpdatePlayerGames {
 	private PlayerstatspergameService playerstatspergameService;
 
 	@Async("threadPoolTaskExecutor")
-	@Scheduled(cron = "0 22 21 * * ?")
+	@Scheduled(cron = "0 38 21 * * ?")
 	public void UpdatePlayerGamesStas() throws IOException {
 
 //		int maxGameId = playerstatspergameService.maxGameIdInPlayerStatsPerGame();
@@ -46,7 +47,7 @@ public class UpdatePlayerGames {
 //			if (gameId > maxGameId) {
 //				int gameId=13905;
 		ArrayList<Integer> gameIdList = new ArrayList<Integer>();	
-		
+		gameIdList.add(14135);
 		for(int gameId:gameIdList) {
 //		for (int gameId = 14000; gameId < 14000; gameId++) {
 
@@ -162,11 +163,14 @@ public class UpdatePlayerGames {
 			OpponentPlayerStatsPerGame.calulateOpponentPlayerStatsPerGame(gameId);
 
 			Teamstatsbypositionpergame.calculateTeamstatsbypositionpergame(gameId);
-
+			
+			UpdatePlayerseasonstats.UpdatePlayerseasonstatsSchedule(gameId);
+			
 			/** ---------Calculate the process time for each game--------- **/
 			long timeEnd = System.currentTimeMillis();
 			System.out.println("Total time process time of match with gameId " + gameId + " : "
 					+ (timeEnd - timeNow) / 1000 + " sec");
+			timeNow = System.currentTimeMillis();
 
 		}
 	}

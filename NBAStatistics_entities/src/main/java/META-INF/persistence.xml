@@ -17,5 +17,7 @@
 		<class>com.nbaproject.entities.TeamstatsbypositionpergamePK</class>
 		<class>com.nbaproject.entities.Playerprop</class>
 		<class>com.nbaproject.entities.PlayerpropPK</class>
+		<class>com.nbaproject.entities.Playerseasonstat</class>
+		<class>com.nbaproject.entities.PlayerseasonstatPK</class>
 	</persistence-unit>
 </persistence>
