@@ -42,13 +42,23 @@ public class PlayerpropServiceImp implements PlayerpropService {
 	public void savePlayerprops(Playerprop playerprop) {
 
 		playerpropRepository.save(playerprop);
-		
+
 	}
 
 	@Override
 	public ArrayList<Playerprop> findPlayerpropsByPlayerIdAndDescription(int playerid, int description) {
 
-		ArrayList<Playerprop> playerpropList = playerpropRepository.findPlayerpropsByPlayerIdAndDescription(playerid, description);
+		ArrayList<Playerprop> playerpropList = playerpropRepository.findPlayerpropsByPlayerIdAndDescription(playerid,
+				description);
+
+		return playerpropList;
+	}
+
+	@Override
+	public ArrayList<Playerprop> findLastPlayerpropsByPlayerIdAndDescription(int playerid, int description, int lastX) {
+
+		ArrayList<Playerprop> playerpropList = playerpropRepository
+				.findLastPlayerpropsByPlayerIdAndDescription(playerid, description, lastX);
 
 		return playerpropList;
 	}

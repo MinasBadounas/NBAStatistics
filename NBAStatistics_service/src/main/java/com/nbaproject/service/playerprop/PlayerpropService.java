@@ -15,4 +15,6 @@ public interface PlayerpropService {
 	public void savePlayerprops(Playerprop playerprop);
 	
 	public  ArrayList<Playerprop> findPlayerpropsByPlayerIdAndDescription(int playerid, int description);
+	
+	public ArrayList<Playerprop> findLastPlayerpropsByPlayerIdAndDescription(int playerid, int description,int lastX);
 }

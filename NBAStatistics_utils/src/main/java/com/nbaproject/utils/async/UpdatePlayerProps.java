@@ -26,6 +26,7 @@ import com.nbaproject.service.player.PlayerService;
 import com.nbaproject.service.playerprop.PlayerpropService;
 import com.nbaproject.service.playerstatspergame.PlayerstatspergameService;
 import com.nbaproject.utils.converter.ConvertPlayerpropDescriptionToInt;
+import com.nbaproject.utils.tools.RoundDoubles;
 
 @Configuration
 @EnableScheduling
@@ -93,11 +94,11 @@ public class UpdatePlayerProps {
 					e.printStackTrace();
 				}
 				newPlayerprop.setBetresult(JObject.getString("BetResult"));
-				newPlayerprop.setOverpayout((double)100/Math.abs(JObject.getInt("OverPayout"))+1);
-				newPlayerprop.setOverunder(JObject.getDouble("OverUnder"));
+				newPlayerprop.setOverpayout(RoundDoubles.round((double)100/Math.abs(JObject.getInt("OverPayout"))+1,2));
+				newPlayerprop.setOverunder(RoundDoubles.round(JObject.getDouble("OverUnder"),2));
 				newPlayerprop.setPlayer(playerService.findPlayerByPlayerId(JObject.getInt("PlayerID")));
-				newPlayerprop.setStatresult(JObject.getDouble("StatResult"));
-				newPlayerprop.setUnderpayout((double)100/Math.abs(JObject.getInt("UnderPayout"))+1);
+				newPlayerprop.setStatresult(RoundDoubles.round(JObject.getDouble("StatResult"),2));
+				newPlayerprop.setUnderpayout(RoundDoubles.round((double)100/Math.abs(JObject.getInt("UnderPayout"))+1,2));
 				
 				System.out.println("Save to Playerprop the Playerprop with GameID: " + newPlayerprop.getBoxscore().getGameid()
 				+ " and PlayerId: " + newPlayerprop.getPlayer().getPlayerid() +" and Description: " + JObject.getString("Description") );

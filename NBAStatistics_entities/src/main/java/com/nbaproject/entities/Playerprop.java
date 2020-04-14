@@ -33,12 +33,12 @@ public class Playerprop implements Serializable {
 
 	//bi-directional many-to-one association to Boxscore
 	@ManyToOne
-	@JoinColumn(name="gameid",insertable=false, updatable=false)
+	@JoinColumn(name="gameid", insertable=false, updatable=false)
 	private Boxscore boxscore;
 
 	//bi-directional many-to-one association to Player
 	@ManyToOne
-	@JoinColumn(name="playerid",insertable=false, updatable=false)
+	@JoinColumn(name="playerid", insertable=false, updatable=false)
 	private Player player;
 
 	public Playerprop() {

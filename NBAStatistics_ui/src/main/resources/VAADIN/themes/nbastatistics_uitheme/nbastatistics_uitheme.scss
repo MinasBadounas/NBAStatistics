@@ -37,6 +37,30 @@
    font-weight: bold;
 }
 
+.v-grid-cell.green {
+   background: #3CB371;
+   text-align:center;
+   font-size: 14px;
+   font-weight: bold;
+   font-family:'Roboto';
+}
+
+.v-grid-cell.red {
+   background: #ff7070;
+   text-align:center;
+   font-size: 14px;
+   font-weight: bold;
+   font-family:'Roboto';
+}
+
+.v-grid-cell.grey {
+   background: #A9A9A9;
+   text-align:center;
+   font-size: 14px;
+   font-weight: bold;
+   font-family:'Roboto';
+}
+
 .pageHeader{
 	text-align:center;
 	font-size: 36px;
@@ -128,6 +152,12 @@
 	top: 0px;
 }
 
+.PlayerStatsTeamImage{
+	width: 60px;
+	height:60px;
+	padding-left:216px;
+}
+
 .PlayerStatsName{
 	font-family:'Roboto';
 	color:white;
@@ -148,7 +178,7 @@
 	text-align: left;
 	font-size: 26px;
 	font-weight: bold;
-	margin: 0 0 26px 0;
+	margin: 0 0 0 0;
 	padding-left: 10px;
 	overflow:auto;
     display:block;
@@ -160,7 +190,6 @@
     border-spacing: 0;
     table-layout: fixed ;
     width: 100% ;
-    border-collapse: collapse;
     background-color: #032f4f;
     color: white;
 }
@@ -183,13 +212,29 @@
     border-right: 0;
   }
   
- .GridLineChartPlayerstats{
-	width: 100%;
-	height: 100%;
-	background-color: white;
+
+.LineChart{
+	width: 50%;
 }
-.lineChart{
-	width: 75%;
+
+.GridHeaderCategoryPlayerStats th{
+	font-family:'Roboto';
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #032f4f!important;
+	color: white;
+	word-wrap: break-word;
+	background-image:none!important;
+	white-space: normal!important;
+	text-align: center;
+	
+	.v-grid-cell{
+	display:contents!important;
+	}
+}
+
+.GridHeaderCategoryPlayerStats .v-grid-column-header-content{
+	line-height:20px!important;
 }
 
 }

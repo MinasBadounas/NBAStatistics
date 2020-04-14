@@ -15423,6 +15423,30 @@ div.v-layout.v-horizontal.v-widget {
 	font-weight: bold;
 }
 
+.nbastatistics_uitheme .v-grid-cell.green {
+	background: #3CB371;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: "Roboto";
+}
+
+.nbastatistics_uitheme .v-grid-cell.red {
+	background: #ff7070;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: "Roboto";
+}
+
+.nbastatistics_uitheme .v-grid-cell.grey {
+	background: #A9A9A9;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: "Roboto";
+}
+
 .nbastatistics_uitheme .pageHeader {
 	text-align: center;
 	font-size: 36px;
@@ -15507,6 +15531,11 @@ div.v-layout.v-horizontal.v-widget {
 	top: 0px;
 }
 
+.nbastatistics_uitheme .PlayerStatsTeamImage {
+	width: 60px;
+	height: 60px;
+}
+
 .nbastatistics_uitheme .PlayerStatsName {
 	font-family: "Roboto";
 	color: white;
@@ -15527,7 +15556,7 @@ div.v-layout.v-horizontal.v-widget {
 	text-align: left;
 	font-size: 26px;
 	font-weight: bold;
-	margin: 0 0 26px 0;
+	margin: 0 0 0 0;
 	padding-left: 10px;
 	overflow: auto;
 	display: block;
@@ -15539,7 +15568,6 @@ div.v-layout.v-horizontal.v-widget {
 	border-spacing: 0;
 	table-layout: fixed;
 	width: 100%;
-	border-collapse: collapse;
 	background-color: #032f4f;
 	color: white;
 }
@@ -15564,12 +15592,26 @@ div.v-layout.v-horizontal.v-widget {
 	border-right: 0;
 }
 
-.nbastatistics_uitheme .GridLineChartPlayerstats {
-	width: 100%;
-	height: 100%;
-	background-color: white;
+.nbastatistics_uitheme .LineChart {
+	width: 50%;
 }
 
-.nbastatistics_uitheme .lineChart {
-	width: 75%;
+.nbastatistics_uitheme .GridHeaderCategoryPlayerStats th {
+	font-family: "Roboto";
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #032f4f !important;
+	color: white;
+	word-wrap: break-word;
+	background-image: none !important;
+	white-space: normal !important;
+	text-align: center;
+}
+
+.nbastatistics_uitheme .GridHeaderCategoryPlayerStats th .v-grid-cell {
+	display: contents !important;
+}
+
+.nbastatistics_uitheme .GridHeaderCategoryPlayerStats .v-grid-column-header-content {
+	line-height: 20px !important;
 }

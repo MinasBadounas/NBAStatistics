@@ -20,7 +20,6 @@ public class PlayerpropPK implements Serializable {
 
 	private int description;
 
-	
 	public PlayerpropPK(int playerid, int gameid, int description) {
 		super();
 		this.playerid = playerid;
@@ -59,7 +58,7 @@ public class PlayerpropPK implements Serializable {
 		return 
 			(this.playerid == castOther.playerid)
 			&& (this.gameid == castOther.gameid)
-			&& (this.description==castOther.description);
+			&& (this.description == castOther.description);
 	}
 
 	public int hashCode() {
