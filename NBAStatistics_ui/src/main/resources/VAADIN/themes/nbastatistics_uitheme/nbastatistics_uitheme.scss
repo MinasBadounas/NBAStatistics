@@ -60,6 +60,17 @@
    font-weight: bold;
    font-family:'Roboto';
 }
+.MenuPanel{
+	background-color: #032f4f;
+}
+
+.MenuBarStyle{
+	background: #032f4f;
+	border: none;
+	font-style: 'Roboto' ;
+	color:white;
+	font-weight: bold;
+}
 
 .pageHeader{
 	text-align:center;
@@ -236,5 +247,8 @@
 .GridHeaderCategoryPlayerStats .v-grid-column-header-content{
 	line-height:20px!important;
 }
+
+
+
 
 }

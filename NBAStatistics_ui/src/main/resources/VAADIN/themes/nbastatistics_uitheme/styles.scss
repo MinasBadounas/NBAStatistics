@@ -1,10 +1,12 @@
 @import "addons.scss";
 @import "nbastatistics_uitheme.scss";
+@import "nbastatistics_teams.scss";
 
 /* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
 /* The actual styles should be defined in nbastatistics_uitheme.scss */
 .nbastatistics_uitheme {
   @include addons;
   @include nbastatistics_uitheme;
+  @include nbastatistics_teams;
 
 }

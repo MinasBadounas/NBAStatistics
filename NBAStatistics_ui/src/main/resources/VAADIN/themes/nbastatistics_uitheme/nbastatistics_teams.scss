@@ -1,0 +1,174 @@
+// Global variable overrides. Must be declared before importing Valo.
+
+// Defines the plaintext font size, weight and family. Font size affects general component sizing.
+//$v-font-size: 16px;
+//$v-font-weight: 300;
+//$v-font-family: "Open Sans", sans-serif;
+
+// Defines the border used by all components.
+//$v-border: 1px solid (v-shade 0.7);
+//$v-border-radius: 4px;
+
+// Affects the color of some component elements, e.g Button, Panel title, etc
+//$v-background-color: hsl(210, 0%, 98%);
+// Affects the color of content areas, e.g  Panel and Window content, TextField input etc
+//$v-app-background-color: $v-background-color;
+
+// Affects the visual appearance of all components
+//$v-gradient: v-linear 8%;
+//$v-bevel-depth: 30%;
+//$v-shadow-opacity: 5%;
+
+// Defines colors for indicating status (focus, success, failure)
+//$v-focus-color: valo-focus-color(); // Calculates a suitable color automatically
+//$v-friendly-color: #2c9720;
+//$v-error-indicator-color: #ed473b;
+
+// For more information, see: https://vaadin.com/book/-/page/themes.valo.html
+// Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+
+@import "../valo/valo.scss";
+
+@mixin nbastatistics_teams {
+  @include valo;
+
+.v-button-btnWAS{
+	background: url("https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+
+.v-button-btnCHA{
+	background: url("https://upload.wikimedia.org/wikipedia/en/c/c4/Charlotte_Hornets_%282014%29.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+    background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnATL{
+	background: url("https://upload.wikimedia.org/wikipedia/en/2/24/Atlanta_Hawks_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnMIA{
+	background: url("https://upload.wikimedia.org/wikipedia/en/f/fb/Miami_Heat_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnORL{
+	background: url("https://upload.wikimedia.org/wikipedia/en/1/10/Orlando_Magic_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnNY{
+	background: url("https://upload.wikimedia.org/wikipedia/en/2/25/New_York_Knicks_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnPHI{
+	background: url("https://upload.wikimedia.org/wikipedia/en/0/0e/Philadelphia_76ers_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnBKN{
+	background: url("https://upload.wikimedia.org/wikipedia/commons/4/44/Brooklyn_Nets_newlogo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnBOS{
+	background: url("https://upload.wikimedia.org/wikipedia/en/8/8f/Boston_Celtics.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnTOR{
+	background: url("https://upload.wikimedia.org/wikipedia/en/3/36/Toronto_Raptors_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnCHI{
+	background: url("https://upload.wikimedia.org/wikipedia/en/6/67/Chicago_Bulls_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnCLE{
+	background: url("https://upload.wikimedia.org/wikipedia/en/4/4b/Cleveland_Cavaliers_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnIND{
+	background: url("https://upload.wikimedia.org/wikipedia/en/1/1b/Indiana_Pacers.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnDET{
+	background: url("https://upload.wikimedia.org/wikipedia/commons/7/7c/Pistons_logo17.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+  	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+.v-button-btnMIL{
+	background: url("https://upload.wikimedia.org/wikipedia/en/4/4a/Milwaukee_Bucks_logo.svg") 0px 0px;
+  	margin: 0px;
+  	width:60px;
+  	height:60px;
+    background-repeat: no-repeat;
+	background-size: 120px 120px;
+	border: none;
+}
+
+
+
+}

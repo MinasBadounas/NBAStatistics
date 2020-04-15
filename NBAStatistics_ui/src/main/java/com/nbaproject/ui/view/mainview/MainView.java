@@ -9,12 +9,16 @@ import com.nbaproject.ui.view.teams.TeamsLayoutFactory;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
+import com.vaadin.server.Resource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Embedded;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -46,8 +50,9 @@ public class MainView extends UI {
 		rootLayout.setMargin(false);
 
 		Panel menuPanel = new Panel();
-		menuPanel.setWidth("80%");
+		menuPanel.setWidth("100%");
 		menuPanel.setHeightUndefined();
+		menuPanel.addStyleName("MenuPanel");
 
 		Panel contentPanel = new Panel();
 		contentPanel.setHeight("100%");
