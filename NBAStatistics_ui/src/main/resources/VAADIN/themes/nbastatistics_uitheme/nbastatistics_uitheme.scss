@@ -60,16 +60,21 @@
    font-weight: bold;
    font-family:'Roboto';
 }
-.MenuPanel{
+
+.v-panel-content-MenuPanel{
+	background-color: #032f4f;
+}
+
+.MenuBarLayout{
 	background-color: #032f4f;
 }
 
 .MenuBarStyle{
-	background: #032f4f;
-	border: none;
-	font-style: 'Roboto' ;
-	color:white;
-	font-weight: bold;
+	background: #032f4f!important;
+	border: none!important;
+	font-style: 'Roboto'!important ;
+	color:white!important;
+	font-weight: bold!important;
 }
 
 .pageHeader{
@@ -77,6 +82,7 @@
 	font-size: 36px;
 	font-weight: bold;
 	margin: 0 0 0 0;
+	color: #04487d;
 }
 
 .HomeTeamImage{
@@ -98,7 +104,8 @@
 	text-align:left;
 	font-size: 28px;
 	font-weight: bold;
-	background: lightgray;
+	background: #04487d;
+	color: white;
 }
 
 .AwayTeamButton{
@@ -150,14 +157,14 @@
 .GridHeaderPlayerStats{
 	width: 100%;
 	height: 100%;
-	background-color: #032f4f;
+	background-color: #04487d;
 }
 
 .PlayerStatsImage{
 	float:left;
 	margin: 10px 0 10px 10px;
 	text-align: center;
-	background-color: #032f4f;
+	background-color: #04487d;
 	width: 65px;
 	height:90px;
 	top: 0px;
@@ -166,13 +173,13 @@
 .PlayerStatsTeamImage{
 	width: 60px;
 	height:60px;
-	padding-left:216px;
+	padding-left:500px;
 }
 
 .PlayerStatsName{
 	font-family:'Roboto';
 	color:white;
-	background-color: #032f4f;
+	background-color: #04487d;
 	text-align: left;
 	font-size: 36px;
 	font-weight: bold;
@@ -185,7 +192,7 @@
 
 .PlayerStatsDescription{
 	color:white;
-	background-color: #032f4f;
+	background-color: #04487d;
 	text-align: left;
 	font-size: 26px;
 	font-weight: bold;
@@ -201,7 +208,7 @@
     border-spacing: 0;
     table-layout: fixed ;
     width: 100% ;
-    background-color: #032f4f;
+    background-color: #04487d;
     color: white;
 }
 
@@ -232,16 +239,13 @@
 	font-family:'Roboto';
 	font-size: 12px;
 	font-weight: bold;
-	background-color: #032f4f!important;
+	background-color: #04487d!important;
 	color: white;
 	word-wrap: break-word;
 	background-image:none!important;
 	white-space: normal!important;
-	text-align: center;
+	text-align: center!important;
 	
-	.v-grid-cell{
-	display:contents!important;
-	}
 }
 
 .GridHeaderCategoryPlayerStats .v-grid-column-header-content{

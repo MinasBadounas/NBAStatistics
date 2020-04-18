@@ -20,7 +20,13 @@ public class TopPlayers {
 			ArrayList<Playerstatspergame> playerstatspergamePointsList = new ArrayList<Playerstatspergame>();
 			PlayerstatspergameList.sort(Comparator.comparing(Playerstatspergame::getPoints).reversed());
 			for (int i = 0; i < limit; i++) {
-
+				if (PlayerstatspergameList.get(i).getPlayer().getLastname().length()
+						+ PlayerstatspergameList.get(i).getPlayer().getFirstname().length() > 14) {
+					int endindex = 14-PlayerstatspergameList.get(i).getPlayer().getLastname().length();
+					String firstname = PlayerstatspergameList.get(i).getPlayer().getFirstname().substring(0, endindex);
+					firstname = firstname.concat(".");
+					PlayerstatspergameList.get(i).getPlayer().setFirstname(firstname);
+				}
 				playerstatspergamePointsList.add(PlayerstatspergameList.get(i));
 
 			}
@@ -32,7 +38,13 @@ public class TopPlayers {
 			ArrayList<Playerstatspergame> playerstatspergameReboundsList = new ArrayList<Playerstatspergame>();
 			PlayerstatspergameList.sort(Comparator.comparing(Playerstatspergame::getRebounds).reversed());
 			for (int i = 0; i < limit; i++) {
-
+				if (PlayerstatspergameList.get(i).getPlayer().getLastname().length()
+						+ PlayerstatspergameList.get(i).getPlayer().getFirstname().length() > 14) {
+					int endindex = 14-PlayerstatspergameList.get(i).getPlayer().getLastname().length();
+					String firstname = PlayerstatspergameList.get(i).getPlayer().getFirstname().substring(0, endindex);
+					firstname = firstname.concat(".");
+					PlayerstatspergameList.get(i).getPlayer().setFirstname(firstname);
+				}
 				playerstatspergameReboundsList.add(PlayerstatspergameList.get(i));
 
 			}
@@ -43,7 +55,13 @@ public class TopPlayers {
 			ArrayList<Playerstatspergame> playerstatspergameAssistsList = new ArrayList<Playerstatspergame>();
 			PlayerstatspergameList.sort(Comparator.comparing(Playerstatspergame::getAssists).reversed());
 			for (int i = 0; i < limit; i++) {
-
+				if (PlayerstatspergameList.get(i).getPlayer().getLastname().length()
+						+ PlayerstatspergameList.get(i).getPlayer().getFirstname().length() > 14) {
+					int endindex = 14-PlayerstatspergameList.get(i).getPlayer().getLastname().length();
+					String firstname = PlayerstatspergameList.get(i).getPlayer().getFirstname().substring(0, endindex);
+					firstname = firstname.concat(".");
+					PlayerstatspergameList.get(i).getPlayer().setFirstname(firstname);
+				}
 				playerstatspergameAssistsList.add(PlayerstatspergameList.get(i));
 
 			}

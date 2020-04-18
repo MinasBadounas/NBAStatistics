@@ -32,143 +32,230 @@
 @mixin nbastatistics_teams {
   @include valo;
 
+.EastWestLabel{
+	color:white!important;
+	font-weight: bold!important;
+	background: #032f4f!important;
+	font-style: 'Roboto'!important ;
+	font-size: 30px;
+	text-align: center;
+}
+
 .v-button-btnWAS{
 	background: url("https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
+  	margin: 0px; background-position: center center;
 	background-repeat: no-repeat;
-	background-size: 120px 120px;
+	background-size: 100px 100px;
 	border: none;
 }
 
 .v-button-btnCHA{
 	background: url("https://upload.wikimedia.org/wikipedia/en/c/c4/Charlotte_Hornets_%282014%29.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-    background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnATL{
 	background: url("https://upload.wikimedia.org/wikipedia/en/2/24/Atlanta_Hawks_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnMIA{
 	background: url("https://upload.wikimedia.org/wikipedia/en/f/fb/Miami_Heat_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnORL{
 	background: url("https://upload.wikimedia.org/wikipedia/en/1/10/Orlando_Magic_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnNY{
 	background: url("https://upload.wikimedia.org/wikipedia/en/2/25/New_York_Knicks_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnPHI{
 	background: url("https://upload.wikimedia.org/wikipedia/en/0/0e/Philadelphia_76ers_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+ 	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnBKN{
 	background: url("https://upload.wikimedia.org/wikipedia/commons/4/44/Brooklyn_Nets_newlogo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnBOS{
 	background: url("https://upload.wikimedia.org/wikipedia/en/8/8f/Boston_Celtics.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnTOR{
 	background: url("https://upload.wikimedia.org/wikipedia/en/3/36/Toronto_Raptors_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
+  	margin: 0px; background-position: center center;
   	background-repeat: no-repeat;
-	background-size: 120px 120px;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnCHI{
 	background: url("https://upload.wikimedia.org/wikipedia/en/6/67/Chicago_Bulls_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnCLE{
 	background: url("https://upload.wikimedia.org/wikipedia/en/4/4b/Cleveland_Cavaliers_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnIND{
 	background: url("https://upload.wikimedia.org/wikipedia/en/1/1b/Indiana_Pacers.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnDET{
 	background: url("https://upload.wikimedia.org/wikipedia/commons/7/7c/Pistons_logo17.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-  	background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 .v-button-btnMIL{
 	background: url("https://upload.wikimedia.org/wikipedia/en/4/4a/Milwaukee_Bucks_logo.svg") 0px 0px;
-  	margin: 0px;
-  	width:60px;
-  	height:60px;
-    background-repeat: no-repeat;
-	background-size: 120px 120px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
 	border: none;
 }
 
+
+.v-button-btnMIN{
+	background: url("https://upload.wikimedia.org/wikipedia/en/c/c2/Minnesota_Timberwolves_logo.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnUTA{
+	background: url("https://upload.wikimedia.org/wikipedia/en/0/04/Utah_Jazz_logo_%282016%29.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnOKC{
+	background: url("https://upload.wikimedia.org/wikipedia/en/5/5d/Oklahoma_City_Thunder.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnSA{
+	background: url("https://upload.wikimedia.org/wikipedia/en/a/a2/San_Antonio_Spurs.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnPOR{
+	background: url("https://upload.wikimedia.org/wikipedia/en/2/21/Portland_Trail_Blazers_logo.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnDEN{
+	background: url("https://upload.wikimedia.org/wikipedia/en/7/76/Denver_Nuggets.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnMEM{
+	background: url("https://upload.wikimedia.org/wikipedia/en/f/f1/Memphis_Grizzlies.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnHOU{
+	background: url("https://upload.wikimedia.org/wikipedia/en/2/28/Houston_Rockets.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnNO{
+	background: url("https://upload.wikimedia.org/wikipedia/en/0/0d/New_Orleans_Pelicans_logo.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnDAL{
+	background: url("https://upload.wikimedia.org/wikipedia/en/9/97/Dallas_Mavericks_logo.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnGS{
+	background: url("https://upload.wikimedia.org/wikipedia/en/0/01/Golden_State_Warriors_logo.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnLAL{
+	background: url("https://upload.wikimedia.org/wikipedia/commons/3/3c/Los_Angeles_Lakers_logo.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnLAC{
+	background: url("https://upload.wikimedia.org/wikipedia/en/b/bb/Los_Angeles_Clippers_%282015%29.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+.v-button-btnPHO{
+	background: url("https://upload.wikimedia.org/wikipedia/en/d/dc/Phoenix_Suns_logo.svg") 0px 0px;
+  	margin: 0px; background-position: center center;
+  	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
+
+.v-button-btnSAC{
+	background: url("https://upload.wikimedia.org/wikipedia/en/c/c7/SacramentoKings.svg") 0px 0px;
+  	margin: 0px; 
+  	background-position: center center; 	
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	border: none;
+}
 
 
 }

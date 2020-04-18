@@ -34,12 +34,10 @@ public class Chart {
 	public String PieChartScript(Map<String, Integer> mapTeamList, int teamid, String title) {
 
 		ArrayList<String> backgroundcolorList = new ArrayList<String>();
-		backgroundcolorList.add("burlywood");
-		backgroundcolorList.add("cadetblue");
-		backgroundcolorList.add("mediumseagreen");
-		backgroundcolorList.add("maroon");
-		backgroundcolorList.add("midnightblue");
-
+		backgroundcolorList.add("#375e7d");
+		backgroundcolorList.add("#7c878f");
+		backgroundcolorList.add("#cf1020");
+		backgroundcolorList.add("#f0ce0e");
 
 		StringBuilder stringBuilderLabels = new StringBuilder();
 		StringBuilder stringBuilderData = new StringBuilder();
@@ -115,11 +113,10 @@ public class Chart {
 	public String BarChartScript(Map<String, Integer> mapTeamList, int teamid, String title) {
 
 		ArrayList<String> backgroundcolorList = new ArrayList<String>();
-		backgroundcolorList.add("burlywood");
-		backgroundcolorList.add("cadetblue");
-		backgroundcolorList.add("mediumseagreen");
-		backgroundcolorList.add("maroon");
-		backgroundcolorList.add("midnightblue");
+		backgroundcolorList.add("#375e7d");
+		backgroundcolorList.add("#7c878f");
+		backgroundcolorList.add("#cf1020");
+		backgroundcolorList.add("#f0ce0e");
 
 
 		StringBuilder stringBuilderLabels = new StringBuilder();

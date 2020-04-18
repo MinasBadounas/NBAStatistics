@@ -124,9 +124,28 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 					System.out.println(path);
 				}
 			});
+			
+			MenuItem teamstats = menuBar.addItem("TeamStats", new Command() {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void menuSelected(MenuItem selectedItem) {
+					String selectedItemPath = selectedItem.getText();
+
+					if (selectedItemPath == null)
+						return;
+
+					String path = selectedItemPath.toLowerCase().replaceAll("\\s+", "");
+					MainNavigator.navigate(path);
+
+					System.out.println(path);
+				}
+			});
 
 			stats.setVisible(false);
 			playerstats.setVisible(false);
+			teamstats.setVisible(false);
+			
 			menuBar.addStyleName("MenuBarStyle");
 			logoImage.setHeight("55px");
 			menuBarLayout.addComponent(logoImage,0,0,0,0);
@@ -135,7 +154,7 @@ public class MenuLayoutFactory implements UIComponentBuilder {
 			menuBarLayout.setComponentAlignment(menuBar, Alignment.MIDDLE_LEFT);
 			menuBarLayout.setHeight("60px");
 			menuBarLayout.addStyleName("MenuBarLayout");
-			
+
 			addComponent(menuBarLayout);
 			setComponentAlignment(menuBarLayout, Alignment.TOP_CENTER);
 			return this;

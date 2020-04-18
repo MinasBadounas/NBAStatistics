@@ -32,7 +32,7 @@ public interface PlayerStatsPerGameRepository extends JpaRepository<Playerstatsp
 	ArrayList<Playerstatspergame> findAllPlayerStatsPerGameWhereNotInDefencemMatchUpAndOverMinutesByGameId(int gameid,int minutes);
 
 	
-	@Query(value = "select * from playerstatspergame where gameid= ?1 and teamid= ?2 ;", nativeQuery = true)
+	@Query(value = "select * from playerstatspergame where gameid= ?1 and teamid= ?2 order by started desc;", nativeQuery = true)
 	ArrayList<Playerstatspergame> findPlayerStatsPerGameByGameIdAndTeamId(int gameid, int teamid);
 	
 	@Query(value = "select * from playerstatspergame where gameid= ?1 ;", nativeQuery = true)

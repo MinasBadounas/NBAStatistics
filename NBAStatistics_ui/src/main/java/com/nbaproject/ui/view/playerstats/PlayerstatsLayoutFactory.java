@@ -69,8 +69,16 @@ public class PlayerstatsLayoutFactory extends VerticalLayout implements View {
 		Playerseasonstat playerseasonstat = playerseasonstatsService.findLastPlayerseasonstatsByPlayerId(playerid);
 		ArrayList<Playerprop> playerpropPointsList = playerpropService.findPlayerpropsByPlayerIdAndDescription(playerid,
 				1);
+		ArrayList<Playerprop> playerpropReboundsList = playerpropService.findPlayerpropsByPlayerIdAndDescription(playerid,
+				9);
+		ArrayList<Playerprop> playerpropAssistsList = playerpropService.findPlayerpropsByPlayerIdAndDescription(playerid,
+				7);
 		ArrayList<Playerprop> playerpropPointsList_LastX = playerpropService
 				.findLastPlayerpropsByPlayerIdAndDescription(playerid, 1, 20);
+		ArrayList<Playerprop> playerpropReboundsList_LastX = playerpropService
+				.findLastPlayerpropsByPlayerIdAndDescription(playerid, 9, 20);
+		ArrayList<Playerprop> playerpropAssistsList_LastX = playerpropService
+				.findLastPlayerpropsByPlayerIdAndDescription(playerid, 7, 20);
 		ArrayList<Opponentplayerstatspergame> opponentplayerstatspergameList = opponentplayerstatpergameService
 				.findOpponentplayerstatspergameByPlayerId(playerid);
 		ArrayList<Playerstatspergame> playerstatspergameList = playerstatspergameService
@@ -111,8 +119,8 @@ public class PlayerstatsLayoutFactory extends VerticalLayout implements View {
 				ContentMode.HTML);
 
 		/**** GRIDLAYOUT LINE CHART (POINTS) ****/
-		GridLayout gridLineChartPlayerStats = new GridLayout(12, 1);
-		Label htmlLabelHomeLineChart = new Label(playerStatsChart.LineChartHtml(), ContentMode.HTML);
+		GridLayout gridLineChartPlayerPointsStats = new GridLayout(12, 1);
+		Label htmlLabelPointsLineChart = new Label(playerStatsChart.LineChartHtml("Points"), ContentMode.HTML);
 
 		Grid<Playerstatspergame> gridLayoutPlayerStatsPoints = new Grid<Playerstatspergame>();
 		gridLayoutPlayerStatsPoints.setItems(playerstatspergameList);
@@ -215,6 +223,219 @@ public class PlayerstatsLayoutFactory extends VerticalLayout implements View {
 					}
 					return null;
 				}).setExpandRatio(1).setWidth(114.5);
+		
+		/**** GRIDLAYOUT LINE CHART (REBOUNDS) ****/
+		GridLayout gridLineChartPlayerReboundsStats = new GridLayout(12, 1);
+		Label htmlLabelReboundsLineChart = new Label(playerStatsChart.LineChartHtml("Rebounds"), ContentMode.HTML);
+
+		Grid<Playerstatspergame> gridLayoutPlayerStatsRebounds = new Grid<Playerstatspergame>();
+		gridLayoutPlayerStatsRebounds.setItems(playerstatspergameList);
+
+		gridLayoutPlayerStatsRebounds.addColumn(Playerstatspergame -> {
+			int oponentid = Playerstatspergame.getOpponentid();
+			Team oponentTeam = teamService.findTeamById(oponentid);
+			return oponentTeam.getTeamkey();
+		}).setCaption("Opponent Name").setStyleGenerator(Playerstatspergame -> {
+			for (int i = 0; i < playerpropReboundsList.size(); i++) {
+				if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId().getGameid()
+						&& Playerstatspergame.getRebounds() > playerpropReboundsList.get(i).getOverunder()) {
+					return "green";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getRebounds() < playerpropReboundsList.get(i).getOverunder()) {
+					return "red";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getRebounds() == playerpropReboundsList.get(i).getOverunder()) {
+					return "grey";
+				}
+			}
+			return null;
+		}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsRebounds.addColumn(Playerstatspergame::getRebounds).setCaption("Rebounds")
+				.setStyleGenerator(Playerstatspergame -> {
+					for (int i = 0; i < playerpropReboundsList.size(); i++) {
+						if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() > playerpropReboundsList.get(i).getOverunder()) {
+							return "green";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() < playerpropReboundsList.get(i).getOverunder()) {
+							return "red";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() == playerpropReboundsList.get(i).getOverunder()) {
+							return "grey";
+						}
+					}
+					return null;
+				}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsRebounds.addColumn(Playerstatspergame -> {
+			for (int i = 0; i < playerpropReboundsList.size(); i++) {
+				if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId().getGameid()) {
+					return playerpropReboundsList.get(i).getOverunder();
+				}
+			}
+			return 0;
+		}).setCaption("OverUnder Limit").setStyleGenerator(Playerstatspergame -> {
+			for (int i = 0; i < playerpropReboundsList.size(); i++) {
+				if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId().getGameid()
+						&& Playerstatspergame.getRebounds() > playerpropReboundsList.get(i).getOverunder()) {
+					return "green";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getRebounds() < playerpropReboundsList.get(i).getOverunder()) {
+					return "red";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getRebounds() == playerpropReboundsList.get(i).getOverunder()) {
+					return "grey";
+				}
+			}
+			return null;
+		}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsRebounds.addColumn(Playerstatspergame::getOpponentrank).setCaption("Oponent Rank")
+				.setStyleGenerator(Playerstatspergame -> {
+					for (int i = 0; i < playerpropReboundsList.size(); i++) {
+						if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() > playerpropReboundsList.get(i).getOverunder()) {
+							return "green";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() < playerpropReboundsList.get(i).getOverunder()) {
+							return "red";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() == playerpropReboundsList.get(i).getOverunder()) {
+							return "grey";
+						}
+					}
+					return null;
+				}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsRebounds.addColumn(Playerstatspergame::getOpponentpositionrank)
+				.setCaption("Oponent PositionRank").setStyleGenerator(Playerstatspergame -> {
+					for (int i = 0; i < playerpropReboundsList.size(); i++) {
+						if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() > playerpropReboundsList.get(i).getOverunder()) {
+							return "green";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() < playerpropReboundsList.get(i).getOverunder()) {
+							return "red";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropReboundsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getRebounds() == playerpropReboundsList.get(i).getOverunder()) {
+							return "grey";
+						}
+					}
+					return null;
+				}).setExpandRatio(1).setWidth(114.5);
+
+		/**** GRIDLAYOUT LINE CHART (ASSISTS) ****/
+		GridLayout gridLineChartPlayerAssistsStats = new GridLayout(12, 1);
+		Label htmlLabelAssistsLineChart = new Label(playerStatsChart.LineChartHtml("Assists"), ContentMode.HTML);
+
+		Grid<Playerstatspergame> gridLayoutPlayerStatsAssists = new Grid<Playerstatspergame>();
+		gridLayoutPlayerStatsAssists.setItems(playerstatspergameList);
+
+		gridLayoutPlayerStatsAssists.addColumn(Playerstatspergame -> {
+			int oponentid = Playerstatspergame.getOpponentid();
+			Team oponentTeam = teamService.findTeamById(oponentid);
+			return oponentTeam.getTeamkey();
+		}).setCaption("Opponent Name").setStyleGenerator(Playerstatspergame -> {
+			for (int i = 0; i < playerpropAssistsList.size(); i++) {
+				if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId().getGameid()
+						&& Playerstatspergame.getAssists() > playerpropAssistsList.get(i).getOverunder()) {
+					return "green";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getAssists() < playerpropAssistsList.get(i).getOverunder()) {
+					return "red";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getAssists() == playerpropAssistsList.get(i).getOverunder()) {
+					return "grey";
+				}
+			}
+			return null;
+		}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsAssists.addColumn(Playerstatspergame::getAssists).setCaption("Assists")
+				.setStyleGenerator(Playerstatspergame -> {
+					for (int i = 0; i < playerpropAssistsList.size(); i++) {
+						if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() > playerpropAssistsList.get(i).getOverunder()) {
+							return "green";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() < playerpropAssistsList.get(i).getOverunder()) {
+							return "red";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() == playerpropAssistsList.get(i).getOverunder()) {
+							return "grey";
+						}
+					}
+					return null;
+				}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsAssists.addColumn(Playerstatspergame -> {
+			for (int i = 0; i < playerpropAssistsList.size(); i++) {
+				if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId().getGameid()) {
+					return playerpropAssistsList.get(i).getOverunder();
+				}
+			}
+			return 0;
+		}).setCaption("OverUnder Limit").setStyleGenerator(Playerstatspergame -> {
+			for (int i = 0; i < playerpropAssistsList.size(); i++) {
+				if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId().getGameid()
+						&& Playerstatspergame.getAssists() > playerpropAssistsList.get(i).getOverunder()) {
+					return "green";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getAssists() < playerpropAssistsList.get(i).getOverunder()) {
+					return "red";
+				} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+						.getGameid() && Playerstatspergame.getAssists() == playerpropAssistsList.get(i).getOverunder()) {
+					return "grey";
+				}
+			}
+			return null;
+		}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsAssists.addColumn(Playerstatspergame::getOpponentrank).setCaption("Oponent Rank")
+				.setStyleGenerator(Playerstatspergame -> {
+					for (int i = 0; i < playerpropAssistsList.size(); i++) {
+						if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() > playerpropAssistsList.get(i).getOverunder()) {
+							return "green";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() < playerpropAssistsList.get(i).getOverunder()) {
+							return "red";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() == playerpropAssistsList.get(i).getOverunder()) {
+							return "grey";
+						}
+					}
+					return null;
+				}).setExpandRatio(1).setWidth(114.5);
+		gridLayoutPlayerStatsAssists.addColumn(Playerstatspergame::getOpponentpositionrank)
+				.setCaption("Oponent PositionRank").setStyleGenerator(Playerstatspergame -> {
+					for (int i = 0; i < playerpropAssistsList.size(); i++) {
+						if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() > playerpropAssistsList.get(i).getOverunder()) {
+							return "green";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() < playerpropAssistsList.get(i).getOverunder()) {
+							return "red";
+						} else if (Playerstatspergame.getBoxscore().getGameid() == playerpropAssistsList.get(i).getId()
+								.getGameid()
+								&& Playerstatspergame.getAssists() == playerpropAssistsList.get(i).getOverunder()) {
+							return "grey";
+						}
+					}
+					return null;
+				}).setExpandRatio(1).setWidth(114.5);
+
 
 		/***** IMPORT COMPONENTS IN GRIDLAYOUT ******/
 		gridHeaderPlayerStats.setHeight("100%");
@@ -232,28 +453,69 @@ public class PlayerstatsLayoutFactory extends VerticalLayout implements View {
 		gridHeaderPlayerStats.setComponentAlignment(playerSeasonStatsTable, Alignment.BOTTOM_RIGHT);
 		gridHeaderPlayerStats.setComponentAlignment(playerHeaderTeamImage, Alignment.MIDDLE_CENTER);
 
-		htmlLabelHomeLineChart.setSizeFull();
+		/***** Points *****/
+		htmlLabelPointsLineChart.setSizeFull();
 		gridLayoutPlayerStatsPoints.setSizeFull();
 		gridLayoutPlayerStatsPoints.setHeaderRowHeight(38);
 		gridLayoutPlayerStatsPoints.setCaptionAsHtml(true);
 		gridLayoutPlayerStatsPoints.getHeaderRow(0).setStyleName("GridHeaderCategoryPlayerStats");
 		gridLayoutPlayerStatsPoints.setStyleGenerator(Playerstatspergame -> {
-			return "GridPlayerStatsPoints";
+			return "GridPlayerStatsCategory";
 		});
 		gridLayoutPlayerStatsPoints.setHeightMode(HeightMode.CSS);
 		gridLayoutPlayerStatsPoints.setSelectionMode(SelectionMode.NONE);
-		gridLineChartPlayerStats.setHeight("300px");
-		gridLineChartPlayerStats.setWidth("100%");
-		gridLineChartPlayerStats.addStyleName("GridLineChartPlayerstats");
-		gridLineChartPlayerStats.addComponent(htmlLabelHomeLineChart, 0, 0, 5, 0);
-		gridLineChartPlayerStats.addComponent(gridLayoutPlayerStatsPoints, 6, 0, 11, 0);
-		gridLineChartPlayerStats.setComponentAlignment(htmlLabelHomeLineChart, Alignment.MIDDLE_CENTER);
+		gridLineChartPlayerPointsStats.setHeight("300px");
+		gridLineChartPlayerPointsStats.setWidth("100%");
+		gridLineChartPlayerPointsStats.addStyleName("GridLineChartPlayerstats");
+		gridLineChartPlayerPointsStats.addComponent(htmlLabelPointsLineChart, 0, 0, 5, 0);
+		gridLineChartPlayerPointsStats.addComponent(gridLayoutPlayerStatsPoints, 6, 0, 11, 0);
+		gridLineChartPlayerPointsStats.setComponentAlignment(htmlLabelPointsLineChart, Alignment.MIDDLE_CENTER);
+		
+		/***** Rebounds *****/
+		htmlLabelReboundsLineChart.setSizeFull();
+		gridLayoutPlayerStatsRebounds.setSizeFull();
+		gridLayoutPlayerStatsRebounds.setHeaderRowHeight(38);
+		gridLayoutPlayerStatsRebounds.setCaptionAsHtml(true);
+		gridLayoutPlayerStatsRebounds.getHeaderRow(0).setStyleName("GridHeaderCategoryPlayerStats");
+		gridLayoutPlayerStatsRebounds.setStyleGenerator(Playerstatspergame -> {
+			return "GridPlayerStatsCategory";
+		});
+		gridLayoutPlayerStatsRebounds.setHeightMode(HeightMode.CSS);
+		gridLayoutPlayerStatsRebounds.setSelectionMode(SelectionMode.NONE);
+		gridLineChartPlayerReboundsStats.setHeight("300px");
+		gridLineChartPlayerReboundsStats.setWidth("100%");
+		gridLineChartPlayerReboundsStats.addStyleName("GridLineChartPlayerstats");
+		gridLineChartPlayerReboundsStats.addComponent(htmlLabelReboundsLineChart, 0, 0, 5, 0);
+		gridLineChartPlayerReboundsStats.addComponent(gridLayoutPlayerStatsRebounds, 6, 0, 11, 0);
+		gridLineChartPlayerReboundsStats.setComponentAlignment(htmlLabelReboundsLineChart, Alignment.MIDDLE_CENTER);
+		
+		/***** Assists *****/
+		htmlLabelAssistsLineChart.setSizeFull();
+		gridLayoutPlayerStatsAssists.setSizeFull();
+		gridLayoutPlayerStatsAssists.setHeaderRowHeight(38);
+		gridLayoutPlayerStatsAssists.setCaptionAsHtml(true);
+		gridLayoutPlayerStatsAssists.getHeaderRow(0).setStyleName("GridHeaderCategoryPlayerStats");
+		gridLayoutPlayerStatsAssists.setStyleGenerator(Playerstatspergame -> {
+			return "GridPlayerStatsCategory";
+		});
+		gridLayoutPlayerStatsAssists.setHeightMode(HeightMode.CSS);
+		gridLayoutPlayerStatsAssists.setSelectionMode(SelectionMode.NONE);
+		gridLineChartPlayerAssistsStats.setHeight("300px");
+		gridLineChartPlayerAssistsStats.setWidth("100%");
+		gridLineChartPlayerAssistsStats.addStyleName("GridLineChartPlayerstats");
+		gridLineChartPlayerAssistsStats.addComponent(htmlLabelAssistsLineChart, 0, 0, 5, 0);
+		gridLineChartPlayerAssistsStats.addComponent(gridLayoutPlayerStatsAssists, 6, 0, 11, 0);
+		gridLineChartPlayerAssistsStats.setComponentAlignment(htmlLabelAssistsLineChart, Alignment.MIDDLE_CENTER);
 
-		addComponents(gridHeaderPlayerStats, gridLineChartPlayerStats);
+		addComponents(gridHeaderPlayerStats, gridLineChartPlayerPointsStats,gridLineChartPlayerReboundsStats,gridLineChartPlayerAssistsStats);
 
 		/***** JAVASCRIPT FOR CHARTS ******/
 		JavaScript.getCurrent().execute(
-				playerStatsChart.LineChartScript(playerpropPointsList_LastX, playerstatspergameList, playerid, teamid));
+				playerStatsChart.LineChartScript(playerpropPointsList_LastX, playerstatspergameList, playerid, teamid,"Points"));
+		JavaScript.getCurrent().execute(
+				playerStatsChart.LineChartScript(playerpropReboundsList_LastX, playerstatspergameList, playerid, teamid,"Rebounds"));
+		JavaScript.getCurrent().execute(
+				playerStatsChart.LineChartScript(playerpropAssistsList_LastX, playerstatspergameList, playerid, teamid,"Assists"));
 		/***************************************/
 	}
 }

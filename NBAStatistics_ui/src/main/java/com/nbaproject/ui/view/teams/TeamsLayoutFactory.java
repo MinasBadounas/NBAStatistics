@@ -10,11 +10,15 @@ import com.nbaproject.service.team.TeamService;
 import com.nbaproject.ui.view.mainview.MainView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
 
 @SpringView(name = TeamsLayoutFactory.NAME, ui = MainView.class)
 public class TeamsLayoutFactory extends VerticalLayout implements View {
@@ -27,7 +31,80 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 
 	public void enter(ViewChangeEvent event) {
 
+		HorizontalLayout horizontalLayout = new HorizontalLayout();
+
+		GridLayout gridLayoutEastTeams = new GridLayout(3, 6);
+
 		List<Team> teamList = new ArrayList<Team>();
+		teamList = teamService.findAll();
+
+		int countEast = 0;
+
+		for (int y = 1; y < 6; y++) {
+			for (int i = 0; i < 3; i++) {
+				Button btn = new Button();
+				btn.setStyleName("btn" + teamList.get(countEast).getTeamkey());
+				btn.setWidth("110px");
+				btn.setHeight("110px");
+				gridLayoutEastTeams.addComponent(btn, i, y, i, y);
+				gridLayoutEastTeams.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+				int teamid=teamList.get(countEast).getTeamid();
+				countEast++;
+				
+				btn.addClickListener(team->{
+					UI.getCurrent().getNavigator()
+					.navigateTo("teamstats/" + "teamid=" +teamid);
+				});
+			}
+		}
+		
+
+		Label eastLabel = new Label("EAST", ContentMode.TEXT);
+		gridLayoutEastTeams.addComponent(eastLabel, 0, 0, 2, 0);
+		gridLayoutEastTeams.setComponentAlignment(eastLabel, Alignment.MIDDLE_CENTER);
+		gridLayoutEastTeams.setSizeFull();
+
+		GridLayout gridLayoutWestTeams = new GridLayout(3, 6);
+
+		int countWest = 15;
+
+		for (int y = 1; y < 6; y++) {
+			for (int i = 0; i < 3; i++) {
+				Button btn = new Button();
+				btn.setStyleName("btn" + teamList.get(countWest).getTeamkey());
+				btn.setWidth("110px");
+				btn.setHeight("110px");
+				gridLayoutWestTeams.addComponent(btn, i, y, i, y);
+				gridLayoutWestTeams.setComponentAlignment(btn, Alignment.MIDDLE_CENTER);
+				int teamid=teamList.get(countWest).getTeamid();
+				countWest++;
+				
+				btn.addClickListener(team->{
+					UI.getCurrent().getNavigator()
+					.navigateTo("teamstats/" + "teamid=" +teamid);
+				});
+			}
+		}
+		
+		Label westLabel = new Label("WEST", ContentMode.TEXT);
+		gridLayoutWestTeams.addComponent(westLabel, 0, 0, 2, 0);
+		gridLayoutWestTeams.setComponentAlignment(westLabel, Alignment.MIDDLE_CENTER);
+		gridLayoutWestTeams.setSizeFull();
+		
+
+		eastLabel.setSizeFull();
+		westLabel.setSizeFull();
+		eastLabel.addStyleName("EastWestLabel");
+		westLabel.addStyleName("EastWestLabel");
+		gridLayoutWestTeams.setSizeFull();
+
+		horizontalLayout.setSizeFull();
+		horizontalLayout.addComponents(gridLayoutEastTeams, gridLayoutWestTeams);
+		addComponent(horizontalLayout);
+		
+		
+
+//		List<Team> teamList = new ArrayList<Team>();
 
 //		try {
 //			teamList = JsonNBATeams.JsonNBATeamsRequest();
@@ -35,93 +112,8 @@ public class TeamsLayoutFactory extends VerticalLayout implements View {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		teamList=teamService.findAll();
-		
-		GridLayout gridLayoutTeams = new GridLayout(3,6);
-		
-		Button btnWAS = new Button();
-		Button btnCHA = new Button();
-		Button btnATL = new Button();
-		Button btnMIA = new Button();
-		Button btnORL = new Button();
-		Button btnNY = new Button();
-		Button btnPHI = new Button();
-		Button btnBKN = new Button();
-		Button btnBOS = new Button();
-		Button btnTOR = new Button();
-		Button btnCHI = new Button();
-		Button btnCLE = new Button();
-		Button btnIND = new Button();
-		Button btnDET = new Button();
-		Button btnMIL = new Button();
 
-		btnWAS.setStyleName("btnWAS");
-		btnCHA.setStyleName("btnCHA");
-		btnATL.setStyleName("btnATL");
-		btnMIA.setStyleName("btnMIA");
-		btnORL.setStyleName("btnORL");
-		btnNY.setStyleName("btnNY");
-		btnPHI.setStyleName("btnPHI");
-		btnBKN.setStyleName("btnBKN");
-		btnBOS.setStyleName("btnBOS");
-		btnTOR.setStyleName("btnTOR");
-		btnCHI.setStyleName("btnCHI");
-		btnCLE.setStyleName("btnCLE");
-		btnIND.setStyleName("btnIND");
-		btnDET.setStyleName("btnDET");
-		btnMIL.setStyleName("btnMIL");
-		
-		btnWAS.setWidth("120px");
-		btnCHA.setWidth("120px");
-		btnATL.setWidth("120px");
-		btnMIA.setWidth("120px");
-		btnORL.setWidth("120px");
-		btnNY.setWidth("120px");
-		btnPHI.setWidth("120px");
-		btnBKN.setWidth("120px");
-		btnBOS.setWidth("120px");
-		btnTOR.setWidth("120px");
-		btnCHI.setWidth("120px");
-		btnCLE.setWidth("120px");
-		btnIND.setWidth("120px");
-		btnDET.setWidth("120px");
-		btnMIL.setWidth("120px");
-		
-		btnWAS.setHeight("120px");
-		btnCHA.setHeight("120px");
-		btnATL.setHeight("120px");
-		btnMIA.setHeight("120px");
-		btnORL.setHeight("120px");
-		btnNY.setHeight("120px");
-		btnPHI.setHeight("120px");
-		btnBKN.setHeight("120px");
-		btnBOS.setHeight("120px");
-		btnTOR.setHeight("120px");
-		btnCHI.setHeight("120px");
-		btnCLE.setHeight("120px");
-		btnIND.setHeight("120px");
-		btnDET.setHeight("120px");
-		btnMIL.setHeight("120px");
-		
-		gridLayoutTeams.addComponent(btnWAS,0,1,0,1);
-		gridLayoutTeams.addComponent(btnCHA,1,1,1,1);
-		gridLayoutTeams.addComponent(btnATL,2,1,2,1);
-		gridLayoutTeams.addComponent(btnMIA,0,2,0,2);
-		gridLayoutTeams.addComponent(btnORL,1,2,1,2);
-		gridLayoutTeams.addComponent(btnNY,2,2,2,2);
-		gridLayoutTeams.addComponent(btnPHI,0,3,0,3);
-		gridLayoutTeams.addComponent(btnBKN,1,3,1,3);
-		gridLayoutTeams.addComponent(btnBOS,2,3,2,3);
-		gridLayoutTeams.addComponent(btnTOR,0,4,0,4);
-		gridLayoutTeams.addComponent(btnCHI,1,4,1,4);
-		gridLayoutTeams.addComponent(btnCLE,2,4,2,4);
-		gridLayoutTeams.addComponent(btnIND,0,5,0,5);
-		gridLayoutTeams.addComponent(btnDET,1,5,1,5);
-		gridLayoutTeams.addComponent(btnMIL,2,5,2,5);
-
-		gridLayoutTeams.setSizeFull();
-		addComponent(gridLayoutTeams);
+//		teamList=teamService.findAll();
 
 //		Grid<Team> grid = new Grid<Team>();
 //		grid.setItems(teamList);

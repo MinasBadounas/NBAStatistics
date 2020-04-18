@@ -11,16 +11,16 @@ import com.nbaproject.entities.Playerstatspergame;
 @Component
 public class PlayerStatsChart {
 
-	public String LineChartHtml() {
+	public String LineChartHtml(String Description) {
 
-		String html = "	<div class=\"container_chart\">\r\n" + "<canvas id=\"LineChart\" ></canvas>\r\n"
-				+ "	</div>\r\n";
+		String html = "	<div class=\"container_chart\">\r\n" + "<canvas id=\"" + Description
+				+ "LineChart\" ></canvas>\r\n" + "	</div>\r\n";
 
 		return html;
 	}
 
 	public String LineChartScript(ArrayList<Playerprop> playerpropList,
-			ArrayList<Playerstatspergame> playerstatspergameList, int playerid, int teamid) {
+			ArrayList<Playerstatspergame> playerstatspergameList, int playerid, int teamid, String Description) {
 
 		StringBuilder stringBuilderLabels = new StringBuilder();
 		StringBuilder stringBuilderOverUnderLimitData = new StringBuilder();
@@ -36,7 +36,17 @@ public class PlayerStatsChart {
 
 		for (Playerstatspergame playerstatspergame : playerstatspergameList) {
 
-			stringBuilderPointsPerGameData.append(playerstatspergame.getPoints() + ",");
+			switch (Description) {
+
+			case "Points":
+				stringBuilderPointsPerGameData.append(playerstatspergame.getPoints() + ",");
+			case "Rebounds":
+				stringBuilderPointsPerGameData.append(playerstatspergame.getRebounds() + ",");
+			case "Assists":
+				stringBuilderPointsPerGameData.append(playerstatspergame.getAssists() + ",");
+				
+			}
+
 		}
 
 		for (Playerprop playerprop : playerpropList) {
@@ -49,18 +59,19 @@ public class PlayerStatsChart {
 		String stringOverUnderLimitData = stringBuilderOverUnderLimitData.substring(0,
 				stringBuilderOverUnderLimitData.length() - 1);
 
-		String scriptJavascript = "let ctx = document.getElementById('LineChart').getContext('2d');\r\n" + ""
-				+ "let config =new Chart(ctx, {" + "type: 'line'," + "data: {" + "labels: [" + stringLabels + "],"
-				+ "datasets: [{" + "label: 'Points'," + "fill: false," + "backgroundColor: window.chartColors.blue,"
-				+ "borderColor: window.chartColors.blue," + "data: [" + stringPointsPerGameData + "]," + "}, {"
-				+ "label: 'OverUnder Limit'," + "fill: false," + "backgroundColor: window.chartColors.green,"
-				+ "borderColor: window.chartColors.green," + "borderDash: [5, 5]," + "data: ["
-				+ stringOverUnderLimitData + "]," + "}]" + "}," + "options: {" + "responsive: true," + "title: {"
-				+ "display: true," + "text: 'Points per Game - OverUnder Limit' ," + "fontSize: 30" + "},"
-				+ "tooltips: {" + "mode: 'index'," + "intersect: false," + "}," + "hover: {" + "mode: 'nearest',"
-				+ "intersect: true" + "}," + "scales: {" + "x: {" + "display: true," + "scaleLabel: {"
-				+ "display: true," + "labelString: 'Teams'" + "}" + "}," + "y: {" + "display: true," + "scaleLabel: {"
-				+ "display: true," + "labelString: 'Points'" + "}" + "}" + "}" + "}" + "});";
+		String scriptJavascript = "let ctx = document.getElementById('" + Description
+				+ "LineChart').getContext('2d');\r\n" + "" + "let config =new Chart(ctx, {" + "type: 'line',"
+				+ "data: {" + "labels: [" + stringLabels + "]," + "datasets: [{" + "label: '" + Description + "',"
+				+ "fill: false," + "backgroundColor: window.chartColors.blue," + "borderColor: window.chartColors.blue,"
+				+ "data: [" + stringPointsPerGameData + "]," + "}, {" + "label: 'OverUnder Limit'," + "fill: false,"
+				+ "backgroundColor: window.chartColors.green," + "borderColor: window.chartColors.green,"
+				+ "borderDash: [5, 5]," + "data: [" + stringOverUnderLimitData + "]," + "}]" + "}," + "options: {"
+				+ "responsive: true," + "title: {" + "display: true," + "text: '" + Description
+				+ " per Game - OverUnder Limit' ," + "fontSize: 30" + "}," + "tooltips: {" + "mode: 'index',"
+				+ "intersect: false," + "}," + "hover: {" + "mode: 'nearest'," + "intersect: true" + "}," + "scales: {"
+				+ "x: {" + "display: true," + "scaleLabel: {" + "display: true," + "labelString: 'Teams'" + "}" + "},"
+				+ "y: {" + "display: true," + "scaleLabel: {" + "display: true," + "labelString: '" + Description + "'"
+				+ "}" + "}" + "}" + "}" + "});";
 
 		return scriptJavascript;
 

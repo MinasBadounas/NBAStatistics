@@ -25,6 +25,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.JavaScript;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -65,6 +66,7 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 				.findAllPlayerStatsPerGameByGameIdAndTeam(gameid, awayTeam);
 
 		GridLayout gridStats = new GridLayout(12, 18);
+		GridLayout gridStatsHeader = new GridLayout(12, 1);
 		
 		/**** GRIDLAYOUT HEADER****/
 		Label homeTeamImage = new Label(
@@ -214,32 +216,32 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 		/***************************************/
 		
 		/***** IMPORT COMPONENTS IN GRIDLAYOUT******/
-//		gridStats.setSizeFull();
-		gridStats.setHeight("90%");
-		gridStats.setWidth("90%");
+		gridStats.setSizeFull();
 		gridStats.setSpacing(true);
-		homeTeamImage.addStyleName("HomeTeamImage");
-		awayTeamImage.addStyleName("AwayTeamImage");
-		homeTeamLabel.setWidthFull();
-		homeTeamLabel.addStyleName("TeamLabel");
-		awayTeamLabel.setWidthFull();
-		awayTeamLabel.addStyleName("TeamLabel");		
-		gridStats.addComponent(homeTeamImage, 0, 0,	3, 0);
-		gridStats.addComponent(title, 4, 0,	7, 0);
-		gridStats.addComponent(awayTeamImage, 8, 0,	11, 0);
 		gridStats.addComponent(homeTeamLabel, 0, 1,	11, 1);
 		gridStats.addComponent(htmlLabelHomePieChart, 0, 2,	2, 8);
 		gridStats.addComponent(htmlLabelHomeBarChart, 3, 2,	5, 8);
 		gridStats.addComponent(awayTeamLabel, 0, 9,	11, 9);
 		gridStats.addComponent(htmlLabelAwayPieChart, 0, 10,2, 15);
 		gridStats.addComponent(htmlLabelAwayBarChart, 3, 10,5, 15);
-		gridStats.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
-		gridStats.setComponentAlignment(homeTeamImage, Alignment.MIDDLE_CENTER);
-		gridStats.setComponentAlignment(awayTeamImage, Alignment.MIDDLE_CENTER);
 		gridStats.setComponentAlignment(htmlLabelHomePieChart, Alignment.MIDDLE_CENTER);
 		gridStats.setComponentAlignment(htmlLabelHomeBarChart, Alignment.MIDDLE_CENTER);
 		gridStats.setComponentAlignment(htmlLabelAwayPieChart, Alignment.MIDDLE_CENTER);
 		gridStats.setComponentAlignment(htmlLabelAwayBarChart, Alignment.MIDDLE_CENTER);
+		
+		gridStatsHeader.setSizeFull();
+		homeTeamImage.addStyleName("HomeTeamImage");
+		awayTeamImage.addStyleName("AwayTeamImage");
+		homeTeamLabel.setWidthFull();
+		homeTeamLabel.addStyleName("TeamLabel");
+		awayTeamLabel.setWidthFull();
+		awayTeamLabel.addStyleName("TeamLabel");
+		gridStatsHeader.addComponent(homeTeamImage,0,0,3,0);
+		gridStatsHeader.addComponent(title,4,0,7,0);
+		gridStatsHeader.addComponent(awayTeamImage,8,0,11,0);
+		gridStatsHeader.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
+		gridStatsHeader.setComponentAlignment(homeTeamImage, Alignment.MIDDLE_CENTER);
+		gridStatsHeader.setComponentAlignment(awayTeamImage, Alignment.MIDDLE_CENTER);
 //		addComponent(gridStats);
 		/***************************************/
 		
@@ -258,16 +260,20 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 		/***** BOXSCORE TABLE ******/
 		Grid<Playerstatspergame> grid = new Grid<Playerstatspergame>();
 
+		HorizontalLayout buttonLayout = new HorizontalLayout();
+		
 		Button awayTeamButton = new Button(boxscore.getAwayteam());
 		Button homeTeamButton = new Button(boxscore.getHometeam());
 		homeTeamButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		awayTeamButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		homeTeamButton.addStyleName("HomeTeamButton");
 		awayTeamButton.addStyleName("AwayTeamButton");
-		gridStats.addComponent(awayTeamButton, 5, 16,5,16);
-		gridStats.addComponent(homeTeamButton, 6, 16,6,16);
-		gridStats.setComponentAlignment(homeTeamButton, Alignment.MIDDLE_LEFT);
-		gridStats.setComponentAlignment(awayTeamButton, Alignment.MIDDLE_RIGHT);
+		buttonLayout.addComponents(awayTeamButton,homeTeamButton);
+		buttonLayout.setComponentAlignment(homeTeamButton, Alignment.MIDDLE_LEFT);
+		buttonLayout.setComponentAlignment(awayTeamButton, Alignment.MIDDLE_RIGHT);
+		buttonLayout.setSizeFull();
+		gridStats.addComponent(buttonLayout, 0, 16,11,16);
+
 
 		awayTeamButton.addClickListener(playerstatsList -> {
 
@@ -383,7 +389,7 @@ public class StatsLayoutFactory extends VerticalLayout implements View {
 		});
 
 		awayTeamButton.click();
-		addComponent(gridStats);
+		addComponents(gridStatsHeader,gridStats);
 	}
 
 }
